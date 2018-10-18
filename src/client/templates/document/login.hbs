@@ -1,0 +1,46 @@
+{{route-dialog-header title="Paperjet Login"}}
+
+<div class="container route-dialog-body">
+    {{#if showLoginForm}}
+        <div class="row">
+            <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
+                {{login-form canRegister=false authenticated="authenticated" username=username}}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
+                <a href="/dashboard/register">Click here to join Paperjet</a>
+            </div>
+        </div>
+    {{else}}
+        <div class="row">
+            <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3" style="margin-bottom:20px;font-weight:600">
+                {{signatureRequestTitle}}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
+                <button type="submit" class="btn btn-lg btn-block btn-primary ladda-button" id="signature-request-create-account" data-style="expand-left" data-spinner-color="#f2f2f2" data-spinner-size="25" {{action "createSignatureRequestAccount"}}>
+                    <span class="ladda-label">Continue as {{username}}</span>
+                    <span class="ladda-spinner"></span>
+                </button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3" style="margin-top:20px">
+                <a href="#" {{action "switchToLoginForm"}}>Use another account</a>
+            </div>
+        </div>
+        {{#if signatureRequestError}}
+            <div class="row">
+                <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3" style="margin-top:20px">
+                    <div class="alert alert-danger">
+                        {{signatureRequestError}}
+                    </div>
+                </div>
+            </div>
+        {{/if}}
+    {{/if}}
+</div>
+
+{{app-footer}}

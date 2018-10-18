@@ -1,0 +1,64 @@
+<nav class="navbar navbar-default navbar-fixed-top app-header" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="/" class="navbar-brand"></a>
+        </div>
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <form class="navbar-form navbar-right expanded-only btn-group-profile-container">
+                Welcome, {{userDisplayName}}
+                <div class="btn-group btn-group-profile">
+                    <a data-toggle="dropdown" href="#" class="btn-profile-link">
+                        <span class="btn btn-default dropdown-toggle btn-profile" style={{gravatarProfileBackgroundStyle}}></span>
+                        <i class="fa fa-angle-down"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-triangle" role="menu">
+                        <li><a href="#" data-toggle="modal" data-target="#profile-modal">
+                            <span class="dropdown-menu-item-icon"><i class="fa fa-list-alt"></i></span>Account
+                        </a></li>
+                        <li><a href="#" data-toggle="modal" data-target="#referrals-modal">
+                            <span class="dropdown-menu-item-icon"><i class="fa fa-users"></i></span>Referrals
+                        </a></li>
+                        {{!-- <li><a href="#" data-toggle="modal" data-target="#outbox-modal">
+                            <span class="dropdown-menu-item-icon"><i class="fa fa-paper-plane"></i></span>Outbox</a>
+                        </li> --}}
+                        <li><a href="#" data-toggle="modal" data-target="#subscription-modal">
+                            <span class="dropdown-menu-item-icon"><i class="fa fa-cc-stripe"></i></span>Billing
+                        </a></li>
+                        <li><a href="#" {{action "logout"}}>
+                            <span class="dropdown-menu-item-icon"><i class="fa fa-cog"></i></span>Logout
+                        </a></li>
+                    </ul>
+                </div>
+            </form>
+
+            <ul class="nav navbar-nav navbar-right collapsed-only">
+                <li><a href="#" data-toggle="modal" data-target="#profile-modal">Account</a></li>
+                <li><a href="#" data-toggle="modal" data-target="#referrals-modal">Referrals</a></li>
+                {{!-- <li><a href="#" data-toggle="modal" data-target="#outbox-modal">Outbox</a></li> --}}
+                <li><a href="#" data-toggle="modal" data-target="#subscription-modal">Billing</a></li>
+                <li class="divider"></li>
+                <li><a href="#" {{action "logout"}}>Logout</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="dashboard-page">
+    {{outlet}}
+</div>
+
+{{app-footer}}
+
+{{view "register-modal"}}
+{{!-- {{view "login-modal"}} --}}
+
+{{profile-modal profile=profile store=store}}
+{{referrals-modal profile=profile}}
+{{outbox-modal}}
+{{subscription-modal dialogId="subscription-modal" email=profile.email subscription=profile.subscription paidUntil=profile.paidUntil isAnonymous=profile.isAnonymous profileUpdate="profileUpdate"}}

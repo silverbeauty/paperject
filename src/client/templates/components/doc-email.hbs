@@ -1,0 +1,112 @@
+<div class="form-horizontal">
+    <form role="form" class="form-horizontal js-email-form" {{action "send" on="submit" }}>
+        <div class="form-group has-feedback">
+            <label for={{toField.elementId}} class="col-sm-4 control-label">To</label>
+            <div class="col-sm-7">
+                {{input value=to viewName="toField" name="to" class="form-control"}}
+                <span class="glyphicon glyphicon-remove form-control-feedback hidden" data-toggle="tooltip" data-placement="top"></span>
+            </div>
+        </div>
+
+        {{#if showEmailFields}}
+            <div class="form-group has-feedback">
+                <label for={{fromField.elementId}} class="col-sm-4 control-label">From</label>
+                <div class="col-sm-7">
+                    {{input value=from viewName="fromField" name="from" class="form-control"}}
+                    <span class="glyphicon glyphicon-remove form-control-feedback hidden" data-toggle="tooltip" data-placement="top"></span>
+                </div>
+            </div>
+
+            <div class="form-group has-feedback">
+                <label for={{ccField.elementId}} class="col-sm-4 control-label">CC</label>
+                <div class="col-sm-7">
+                    {{input value=cc viewName="ccField" name="cc" class="form-control"}}
+                    <span class="glyphicon glyphicon-remove form-control-feedback hidden" data-toggle="tooltip" data-placement="top"></span>
+                </div>
+            </div>
+
+            <div class="form-group has-feedback">
+                <label for={{bccField.elementId}} class="col-sm-4 control-label">BCC</label>
+                <div class="col-sm-7">
+                    {{input value=bcc viewName="bccField" name="bcc" class="form-control"}}
+                    <span class="glyphicon glyphicon-remove form-control-feedback hidden" data-toggle="tooltip" data-placement="top"></span>
+                </div>
+            </div>
+        {{/if}}
+
+        <div class="form-group has-feedback">
+            <label for={{subjectField.elementId}} class="col-sm-4 control-label">Subject</label>
+            <div class="col-sm-7">
+                {{input value=subject viewName="subjectField" name="subject" class="form-control"}}
+                <span class="glyphicon glyphicon-remove form-control-feedback hidden" data-toggle="tooltip" data-placement="top"></span>
+            </div>
+        </div>
+
+        <div class="form-group has-feedback">
+            <label for={{messageField.elementId}} class="col-sm-4 control-label">Message</label>
+            <div class="col-sm-7">
+                {{textarea value=message viewName="messageField" class="form-control js-auto-size" rows="4"}}
+                <span class="glyphicon glyphicon-remove form-control-feedback hidden" data-toggle="tooltip" data-placement="top"></span>
+            </div>
+        </div>
+    </form>
+
+    {{#if showEmailFields}}
+        <div class="form-group">
+            <div class="col-sm-4 control-div"></div>
+            <div class="col-sm-7">
+                <div class="checkbox">
+                    <label>
+                        {{input type="checkbox" checked=encryptPDF}} Encrypt
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        {{#if encryptPDF}}
+            <form role="form" class="form-horizontal js-email-password-form">
+                <div class="form-group has-feedback">
+                    <label for={{passwordField.elementId}} class="col-sm-4 control-label">Password</label>
+                    <div class="col-sm-7">
+                        {{input type="password" value=password viewName="passwordField" name="password" class="form-control"}}
+                        <span class="glyphicon glyphicon-remove form-control-feedback hidden" data-toggle="tooltip" data-placement="top"></span>
+                    </div>
+                </div>
+
+                <div class="form-group has-feedback">
+                    <label for={{passwordConfirmField.elementId}} class="col-sm-4 control-label">Verify</label>
+                    <div class="col-sm-7">
+                        {{input type="password" value=passwordConfirm viewName="passwordConfirmField" name="passwordConfirm" class="form-control"}}
+                        <span class="glyphicon glyphicon-remove form-control-feedback hidden" data-toggle="tooltip" data-placement="top"></span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-sm-4 control-div"></div>
+                    <div class="col-sm-7 text-muted">
+                        PDF will be protected with 128-bit encryption
+                    </div>
+                </div>
+            </form>
+        {{/if}}
+    {{else}}
+        <div class="form-group">
+            <div class="col-sm-11 text-right">
+                <a href="#" {{action 'enableEmailFields'}}>Show From, CC, BCC, Password</a>
+            </div>
+        </div>
+    {{/if}}
+
+    <div class="form-group">
+        <div class="col-sm-4 control-div"></div>
+        <div class="col-sm-7">
+            <button type="submit" class="btn btn-lg btn-primary btn-block btn-send ladda-button" data-style="zoom-in" data-spinner-size="25" disabled={{sendDisabled}} {{action "submitEmail"}}>
+                <span class="ladda-label"><i class="fa fa-paper-plane-o"></i> Send Email</span>
+            </button>
+        </div>
+    </div>
+
+    {{#if errorMessage}}
+        <div class="alert alert-danger alert-dismissable">{{errorMessage}}</div>
+    {{/if}}
+</div>

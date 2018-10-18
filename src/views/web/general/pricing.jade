@@ -1,0 +1,263 @@
+block variables
+    -title='Pricing - Paperjet. Go Paperless'
+extends ../layout
+block head
+
+block content
+    section.top-header-panel.no-bg
+        navbar.navbar-default.white.affix(data-offset-top='300', role='navigation')
+            include ../nav
+
+    section.general-page
+        .container-fluid
+            .home-pricing-wrapper
+                .pricing-title-box
+                    h2
+                        strong Simple&nbsp;
+                        | pricing plans
+                    p Say goodbye to paper
+                // pricing-title-box
+
+                .row.text-center.plans-toggle
+                    .btn-group(role="group")
+                        button#toggle-monthly.btn.btn-default(type="button") Monthly
+                        button#toggle-annual.btn.btn-default(type="button") Annual
+
+                ul.pricing-col
+                    li
+                        .pricing.price-personal
+                            .pricing-head
+                                h4.free
+                                    | Free
+                                    small &nbsp;
+                                h5.price-plan-title Personal
+                            ul.pricing-content
+                                li
+                                    span #{freeUploadsQuota}&nbsp;
+                                    | Uploads per month
+                                li Field detection
+                                li
+                                    span 1GB&nbsp;
+                                    | storage
+                                li
+                                    <a href="#" data-toggle="modal" data-target="#fax-rates-subscription-modal">Fax pay as you go</a>
+                                li.text-muted Support
+                            .pricing-footer
+                                a.btn.btn-lg.btn-brand-green(href='dashboard/register') Get Started
+                    li.popular-price
+                        .pricing.price-active
+                            .pricing-head.pro
+                                h4
+                                    i $&nbsp;
+                                    strong.monthly-visible #{pricing.pro.monthly}
+                                    span.monthly-visible /month
+                                    
+                                    strong.annual-visible(style="display:none") #{pricing.pro.annual}
+                                    span.annual-visible(style="display:none") /year
+                                    
+                                    small &nbsp;
+                                h5.price-plan-title.pro
+                                    | PRO&nbsp;
+                                    span (MOST POPULAR)
+                            ul.pricing-content
+                                li
+                                    span Unlimited&nbsp;
+                                    | uploads
+                                li Field detection
+                                li
+                                    span 5GB&nbsp;
+                                    | storage
+                                li
+                                    <a href="#" data-toggle="modal" data-target="#fax-rates-subscription-modal">100 fax pages</a>
+                                li Support
+                            .pricing-footer
+                                a.btn.btn-lg.btn-brand-green(href='dashboard/register?subscribe=pro') Get Started
+                    //- li
+                    //-     .pricing.price-business
+                    //-         .pricing-head.business
+                    //-             h4
+                    //-                 i $
+                    //-                 strong.monthly-visible #{pricing.business.monthly}
+                    //-                 strong.annual-visible(style="display:none") #{pricing.business.annualPerMonth}
+                    //-                 span /mo
+                    //-                 small.monthly-visible &nbsp;
+                    //-                 small.annual-visible(style="display:none") $#{pricing.business.annual} billed annually
+                    //-             h5.price-plan-title.business BUSINESS
+                    //-         ul.pricing-content
+                    //-             li.content-up
+                    //-                 .content-div
+                    //-                     div
+                    //-                         span 5&nbsp;
+                    //-                         | User Accounts
+                    //-                     span.second-line
+                    //-                         em $
+                    //-                         | #{pricing.business.user} per user thereafter
+                    //-             li
+                    //-                 span Unlimited&nbsp;
+                    //-                 | Uploads
+                    //-             li Field detection
+                    //-             li
+                    //-                 span 10GB&nbsp;
+                    //-                 | Storage
+                    //-             li
+                    //-                 <a href="#" data-toggle="modal" data-target="#fax-rates-subscription-modal">5 Faxes</a>
+                    //-             li Support
+                    //-     .pricing-footer(style="font-weight:600;line-height: 47px;")
+                    //-             | COMING SOON
+            // home-pricing-wrapper
+
+    div
+        <div class="modal fade" id="fax-rates-subscription-modal" tabindex="-1" role="dialog" aria-labelledby="fax-rates-dialog-label" aria-hidden="true">
+        <div class="modal-dialog">
+        <div class="modal-content">
+        <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+        </button>
+        <h4 class="modal-title" id="fax-rates-dialog-label">Fax Rates</h4>
+        <h5 class="text-muted">Paperjet supports sending faxes to following countries. Flat rate applies.</h5>
+        </div>
+        <div class="modal-body fax-rates">
+        <span class="fr-country">Albania</span>
+        <span class="fr-country">Algeria</span>
+        <span class="fr-country">American Samoa</span>
+        <span class="fr-country">Andorra</span>
+        <span class="fr-country">Angola</span>
+        <span class="fr-country">Anguilla</span>
+        <span class="fr-country">Antigua and Barbuda</span>
+        <span class="fr-country">Argentina</span>
+        <span class="fr-country">Armenia</span>
+        <span class="fr-country">Aruba</span>
+        <span class="fr-country">Australia</span>
+        <span class="fr-country">Austria</span>
+        <span class="fr-country">Bahrain</span>
+        <span class="fr-country">Bangladesh</span>
+        <span class="fr-country">Barbados</span>
+        <span class="fr-country">Belgium</span>
+        <span class="fr-country">Bermuda</span>
+        <span class="fr-country">Bolivia</span>
+        <span class="fr-country">Bosnia/Herzegovina</span>
+        <span class="fr-country">Botswana</span>
+        <span class="fr-country">Brazil</span>
+        <span class="fr-country">British Virgin Islands</span>
+        <span class="fr-country">Brunei</span>
+        <span class="fr-country">Bulgaria</span>
+        <span class="fr-country">Cambodia</span>
+        <span class="fr-country">Canada</span>
+        <span class="fr-country">Cayman Islands</span>
+        <span class="fr-country">Chile</span>
+        <span class="fr-country">China</span>
+        <span class="fr-country">Colombia</span>
+        <span class="fr-country">Costa Rica</span>
+        <span class="fr-country">Croatia</span>
+        <span class="fr-country">Cyprus</span>
+        <span class="fr-country">Czech Republic</span>
+        <span class="fr-country">Denmark</span>
+        <span class="fr-country">Dominican Republic-809</span>
+        <span class="fr-country">Dominican Republic-829</span>
+        <span class="fr-country">Dominican Republic-849</span>
+        <span class="fr-country">Ecuador-Cuenca</span>
+        <span class="fr-country">Ecuador</span>
+        <span class="fr-country">Egypt-Alexandria</span>
+        <span class="fr-country">Egypt-Cairo</span>
+        <span class="fr-country">Egypt</span>
+        <span class="fr-country">Estonia</span>
+        <span class="fr-country">Finland</span>
+        <span class="fr-country">France</span>
+        <span class="fr-country">French Guiana</span>
+        <span class="fr-country">Georgia</span>
+        <span class="fr-country">Germany</span>
+        <span class="fr-country">Gibraltar</span>
+        <span class="fr-country">Greece</span>
+        <span class="fr-country">Grenada</span>
+        <span class="fr-country">Guadeloupe</span>
+        <span class="fr-country">Guam</span>
+        <span class="fr-country">Guatemala</span>
+        <span class="fr-country">Hong Kong</span>
+        <span class="fr-country">Hungary</span>
+        <span class="fr-country">Iceland</span>
+        <span class="fr-country">India</span>
+        <span class="fr-country">Indonesia</span>
+        <span class="fr-country">Iran</span>
+        <span class="fr-country">Iraq-Baghdad</span>
+        <span class="fr-country">Iraq</span>
+        <span class="fr-country">Ireland</span>
+        <span class="fr-country">Israel</span>
+        <span class="fr-country">Italy</span>
+        <span class="fr-country">Jamaica</span>
+        <span class="fr-country">Japan</span>
+        <span class="fr-country">Jordan</span>
+        <span class="fr-country">Kenya</span>
+        <span class="fr-country">Kuwait</span>
+        <span class="fr-country">Kyrgyzstan</span>
+        <span class="fr-country">Laos</span>
+        <span class="fr-country">Latvia</span>
+        <span class="fr-country">Lebanon</span>
+        <span class="fr-country">Liechtenstein</span>
+        <span class="fr-country">Lithuania</span>
+        <span class="fr-country">Luxembourg</span>
+        <span class="fr-country">Macau</span>
+        <span class="fr-country">Macedonia</span>
+        <span class="fr-country">Malawi</span>
+        <span class="fr-country">Malaysia</span>
+        <span class="fr-country">Malta</span>
+        <span class="fr-country">Mexico</span>
+        <span class="fr-country">Moldova</span>
+        <span class="fr-country">Monaco</span>
+        <span class="fr-country">Montenegro</span>
+        <span class="fr-country">Morocco</span>
+        <span class="fr-country">Mozambique</span>
+        <span class="fr-country">Namibia</span>
+        <span class="fr-country">Netherland Antilles</span>
+        <span class="fr-country">Netherlands</span>
+        <span class="fr-country">New Zealand</span>
+        <span class="fr-country">Nicaragua</span>
+        <span class="fr-country">Nigeria</span>
+        <span class="fr-country">Northern Marianas</span>
+        <span class="fr-country">Norway</span>
+        <span class="fr-country">Oman</span>
+        <span class="fr-country">Pakistan</span>
+        <span class="fr-country">Panama</span>
+        <span class="fr-country">Paraguay</span>
+        <span class="fr-country">Peru</span>
+        <span class="fr-country">Philippines</span>
+        <span class="fr-country">Poland</span>
+        <span class="fr-country">Portugal</span>
+        <span class="fr-country">Romania</span>
+        <span class="fr-country">Russia</span>
+        <span class="fr-country">Rwanda</span>
+        <span class="fr-country">San Marino</span>
+        <span class="fr-country">Saudi Arabia</span>
+        <span class="fr-country">Serbia</span>
+        <span class="fr-country">Singapore</span>
+        <span class="fr-country">Slovakia</span>
+        <span class="fr-country">Slovenia</span>
+        <span class="fr-country">South Africa</span>
+        <span class="fr-country">South Korea</span>
+        <span class="fr-country">Spain</span>
+        <span class="fr-country">Sri Lanka</span>
+        <span class="fr-country">Sweden-Stockholm</span>
+        <span class="fr-country">Sweden</span>
+        <span class="fr-country">Switzerland</span>
+        <span class="fr-country">Taiwan</span>
+        <span class="fr-country">Tajikistan</span>
+        <span class="fr-country">Thailand</span>
+        <span class="fr-country">Trinidad and Tobago</span>
+        <span class="fr-country">Turkey</span>
+        <span class="fr-country">Uganda</span>
+        <span class="fr-country">UK</span>
+        <span class="fr-country">Ukraine</span>
+        <span class="fr-country">United Arab Emirates</span>
+        <span class="fr-country">Uruguay</span>
+        <span class="fr-country">US Virgin Islands</span>
+        <span class="fr-country">USA-Hawaii</span>
+        <span class="fr-country">USA-Puerto Rico 787</span>
+        <span class="fr-country">Uzbekistan</span>
+        <span class="fr-country">Vatican City</span>
+        <span class="fr-country">Venezuela</span>
+        <span class="fr-country">Vietnam</span>
+        <span class="fr-country">Zambia</span>
+        <span class="fr-country">Zimbabwe</span>
+        </div>
+        </div>
+        </div>
+        </div>

@@ -1,0 +1,99 @@
+<div class="modal fade" id="doc-send" tabindex="-1" role="dialog" aria-labelledby="doc-send-dialog-label" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="doc-send-dialog-label">{{title}}</h4>
+                <h5 class="text-muted hidden-xs">Choose an action for your document</h5>
+            </div>
+            <div class="modal-body doc-send-modal-body">
+                <ul class="nav nav-tabs" role="tablist">
+                    <li role="presentation" class="{{if emailActive 'active'}}"><a id="doc-send-tab-link-email" href="#doc-send-tab-email" role="tab" data-toggle="tab">Email</a></li>
+                    <li role="presentation" class="{{if faxActive 'active'}}"><a id="doc-send-tab-link-fax" href="#doc-send-tab-fax" role="tab" data-toggle="tab">Fax</a></li>
+                    <li role="presentation" class="{{if printActive 'active'}} {{if sendOnly 'hidden'}}"><a id="doc-send-tab-link-print" href="#doc-send-tab-print" role="tab" data-toggle="tab">Print</a></li>
+                    <li role="presentation" class="{{if downloadActive 'active'}} {{if sendOnly 'hidden'}}"><a id="doc-send-tab-link-download" href="#doc-send-tab-download" role="tab" data-toggle="tab">Download</a></li>
+                </ul>
+                <div class="tab-content">
+                    <div role="tabpanel" class="tab-pane {{if emailActive 'active'}}" id="doc-send-tab-email">
+                        {{doc-email user=user doc=doc pages=pages emailSent="docSent" visible=visible}}
+                    </div>
+                    <div role="tabpanel" class="tab-pane {{if faxActive 'active'}}" id="doc-send-tab-fax">
+                        {{doc-fax user=user doc=doc pages=pages faxSent="docSent" store=store visible=faxVisible}}
+                    </div>
+                    <div role="tabpanel" class="tab-pane {{if printActive 'active'}}" id="doc-send-tab-print">
+                        <div class="form-horizontal">
+                            <div class="form-group">
+                                <label class="col-sm-4 control-label">Print</label>
+                                <div class="col-sm-7" style="padding-top:7px;">
+                                    {{doc.name}}, {{doc.pageCount}} page(s)
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-4 control-div"></div>
+                                <div class="col-sm-7">
+                                    <button class="btn btn-lg btn-primary btn-block btn-send ladda-button" data-style="zoom-in" data-spinner-size="25" {{action "print"}}>
+                                        <span class="ladda-label"><i class="fa fa-print"></i> <span class="js-message">Print</span></span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div role="tabpanel" class="tab-pane {{if downloadActive 'active'}}" id="doc-send-tab-download">
+                        <div class="form-horizontal">
+                            <div class="form-group">
+                                <label class="col-sm-4 control-label">Download</label>
+                                <div class="col-sm-7" style="padding-top:7px;">
+                                    {{doc.name}}, {{doc.pageCount}} page(s)
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-4 control-div"></div>
+                                <div class="col-sm-7">
+                                    <div class="checkbox">
+                                        <label>
+                                            {{input type="checkbox" checked=encryptDownload}} Encrypt
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            {{#if encryptDownload}}
+                                <form role="form" class="form-horizontal" id="download-password-form">
+                                    <div class="form-group has-feedback">
+                                        <label for={{downloadPasswordField.elementId}} class="col-sm-4 control-label">Password</label>
+                                        <div class="col-sm-7">
+                                            {{input type="password" value=downloadPassword viewName="downloadPasswordField" name="downloadPassword" class="form-control"}}
+                                            <span class="glyphicon glyphicon-remove form-control-feedback hidden" data-toggle="tooltip" data-placement="top"></span>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group has-feedback">
+                                        <label for={{downloadPasswordConfirmField.elementId}} class="col-sm-4 control-label">Verify</label>
+                                        <div class="col-sm-7">
+                                            {{input type="password" value=downloadPasswordConfirm viewName="downloadPasswordConfirmField" name="downloadPasswordConfirm" class="form-control"}}
+                                            <span class="glyphicon glyphicon-remove form-control-feedback hidden" data-toggle="tooltip" data-placement="top"></span>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <div class="col-sm-4 control-div"></div>
+                                        <div class="col-sm-7 text-muted">
+                                            PDF will be protected with 128-bit encryption
+                                        </div>
+                                    </div>
+                                </form>
+                            {{/if}}
+                            <div class="form-group">
+                                <div class="col-sm-4 control-div"></div>
+                                <div class="col-sm-7">
+                                    <button class="btn btn-lg btn-primary btn-block btn-send ladda-button" data-style="zoom-in" data-spinner-size="25" {{action "download"}} disabled={{downloadDisabled}}>
+                                        <span class="ladda-label"><i class="fa fa-cloud-download"></i> <span class="js-message">Download</span></span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

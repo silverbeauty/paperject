@@ -1,0 +1,224 @@
+<nav class="navbar navbar-default navbar-fixed-top expanded-only navbar-doc-edit" role="navigation">
+    <div class="container">
+        {{#if formOrSignatureRequest}}
+            <div class="text-muted clearfix" style="line-height:52px">
+                {{#if isNotMobileDevice}}
+                    <span>Please complete the form, eSign and click Done once complete</span>
+                {{else}}
+                    <button type="button" id="btn-mobile-zoom" class="btn btn-default navbar-btn {{if mobileZoom 'active'}}" data-placement="bottom" data-container="body" title="Zoom">
+                        {{!-- toggleZoom --}}
+                        <i class="fa fa-search-plus"></i>
+                        <span class="text-muted">Zoom</span>
+                    </button>
+                    <button type="button" id="btn-mobile-hide-fields" class="btn btn-default navbar-btn navbar-right {{if hideFields 'active'}} js-hide-fields" data-placement="bottom" data-container="body" title="Show/Hide fields">
+                        {{!-- hideFields --}}
+                        <i class="fa {{if hideFields 'fa-toggle-on' 'fa-toggle-off'}}"></i>
+                        <span class="text-muted">
+                            {{#if hideFields}}Show{{else}}Hide{{/if}} fields</span>
+                    </button>
+                {{/if}}
+                {{#if hasRequiredFields}}
+                    <span class="required-fields-message">{{requiredFieldsMessage}}</span>
+                {{else}}
+                    <span class="click-to-send-message">Click to send <i class="fa fa-reply fa-rotate-90"></i></span>
+                {{/if}}
+            </div>
+        {{else}}
+            {{#if isNotMobileDevice}}
+                <button type="button" class="btn btn-default navbar-btn {{if textActive 'active'}}" data-placement="bottom" data-container="body" title="Add text field" {{action 'addText'}}>
+                    <i class="fa fa-font"></i>
+                    <span class="text-muted">Text</span>
+                </button>
+                <button type="button" class="btn btn-default navbar-btn {{if checkboxActive 'active'}}" data-placement="bottom" data-container="body" title="Add checkbox" {{action 'addCheckbox'}}>
+                    <i class="fa fa-check-square-o"></i>
+                    <span class="text-muted">Checkbox</span>
+                </button>
+                {{! Rectangle DEPRECATED for now. We may re-add as part of proper editing tools}} {{!--
+                <button type="button" class="btn btn-default navbar-btn {{if rectangleActive 'active'}}" data-placement="bottom" data-container="body" title="Add rectangle" {{action 'addRectangle'}}>
+                    <i class="fa fa-square-o"></i>
+                    <span class="text-muted">Rectangle</span>
+                </button>
+                Remove Move for now. See https://trello.com/c/WaBpnCMW/329-sig-man-toolbar-updates
+                <button type="button" class="btn btn-default navbar-btn {{if moveActive 'active'}}" data-placement="bottom" data-container="body" title="Move" {{action 'switchToMoveMode'}}>
+                    <i class="fa fa-arrows"></i>
+                    <span class="text-muted">Move</span>
+                </button>
+                --}}
+                <div class="btn-group navbar-btn">
+                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" data-placement="bottom" data-container="body">
+                        {{!-- title="Add signature" --}}
+                        <i class="fa fa-strikethrough"></i>
+                        <span class="text-muted">Signature</span>
+                    </button>
+                    <ul class="dropdown-menu signatures-dropdown" role="menu">
+                        <div class="signatures-container">
+                            {{#each signature in signatures}}
+                                {{view "signature-dropdown-item" signature=signature}}
+                            {{/each}}
+                        </div>
+                        <li>
+                            {{#if showSignaturesCountLabel}}
+                                <div class="signatures-more-hint">Scroll to show more</div>
+                            {{/if}}
+                        </li>
+                        <li>
+                            <a href="#" {{action "addSignatureRequest"}}>Request Signature</a>
+                        </li>
+                        <li>
+                            <a href="#" {{action "showSignatures"}}>
+                             Create Signature
+                          </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="btn-group navbar-btn">
+                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" data-placement="bottom" data-container="body">
+                        {{!-- title="Add Initials" --}}
+                        <i class="fa fa-italic"></i>
+                        <span class="text-muted">Initials</span>
+                    </button>
+                    <ul class="dropdown-menu signatures-dropdown" role="menu">
+                        <div class="signatures-container">
+                            {{#each signature in initials}}
+                                {{view "signature-dropdown-item" signature=signature}}
+                            {{/each}}
+                        </div>
+                        <li>
+                            {{#if showInitialsCountLabel}}
+                                <div class="signatures-more-hint">Scroll to show more</div>
+                            {{/if}}
+                        </li>
+                        <li>
+                            <a href="#" {{action "addInitialsRequest"}}>Request Initials</a>
+                        </li>
+                        <li>
+                            <a href="#" {{action "showInitialsManager"}}>
+                              Create Initials
+                          </a>
+                        </li>
+                    </ul>
+                </div>
+                <button type="button" class="btn btn-default navbar-btn navbar-right {{if hideFields 'active'}} js-hide-fields" data-placement="bottom" data-container="body" title="Show/Hide fields" {{action 'hideFields'}}>
+                    <i class="fa {{if hideFields 'fa-toggle-on' 'fa-toggle-off'}}"></i>
+                    <span class="text-muted">
+                        {{#if hideFields}}Show{{else}}Hide{{/if}} fields</span>
+                </button>
+            {{else}}
+                <button type="button" id="btn-mobile-zoom" class="btn btn-default navbar-btn {{if mobileZoom 'active'}}" data-placement="bottom" data-container="body" title="Zoom">
+                    {{!-- toggleZoom --}}
+                    <i class="fa fa-search-plus"></i>
+                    <span class="text-muted">Zoom</span>
+                </button>
+                <button type="button" id="btn-mobile-hide-fields" class="btn btn-default navbar-btn navbar-right {{if hideFields 'active'}} js-hide-fields" data-placement="bottom" data-container="body" title="Show/Hide fields">
+                    {{!-- hideFields --}}
+                    <i class="fa {{if hideFields 'fa-toggle-on' 'fa-toggle-off'}}"></i>
+                    <span class="text-muted">
+                        {{#if hideFields}}Show{{else}}Hide{{/if}} fields</span>
+                </button>
+            {{/if}}
+        {{/if}}
+    </div>
+</nav>
+
+{{#unless pdfLoaded}}
+    <div class="loading-container">
+        <i class="fa fa-spin fa-refresh"></i>
+        <div class="loading-message">Loading PDF file ({{pdfLoadProgress}}%)...</div>
+    </div>
+{{/unless}}
+
+<div class="{{activeToolClass}} {{if hideFields 'hide-fields'}} {{if formOrSignatureRequest 'shared-form'}} doc-editor-container {{if mobileZoom 'doc-editor-container-mobile-zoom'}}">
+    <div class="doc-editor-viewer pdfViewer"></div>
+
+    {{#if isNotMobileDevice}}
+    <div id="signature-info-bar">
+        <div class="container">
+            {{#if isSignatureSelected}}
+                Adding signature
+            {{/if}}
+            {{#if isInitialsSelected}}
+                Adding initials
+            {{/if}}
+            <button type="button" class="btn btn-default btn-xs" {{action 'addText'}}>Cancel</button>
+        </div>
+    </div>
+    {{/if}}
+
+    {{#if isNotMobileDevice}}
+        <div id="document-obj-properties" class="{{selectedObjectPropertyPanelClass}} {{unless documentEditingEnabled 'document-obj-properties-disabled'}}">
+            <div id="dop-font" class="btn-group">
+                <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown" title="Set Font" data-placement="bottom">
+                    {{selectedObjectFont}}
+                    <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" role="menu">
+                    <li><a style="font-family:Helvetica, sans-serif;" {{action "setSelectedObjectFont" "Helvetica"}}>Helvetica</a></li>
+                    <li><a style="font-family:Times, serif;" {{action "setSelectedObjectFont" "Times"}}>Times</a></li>
+                    <li><a style="font-family:Courier, monospace;" {{action "setSelectedObjectFont" "Courier"}}>Courier</a></li>
+                </ul>
+            </div>
+
+            {{!-- Icons for text --}}
+            <button id="dop-plus" type="button" class="btn btn-default btn-sm compound-icon-btn" {{action "increaseSelectedObjectSize"}} title="Make Bigger" data-placement="bottom">
+                <i class="fa fa-font text-icons"></i>
+                <i class="fa fa-long-arrow-up text-icons"></i>
+
+                <i class="fa fa-search-plus non-text-icons"></i>
+            </button>
+            <button id="dop-minus" type="button" class="btn btn-default btn-sm compound-icon-btn" {{action "decreaseSelectedObjectSize"}} title="Make Smaller" data-placement="bottom">
+                <i class="fa fa-font text-icons"></i>
+                <i class="fa fa-long-arrow-down text-icons"></i>
+
+                <i class="fa fa-search-minus non-text-icons"></i>
+            </button>
+            <span id="dop-color-separator">|</span> {{!-- separator --}}
+
+
+            <button id="dop-fill" type="button" class="btn btn-default btn-sm" data-toggle="button" {{action "toggleSelectedObjectFilled"}} title="Fill" data-placement="bottom"><i class="fa fa-square"></i>
+            </button>
+            <button id="dop-bold" type="button" class="btn btn-default btn-sm" data-toggle="button" {{action "setSelectedObjectStyle" "fontWeight" "bold" "normal"}} title="Bold (Ctrl+B)" data-placement="bottom"><i class="fa fa-bold"></i>
+            </button>
+            <button id="dop-italic" type="button" class="btn btn-default btn-sm" data-toggle="button" {{action "setSelectedObjectStyle" "fontStyle" "italic" "normal"}} title="Italic (Ctrl+I)" data-placement="bottom"><i class="fa fa-italic"></i>
+            </button>
+            <button id="dop-underline" type="button" class="btn btn-default btn-sm" data-toggle="button" {{action "setSelectedObjectStyle" "textDecoration" "underline" "initial"}} title="Underline (Ctrl+U)" data-placement="bottom"><i class="fa fa-underline"></i>
+            </button>
+
+            <div id="dop-color-container" class="btn-group">
+                <button id="dop-color" type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown" title="Set Color" data-placement="bottom">
+                    <i class="fa fa-circle" style="text-shadow: 0px 0px 2px gray;"></i>
+                </button>
+                <ul class="dropdown-menu color-menu" role="menu">
+                    <li><a {{action "setSelectedObjectStyle" "color" "#ffffff"}}><i style="color:#ffffff;text-shadow: 0px 0px 2px gray;" class="fa fa-circle"></i></a>
+                    </li>
+                    <li><a {{action "setSelectedObjectStyle" "color" "#000000"}}><i style="color:#000000" class="fa fa-circle"></i></a>
+                    </li>
+                    <li><a {{action "setSelectedObjectStyle" "color" "#ff0000"}}><i style="color:#ff0000" class="fa fa-circle"></i></a>
+                    </li>
+                    <li><a {{action "setSelectedObjectStyle" "color" "#00ff00"}}><i style="color:#00ff00" class="fa fa-circle"></i></a>
+                    </li>
+                    <li><a {{action "setSelectedObjectStyle" "color" "#0000ff"}}><i style="color:#0000ff" class="fa fa-circle"></i></a>
+                    </li>
+                    <li><a {{action "setSelectedObjectStyle" "color" "#ff00ff"}}><i style="color:#ff00ff" class="fa fa-circle"></i></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    {{/if}}
+
+    {{#unless formOrSignatureRequest}}
+        {{#if isNotMobileDevice}}
+            <div id="document-tool-indicator" class="{{activeTool}} document-tool-indicator-inactive {{unless documentEditingEnabled 'document-tool-indicator-disabled'}}">
+                <i class="fa fa-font"></i>
+                <i class="fa fa-check-square-o"></i>
+                <i class="fa fa-square-o"></i>
+                <img class="signature-indicator" src="{{selectedSignature.img}}" />
+                <img class="signature-request-indicator" />
+                <img class="initials-request-indicator" />
+            </div>
+        {{/if}}
+    {{/unless}}
+</div>
+
+<div id="div-test-width"></div>
+
+{{signature-modal selectSignature="selectSignature" addFormSignature="addFormSignature" saveFormSignature="saveFormSignature" primarySignature=primarySignature savedSignatures=savedSignatures actualSignature=actualSignature}}

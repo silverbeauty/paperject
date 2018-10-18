@@ -1,0 +1,329 @@
+@pricing-gray-color: #959595;
+.price-panel {
+    padding: 60px 0 80px;
+}
+.home-pricing-wrapper {
+    padding: 0 85px;
+}
+.plans-toggle {
+    margin-bottom: 41px;
+}
+.pricing-col {
+    margin: 0 auto;
+    max-width: 700px;
+    padding: 0;
+    list-style: none;
+    .clearfix();
+    >li {
+        float: left;
+        width: 49.5%;
+        .clearfix();
+    }
+}
+.pricing-title-box {
+    margin-bottom: 50px;
+    text-align: center;
+    margin-top: 20px;
+    text-align: center;
+    h2,
+    p {
+        margin: 0;
+        font-size: 23px;
+        font-weight: 300;
+    }
+    h2 {
+        margin: 0 0 25px 0;
+        font-size: 30px;
+        color: @web-title-color;
+        @media (min-width: @screen-xs-min) {
+            font-size: 45px;
+        }
+        strong {
+            font-weight: 400;
+        }
+    }
+}
+.pricing {
+    position: relative;
+    margin-bottom: 30px;
+    padding-bottom: 25px;
+    border: 1px solid #eee;
+    background-color: #fff;
+    &.price-personal {
+        border-right: 0;
+    }
+    //&.price-business {
+    //    border-left: 0;
+    //}
+    &.enterprise {
+        border-left: 0;
+    }
+}
+.pricing-head {
+    text-align: center;
+}
+.pricing-head h3,
+.pricing-head h4 {
+    margin: 0;
+    line-height: normal;
+    font-weight: 600;
+}
+.pricing-head h4 span {
+    margin-top: 5px;
+    font-size: 12px;
+}
+.pricing-head {
+    padding: 10px 0;
+    border-top: 8px solid #88c1f0;
+    &.pro {
+        padding-top: 26px;
+        h4,
+        span {
+            color: @brand-green;
+            padding-bottom: 7px;
+        }
+        small {
+            color: #8ad574;
+        }
+    }
+    //&.business {
+    //    border-top-color: @brand-orange;
+    //    padding-top: 0;
+    //    h4 {
+    //        padding-top: 5px;
+    //        padding-bottom: 7px;
+    //    }
+    //    h4,
+    //    span {
+    //        color: @brand-orange;
+    //    }
+    //    small {
+    //        color: #fcaf5d;
+    //    }
+    //}
+    &.enterprise {
+        border-top-color: #c0c3c6;
+        padding-top: 0;
+        h4 {
+            padding-top: 5px;
+        }
+    }
+    h4 {
+        padding: 8px 0;
+        font-size: 60px;
+        font-weight: 600;
+        color: #b6bfca;
+        &.free {
+            font-size: 50px;
+            font-weight: 600;
+            color: #88c1f0;
+        }
+    }
+    .price-plan-title {
+        font-size: 15px;
+        font-weight: 600;
+        color: #7cbbee;
+        text-transform: uppercase;
+        display: inline-block;
+        background-color: #eff1f3;
+        padding: 8px 15px;
+        border-radius: 3px;
+        margin: 0 0 10px 0;
+        &.pro {
+            color: @brand-green;
+            background-color: #e5f6df;
+        }
+        //&.business {
+        //    color: @brand-orange;
+        //    background-color: #feeddb;
+        //}
+        &.enterprise {
+            color: #c0c3c6;
+        }
+    }
+}
+.pricing-head h4 i {
+    top: -20px;
+    font-size: 32px;
+    font-style: normal;
+    position: relative;
+}
+.pricing-head h4 span {
+    top: 0;
+    font-size: 24px;
+    font-weight: 600;
+    position: relative;
+    color: #d8dee7;
+}
+.pricing-head h4 small {
+    display: block;
+    top: -7px;
+    font-size: 15px;
+    //font-weight: 600;
+    position: relative;
+    color: #88c1f0;
+}
+.pricing-content {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    font-size: 15px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    >li {
+        position: relative;
+        text-align: center;
+        color: @pricing-gray-color;
+        padding: 10px;
+        border-bottom: 1px solid #eee;
+        &.content-up {
+            padding-bottom: 0;
+            padding-top: 7px;
+        }
+        .content-div {
+            text-align: center;
+            position: relative;
+            top: -11px;
+            padding-bottom: 0;
+            .second-line {
+                margin-top: -4px;
+                display: block;
+                color: @pricing-gray-color;
+                font-size: 12px;
+                font-style: italic;
+            }
+        }
+        span {
+            color: #27282a;
+        }
+        &.text-muted {
+            color: #e1e1e1;
+        }
+    }
+}
+.pricing-footer {
+    text-align: center;
+    padding: 5px 0 0 0;
+    .btn {
+        font-size: 15px;
+        font-weight: 600;
+        text-transform: uppercase;
+        border-radius: 3px 3px 3px 3px;
+        padding: 8px 15px;
+        margin: 5px;
+    }
+}
+.price-active {
+    z-index: 9;
+    border-radius: 5px;
+    margin-top: -29px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    padding-bottom: 45px;
+    .pricing-head {
+        .border-top-radius(5px);
+        border-top-color: @brand-green;
+    }
+}
+
+@media (max-width: 767px) {
+    .pricing-col {
+        >li {
+            width: 100%;
+            padding-right: 10%;
+            padding-left: 10%;
+        }
+    }
+    .pricing {
+        position: relative;
+        margin-bottom: 30px;
+        padding-bottom: 25px;
+        border: 1px solid #eee;
+        background-color: #fff;
+        &.price-personal {
+            border: 1px solid #eee;
+        }
+        //&.price-business {
+        //    border: 1px solid #eee;
+        //}
+        &.enterprise {
+            border: 1px solid #eee;
+        }
+    }
+    .price-active {
+        margin-top: 0;
+        padding-bottom: 25px;
+        .pricing-head {
+            border-radius: 0;
+        }
+    }
+    .pricing-head {
+        &.pro {
+            padding-top: 0;
+        }
+        .price-plan-title {
+            &.pro {
+                margin-bottom: 7px;
+            }
+        }
+    }
+    .home-pricing-wrapper {
+        padding: 0;
+    }
+}
+@media (max-width: 480px) {
+    .pricing-col {
+        >li {
+            display: block;
+            float: none;
+            width: 100%;
+            padding-left: 0;
+            padding-right: 0;
+        }
+    }
+    .pricing {
+        padding-bottom: 0;
+    }
+    .pricing .pricing-footer {
+        display: none;
+    }
+    .pricing-content {
+        margin-bottom: 0;
+        >li:last-child {
+            border-bottom: 0;
+        }
+    }
+}
+#subscription-modal {
+    .price-personal {
+        .pricing-footer {
+            line-height: 54px;
+        }
+        padding-bottom: 26px;
+    }
+    //.price-business {
+    //    .pricing-footer {
+    //        line-height: 54px;
+    //    }
+    //    padding-bottom: 26px;
+    //}
+    .home-pricing-wrapper {
+        padding: 0;
+    }
+    .pricing-footer {
+        color: @pricing-gray-color;
+        font-weight: 600;
+    }
+}
+.fax-rates {
+    .fr-country {
+        border: 1px solid @brand-panel-navy-border;
+        background-color: @brand-panel-navy-bg;
+        padding: 3px 5px;
+        margin: 3px 1px;
+        display: inline-block;
+    }
+}
+.fax-payment-btn {
+    margin-bottom: 10px;
+}

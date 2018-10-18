@@ -1,0 +1,55 @@
+@font-select-border-color: #ccc;
+@font-select-text-color: #333333;
+
+.sm-type-signature-font-selector{
+    position: relative;
+    a{
+        color: @font-select-text-color;
+        span{
+            padding: 6px;
+            float: left;
+            color: @font-select-text-color;
+            i {
+                vertical-align: top;
+            }
+        }
+    }
+    a:hover{
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+    .fs-drop{
+        width: 200px;
+        height: 171px;
+        overflow-y: scroll;
+        position: absolute;
+        top: 34px;
+        left: 0px;
+        border: 1px solid #ccc;
+        background: #fff;
+        z-index: 9999;
+
+        .fs-results{
+            list-style: none;
+            padding-left: 14px;
+            li.active {
+                background: #ccc;
+            }
+        }
+    }
+}
+
+.font-selector-initializer{
+    color: @font-select-text-color;
+    border: 1px solid @font-select-border-color;
+    padding: 6px;
+    i {
+        vertical-align: top;
+    }
+}
+.font-selector-initializer:hover{
+    text-decoration: none;
+    cursor: pointer;
+    color: @font-select-text-color;
+}

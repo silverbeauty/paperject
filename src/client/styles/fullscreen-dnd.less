@@ -1,0 +1,70 @@
+@external-drop-indicator-color: #449d44;
+@external-help-indicator-color: rgba(68, 157, 68, 0.5);
+@external-drop-indicator-width: 6px;
+
+.file-hover {
+    .app-container, .top-header-panel, .general-page, .footer {
+        opacity: 0.6;
+    }
+}
+
+.external-drop-indicator {
+    position: fixed;
+    z-index: 1000000;
+    display: none;
+
+    &.top {
+        top: 0;
+        left: @external-drop-indicator-width;
+        width: 100%;
+    }
+
+    &.top, &.bottom {
+        border-bottom: @external-drop-indicator-width dashed @external-drop-indicator-color;
+    }
+
+    &.left, &.right {
+        border-left: @external-drop-indicator-width dashed @external-drop-indicator-color;
+    }
+
+    &.help {
+        color: white;
+        font-family: @font-family;
+        font-weight: 400;
+        top: 6px;
+        left: @external-drop-indicator-width;
+        width: 100%;
+        background-color: transparent;
+
+        div {
+            background-color: @external-help-indicator-color;
+            width: 280px;
+            margin: 0 auto;
+            padding: 10px;
+            text-align: center;
+            border-bottom-left-radius: 4px;
+            border-bottom-right-radius: 4px;
+        }
+
+    }
+
+    &.right {
+        top: 6px;
+        right: 0;
+        height: 100%;
+        float: right;
+
+    }
+
+    &.bottom {
+        bottom: 0;
+        right: @external-drop-indicator-width;
+        width: 100%;
+    }
+
+    &.left {
+        bottom: 6px;
+        left: 0;
+        height: 100%;
+    }
+}

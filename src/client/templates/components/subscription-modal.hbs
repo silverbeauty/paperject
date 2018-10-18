@@ -1,0 +1,311 @@
+<div class="modal fade" id="subscription-modal" tabindex="-1" role="dialog" aria-labelledby="payment-dialog-label" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true">&times;</span>
+                    <span class="sr-only">Close</span>
+                </button>
+                <h4 class="modal-title" id="payment-dialog-label">Billing</h4>
+                <h5 class="text-muted">Select your subscription. Cancel anytime</h5>
+            </div>
+            <div class="modal-body" style="padding-top:30px">
+                {{#if isAnonymous}}
+                    <div class="text-center" style="margin-bottom:20px">
+                        <button type="submit" class="btn btn-primary" data-toggle="modal" data-target="#register-modal" {{action "hideSubscriptionModal"}}>Register to unlock subscription</button>
+                    </div>
+                {{/if}}
+
+                <div class="row text-center plans-toggle">
+                    <div class="btn-group" role="group">
+                        <button type="button" class="btn btn-default {{if isMonthlyBtnActive 'active'}}" {{action "toggleToMonthly"}}>Monthly</button>
+                        <button type="button" class="btn btn-default {{if isAnnualBtnActive 'active'}}" {{action "toggleToAnnual"}}>Annual</button>
+                    </div>
+                </div>
+
+                {{#if errorMessage}}
+                    <div class="alert alert-danger alert-dismissable" }}>
+                        <button type="button" class="close" aria-hidden="true" {{action 'dismissErrorMessage'}}>&times;</button>
+                        {{errorMessage}}
+                    </div>
+                {{/if}}
+
+                <div class="container-fluid">
+                    <div class="home-pricing-wrapper">
+                        <ul class="pricing-col">
+                            <li>
+                                <div class="pricing price-personal">
+                                    <div class="pricing-head">
+                                        <h4 class="free">Free<small>&nbsp;</small></h4>
+                                        <h5 class="price-plan-title">Personal</h5>
+                                    </div>
+                                    <ul class="pricing-content">
+                                        <li><span>{{freeUploadsQuota}}&nbsp;</span>uploads / mo</li>
+                                        <li>Field detection</li>
+                                        <li><span>1GB&nbsp;</span>storage</li>
+                                        <li>Fax pay as you go</li>
+                                        <li class="text-muted">Support</li>
+                                    </ul>
+                                    <div class="pricing-footer">&nbsp;</div>
+                                </div>
+                            </li>
+                            <li class="popular-price">
+                                <div class="pricing price-active">
+                                    <div class="pricing-head pro">
+                                        {{#if isMonthlyBtnActive}}
+                                            <h4>
+                                                <i>$&nbsp;</i>{{proSubscriptionMonthlyPrice}}<span>/month</span>
+                                                <small>&nbsp;</small>
+                                            </h4>
+                                        {{/if}}
+                                        {{#if isAnnualBtnActive}}
+                                            <h4>
+                                                <i>$&nbsp;</i>{{proSubscriptionAnnualPrice}}<span>/year</span>
+                                                <small>&nbsp;</small>
+                                            </h4>
+                                        {{/if}}
+                                        <h5 class="price-plan-title pro">PRO&nbsp;<span>(MOST POPULAR)</span></h5>
+                                    </div>
+                                    <ul class="pricing-content">
+                                        <li><span>Unlimited&nbsp;</span>uploads</li>
+                                        <li>Field detection</li>
+                                        <li><span>5GB&nbsp;</span>storage</li>
+                                        <li>100 fax pages</li>
+                                        <li>Support</li>
+                                    </ul>
+                                    <div class="pricing-footer">
+                                        {{#if isSubscribedToPro}}
+                                            {{#if subscription.promo}}
+                                                <div style="margin-bottom:10px">Free PRO is active until {{prettifyDate paidUntil}}.<br/><a href="#" {{action "proSubscription"}}>Subscribe</a> to enable auto renewal.</div>
+                                            {{else}}
+                                                <div style="margin-bottom:10px">Your Pro account is automatically renewed {{subscription.type}}. Paid until {{prettifyDate paidUntil}}.</div>
+                                                <button type="submit" class="btn btn-primary" {{action "cancelSubscription"}}>Cancel Subscription</button>
+                                            {{/if}}
+                                        {{else}}
+                                            <button type="submit" class="btn btn-primary" {{action "proSubscription"}} disabled={{isAnonymous}}>Subscribe now</button>
+                                        {{/if}}
+                                        {{!-- <a href="dashboard/register?subscribe=pro" class="btn btn-lg btn-brand-green">Get Started</a> --}}
+                                    </div>
+                                </div>
+                            </li>
+                            {{!-- <li>
+                                <div class="pricing price-business">
+                                    <div class="pricing-head business">
+                                        {{#if isMonthlyBtnActive}}
+                                            <h4>
+                                                <i>$</i>{{businessSubscriptionMonthlyPrice}}<span>/mo</span>
+                                                <small>&nbsp;</small>
+                                            </h4>
+                                        {{/if}}
+                                        {{#if isAnnualBtnActive}}
+                                            <h4>
+                                                <i>$</i>9<span>/mo</span>
+                                                <small>${{businessSubscriptionAnnualPrice}} billed annually</small>
+                                            </h4>
+                                        {{/if}}
+                                        <h5 class="price-plan-title business">BUSINESS</h5>
+                                    </div>
+                                    <ul class="pricing-content">
+                                        <li class="content-up">
+                                            <div class="content-div">
+                                                <div><span>5&nbsp;</span>User Accounts</div><span class="second-line"><em>$</em>2 per user thereafter</span>
+                                            </div>
+                                        </li>
+                                        <li><span>Unlimited&nbsp;</span>Uploads</li>
+                                        <li>Field detection</li>
+                                        <li><span>10GB&nbsp;</span>Storage</li>
+                                        <li><span>5&nbsp;</span>Faxes</li>
+                                        <li>Support</li>
+                                    </ul>
+                                    <div class="pricing-footer">COMING SOON</div>
+                                </div>
+                            </li> --}}
+                        </ul>
+                    </div>
+                    <!-- home-pricing-wrapper-->
+                </div>
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-xs-12 text-center">
+                            <h4>Refill Fax Pages</h4>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-4 col-lg-2 col-lg-offset-3">
+                            <button type="submit" class="btn btn-primary btn-block fax-payment-btn" {{action 'faxPayment5'}} disabled={{isAnonymous}}>
+                                20 pages for $5
+                            </button>
+                        </div>
+                        <div class="col-xs-12 col-sm-4 col-lg-2">
+                            <button type="submit" class="btn btn-primary btn-block fax-payment-btn" {{action 'faxPayment10'}} disabled={{isAnonymous}}>
+                                50 pages for $10
+                            </button>
+                        </div>
+                        <div class="col-xs-12 col-sm-4 col-lg-2">
+                            <button type="submit" class="btn btn-default btn-block fax-payment-btn" data-toggle="modal" data-target="#fax-rates-subscription-modal">
+                                Fax Rates
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="fax-rates-subscription-modal" tabindex="-1" role="dialog" aria-labelledby="fax-rates-dialog-label" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true">&times;</span>
+                    <span class="sr-only">Close</span>
+                </button>
+                <h4 class="modal-title" id="fax-rates-dialog-label">Fax Rates</h4>
+                <h5 class="text-muted">Paperjet supports sending faxes to following countries. Flat rate applies.</h5>
+            </div>
+            <div class="modal-body fax-rates">
+                <span class="fr-country">Albania</span>
+                <span class="fr-country">Algeria</span>
+                <span class="fr-country">American Samoa</span>
+                <span class="fr-country">Andorra</span>
+                <span class="fr-country">Angola</span>
+                <span class="fr-country">Anguilla</span>
+                <span class="fr-country">Antigua and Barbuda</span>
+                <span class="fr-country">Argentina</span>
+                <span class="fr-country">Armenia</span>
+                <span class="fr-country">Aruba</span>
+                <span class="fr-country">Australia</span>
+                <span class="fr-country">Austria</span>
+                <span class="fr-country">Bahrain</span>
+                <span class="fr-country">Bangladesh</span>
+                <span class="fr-country">Barbados</span>
+                <span class="fr-country">Belgium</span>
+                <span class="fr-country">Bermuda</span>
+                <span class="fr-country">Bolivia</span>
+                <span class="fr-country">Bosnia/Herzegovina</span>
+                <span class="fr-country">Botswana</span>
+                <span class="fr-country">Brazil</span>
+                <span class="fr-country">British Virgin Islands</span>
+                <span class="fr-country">Brunei</span>
+                <span class="fr-country">Bulgaria</span>
+                <span class="fr-country">Cambodia</span>
+                <span class="fr-country">Canada</span>
+                <span class="fr-country">Cayman Islands</span>
+                <span class="fr-country">Chile</span>
+                <span class="fr-country">China</span>
+                <span class="fr-country">Colombia</span>
+                <span class="fr-country">Costa Rica</span>
+                <span class="fr-country">Croatia</span>
+                <span class="fr-country">Cyprus</span>
+                <span class="fr-country">Czech Republic</span>
+                <span class="fr-country">Denmark</span>
+                <span class="fr-country">Dominican Republic-809</span>
+                <span class="fr-country">Dominican Republic-829</span>
+                <span class="fr-country">Dominican Republic-849</span>
+                <span class="fr-country">Ecuador-Cuenca</span>
+                <span class="fr-country">Ecuador</span>
+                <span class="fr-country">Egypt-Alexandria</span>
+                <span class="fr-country">Egypt-Cairo</span>
+                <span class="fr-country">Egypt</span>
+                <span class="fr-country">Estonia</span>
+                <span class="fr-country">Finland</span>
+                <span class="fr-country">France</span>
+                <span class="fr-country">French Guiana</span>
+                <span class="fr-country">Georgia</span>
+                <span class="fr-country">Germany</span>
+                <span class="fr-country">Gibraltar</span>
+                <span class="fr-country">Greece</span>
+                <span class="fr-country">Grenada</span>
+                <span class="fr-country">Guadeloupe</span>
+                <span class="fr-country">Guam</span>
+                <span class="fr-country">Guatemala</span>
+                <span class="fr-country">Hong Kong</span>
+                <span class="fr-country">Hungary</span>
+                <span class="fr-country">Iceland</span>
+                <span class="fr-country">India</span>
+                <span class="fr-country">Indonesia</span>
+                <span class="fr-country">Iran</span>
+                <span class="fr-country">Iraq-Baghdad</span>
+                <span class="fr-country">Iraq</span>
+                <span class="fr-country">Ireland</span>
+                <span class="fr-country">Israel</span>
+                <span class="fr-country">Italy</span>
+                <span class="fr-country">Jamaica</span>
+                <span class="fr-country">Japan</span>
+                <span class="fr-country">Jordan</span>
+                <span class="fr-country">Kenya</span>
+                <span class="fr-country">Kuwait</span>
+                <span class="fr-country">Kyrgyzstan</span>
+                <span class="fr-country">Laos</span>
+                <span class="fr-country">Latvia</span>
+                <span class="fr-country">Lebanon</span>
+                <span class="fr-country">Liechtenstein</span>
+                <span class="fr-country">Lithuania</span>
+                <span class="fr-country">Luxembourg</span>
+                <span class="fr-country">Macau</span>
+                <span class="fr-country">Macedonia</span>
+                <span class="fr-country">Malawi</span>
+                <span class="fr-country">Malaysia</span>
+                <span class="fr-country">Malta</span>
+                <span class="fr-country">Mexico</span>
+                <span class="fr-country">Moldova</span>
+                <span class="fr-country">Monaco</span>
+                <span class="fr-country">Montenegro</span>
+                <span class="fr-country">Morocco</span>
+                <span class="fr-country">Mozambique</span>
+                <span class="fr-country">Namibia</span>
+                <span class="fr-country">Netherland Antilles</span>
+                <span class="fr-country">Netherlands</span>
+                <span class="fr-country">New Zealand</span>
+                <span class="fr-country">Nicaragua</span>
+                <span class="fr-country">Nigeria</span>
+                <span class="fr-country">Northern Marianas</span>
+                <span class="fr-country">Norway</span>
+                <span class="fr-country">Oman</span>
+                <span class="fr-country">Pakistan</span>
+                <span class="fr-country">Panama</span>
+                <span class="fr-country">Paraguay</span>
+                <span class="fr-country">Peru</span>
+                <span class="fr-country">Philippines</span>
+                <span class="fr-country">Poland</span>
+                <span class="fr-country">Portugal</span>
+                <span class="fr-country">Romania</span>
+                <span class="fr-country">Russia</span>
+                <span class="fr-country">Rwanda</span>
+                <span class="fr-country">San Marino</span>
+                <span class="fr-country">Saudi Arabia</span>
+                <span class="fr-country">Serbia</span>
+                <span class="fr-country">Singapore</span>
+                <span class="fr-country">Slovakia</span>
+                <span class="fr-country">Slovenia</span>
+                <span class="fr-country">South Africa</span>
+                <span class="fr-country">South Korea</span>
+                <span class="fr-country">Spain</span>
+                <span class="fr-country">Sri Lanka</span>
+                <span class="fr-country">Sweden-Stockholm</span>
+                <span class="fr-country">Sweden</span>
+                <span class="fr-country">Switzerland</span>
+                <span class="fr-country">Taiwan</span>
+                <span class="fr-country">Tajikistan</span>
+                <span class="fr-country">Thailand</span>
+                <span class="fr-country">Trinidad and Tobago</span>
+                <span class="fr-country">Turkey</span>
+                <span class="fr-country">Uganda</span>
+                <span class="fr-country">UK</span>
+                <span class="fr-country">Ukraine</span>
+                <span class="fr-country">United Arab Emirates</span>
+                <span class="fr-country">Uruguay</span>
+                <span class="fr-country">US Virgin Islands</span>
+                <span class="fr-country">USA-Hawaii</span>
+                <span class="fr-country">USA-Puerto Rico 787</span>
+                <span class="fr-country">Uzbekistan</span>
+                <span class="fr-country">Vatican City</span>
+                <span class="fr-country">Venezuela</span>
+                <span class="fr-country">Vietnam</span>
+                <span class="fr-country">Zambia</span>
+                <span class="fr-country">Zimbabwe</span>
+            </div>
+        </div>
+    </div>
+</div>

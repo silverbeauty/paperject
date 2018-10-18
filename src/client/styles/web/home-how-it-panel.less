@@ -1,0 +1,147 @@
+/**
+ * How it Works
+ */
+
+.howitworks{
+  position: relative;
+  padding: 50px 0;
+  min-height: 745px;
+  .clearfix();
+
+  @media (min-width: 941px){
+    padding: 102px 0;
+  }
+  @media (max-width: 767px) {
+    padding: 30px 0;
+  }
+
+  &.light-bg{
+    background-color: @brand-thin;
+  }
+
+  .howitworks-image{
+    position: absolute;
+    top: 100px;
+    right: 0;
+    z-index: 1;
+
+    &.left{
+      right: auto;
+      left: 0;
+    }
+  }
+
+  @media (max-width: 1185px){
+    .howitworks-image{
+      img{
+        max-width: 80%;
+        float: right;
+      }
+      &.left{
+        img{
+          float: left;
+        }
+      }
+    }
+  }
+  @media (max-width: 1080px){
+    .howitworks-image{
+      img{
+        max-width: 66%;
+      }
+    }
+  }
+  @media (max-width: 940px){
+    .howitworks-image{
+      display: none;
+    }
+    min-height: 0;
+  }
+}
+
+.how-work-text-box{
+  max-width: 482px;
+  padding-top: 65px;
+
+  &.align-right{
+    padding: 65px 0 0 80px;
+    max-width: 530px;
+  }
+  &.width-auto{
+    max-width: none;
+  }
+
+  h2 {
+    font-size: 30px;
+    line-height: 1.3;
+    font-weight: 300;
+    color: @web-title-color;
+    margin-bottom: 30px;
+
+    @media (min-width: @screen-xs-min) {
+        font-size: 45px;
+    }
+
+    span {
+      font-weight: 400;
+      color: #3c5072;
+    }
+  }
+
+  p{
+    font-size: 23px;
+    line-height: 1.5;
+  }
+
+  .infographics{
+    padding: 30px 0 0 30px;
+  }
+
+  @media (max-width: 940px){
+    padding: 10px;
+    margin:0 auto;
+
+    .infographics{
+      display: none;
+    }
+
+    &.align-right{
+      padding: 10px;
+      max-width: 482px;
+    }
+
+    &.width-auto{
+      max-width: 482px;
+      padding: 10px;
+    }
+  }
+
+  @media (max-width: 700px){
+
+    max-width: 100%;
+
+    &.align-right{
+      max-width: 100%;
+    }
+    &.width-auto{
+      max-width: 100%;
+    }
+  }
+}
+
+.howitworks-show-mobile{
+  display: none;
+
+  margin-top: 20px;
+
+  img{
+    display: block;
+    max-width: 98%;
+    height: auto;
+    margin: 0 auto;
+  }
+
+  @media (max-width: 940px){
+    display: block;
+  }
+}

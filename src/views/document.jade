@@ -1,0 +1,120 @@
+block variables
+    - var title='Loading... - Paperjet'
+    - var bodyClass='doc'
+
+extends layout
+
+block head
+    <link rel="stylesheet" href="/styles/document.css">
+    <link rel="stylesheet" href="/scripts/pdfjs#{pdfjsVersion}/web/pdf_viewer.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    //- <!-- build:js /scripts/modernizr.js -->
+    //- <script src="/bower_components/modernizr/modernizr.js"></script>
+    //- <!-- endbuild -->
+    <script type="text/javascript">EmberENV = {LOG_VERSION: false};</script>
+    meta(name="stripe-public-key", content="#{stripePublicKey}")
+
+block content
+    nav.navbar.navbar-default.navbar-fixed-top.app-header.doc-app-header#app-loading-nav.
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse" disabled>
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <span class="navbar-brand clearfix">
+                    <span class="navbar-brand-logo"></span>
+                    <span class="navbar-brand-separator"></span>
+                </span>
+            </div>
+            <div class="collapse navbar-collapse navbar-ex1-collapse">
+                <form class="navbar-form navbar-right expanded-only">
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-primary btn-orange dropdown-toggle" disabled>&nbsp;</button>
+                    </div>
+                    <div class="btn-group btn-group-profile">
+                        <button type="button" class="btn btn-default dropdown-toggle btn-profile" disabled></button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    
+    div.loading-container#app-loading
+        i.fa.fa-spin.fa-refresh
+            
+    //- hide avatar in form mode, apply branding
+    script(type="text/javascript").
+        try {
+            if ((/(\?form=[a-z0-9]{24})$/i).exec(window.location.href)) {
+                var el = document.getElementsByClassName('btn-group-profile');
+
+                if (el && el.length) {
+                    el = el[0];
+                    el.parentNode.removeChild(el);
+                }
+            }
+            
+            var getParameterByName=function(name) {
+                name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+                var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+                results = regex.exec(location.search);
+                return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+            }
+            
+            var brandCssClass = getParameterByName('b');
+
+            if (brandCssClass) {
+                document.body.className += ' ' + brandCssClass + ' branded';                
+            }
+        } catch (e) {
+            console.log(e);
+        }
+
+block scripts
+    <!-- build:js /scripts/document.components.js -->
+    <script src="/bower_components/handlebars/handlebars.runtime.js"></script>
+    <script src="/bower_components/ember/ember.js"></script>
+    <script src="/bower_components/ember-data/ember-data.js"></script>
+    <script src="/bower_components/lodash/lodash.js"></script>
+
+    <script src="/bower_components/ladda/js/spin.js"></script>
+    <script src="/bower_components/ladda/js/ladda.js"></script>
+
+    <script src="/bower_components/moment/moment.js"></script>
+
+    <script src="/bower_components/jquery-ui/ui/core.js"></script>
+    <script src="/bower_components/jquery-ui/ui/widget.js"></script>
+    <script src="/bower_components/jquery-ui/ui/mouse.js"></script>
+    <script src="/bower_components/jquery-ui/ui/draggable.js"></script>
+    <script src="/bower_components/jquery-ui/ui/droppable.js"></script>
+    <script src="/bower_components/jquery-ui/ui/resizable.js"></script>
+
+    <script src="/bower_components/jquery-bootpag/lib/jquery.bootpag.js"></script>
+    <script src="/bower_components/sprintf/src/sprintf.js"></script>
+    <script src="/bower_components/jspdf/dist/jspdf.debug.js"></script>
+
+    <script src="/bower_components/jquery-validation/dist/jquery.validate.js"></script>
+    <!-- FIX: plese include non-minimized libraries. They will be minimized on build. -->
+    <script src="/bower_components/nouislider/jquery.nouislider.full.min.js"></script>
+    <script src="/bower_components/fontselect-jquery-plugin/jquery.fontselect.js"></script>
+    <script src="/bower_components/textarea-autosize/dist/jquery.textarea_autosize.js"></script>
+    <script src="/vendor/realistic-pen.js"></script>
+    <script src="/bower_components/pdfjs-dist/web/compatibility.js"></script>
+    <script src="/bower_components/intl-tel-input/build/js/intlTelInput.js"></script>
+    <script src="/bower_components/intl-tel-input/lib/libphonenumber/build/utils.js"></script>
+    <script src="/bower_components/bootstrap-tagsinput/dist/bootstrap-tagsinput.js"></script>
+    <script src="/bower_components/pdfjs-dist/web/compatibility.js"></script>
+    <!-- endbuild -->
+    <script src="/scripts/pdfjs#{pdfjsVersion}/build/pdf.js"></script>
+    <script src="/scripts/pdfjs#{pdfjsVersion}/web/pdf_viewer.js"></script>
+
+    <!-- build:js(.tmp) /scripts/document.templates.js -->
+    <script src="/scripts/document.templates.js"></script>
+    <!-- endbuild -->
+
+    <!-- build:js(.tmp) /scripts/document.app.js -->
+    <script src="/scripts/document.app.js"></script>
+    <!-- endbuild -->
+    <script src="/socket.io/socket.io.js"></script>

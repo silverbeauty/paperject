@@ -1,0 +1,46 @@
+block variables
+    -title='Security - Paperjet. Go Paperless'
+extends ../layout
+block head
+
+block content
+    section.top-header-panel.no-bg
+        navbar.navbar-default.white.affix(data-offset-top='300', role='navigation')
+            include ../nav
+
+    section.security-panel
+        .light-bg
+            .security-title-box
+                h2 Safe & Security
+                p
+                    | Protection your data is Paperjet’s top priority, we have bank-grade security to ensure the confidentiality of your documents using online encryption
+            // security-title-box
+            .system-info-box
+                .system-text.text-one
+                    h3 System Compliance
+                    p
+                        | We use stripe which has been audited by a PCI-certified auditor, and is certified to PCI Service Provider Level 1. This is the most stringent level of certification available
+                // system-text
+                .system-text.text-two
+                    h3 Privacy
+                    p
+                        | We ensure the privacy of your documents by encrypting them and enacting internal security policies to ensure no employee at Paperjet can view your files
+                // system-text
+                .system-infographic
+                    img(src='images/web/security-infographic.png', alt='security-infographic')
+                // system-infographic
+                .system-text.text-three
+                    h3 256-bit SSL encryption
+                    p
+                        | We use 256-bit SSL encryption to keep your documents safe and secure in your dashboard
+                // system-text
+                .system-text.text-four
+                    h3 Backup
+                    p
+                        | Our automatic scheduled backups keep your data storage safe. Replication across regions and infrastructure monitoring prevents loss.
+                // system-text
+            // system-info-box
+        // light-bg
+        .security-get-button
+            a.btn.btn-lg.btn-brand-green(href='dashboard/register') FREE TRIAL. GET STARTED
+    // security-panel end

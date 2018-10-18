@@ -1,0 +1,66 @@
+.sent-items {
+    color: @text-color;
+
+    a {
+        color: @text-color;
+
+        &:hover {
+            color: #4a97d0;
+        }
+    }
+
+    .sent-items-header {
+        margin-bottom: 22px;
+        user-select: none;
+
+        & > div {
+            border-bottom: 1px solid #f6f8fa;
+            padding-top: 20px;
+            padding-bottom: 20px;
+            color: @brand-grey;
+        }
+    }
+
+    .sent-items-header-sortable {
+        cursor: pointer;
+    }
+
+    .sent-item-row {
+        margin-top: 1px;
+        padding: 10px 0 0 0;
+        line-height: 20px;
+    }
+
+    .sent-item-status, .sent-item-name {
+        i {
+            margin-right: 5px;
+            width: 14px;
+        }
+    }
+
+    .sent-item-secondary {
+        font-size: 12px;
+        font-weight: normal;
+        line-height: 12px;
+        padding-bottom: 2px;
+    }
+
+    .sent-item-secondary-alighed-to-icon {
+        padding-left: 38px;
+    }
+
+    .sent-item-date {
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+    }
+
+    .sent-item-failed i {
+        color: #a94442;
+    }
+
+    .sent-item-row-btn {
+        padding: 2px 6px;
+        font-weight: 600;
+    }
+}

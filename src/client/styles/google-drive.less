@@ -1,0 +1,25 @@
+.google-drive {
+    overflow: auto;
+    padding: 20px;
+
+    .gd-folders {
+        float: left;
+        width: 200px;
+        max-height: 400px;
+        overflow: auto;
+    }
+
+    .gd-files {
+        max-height: 400px;
+        overflow: auto;
+
+        &>ul {
+            list-style-type: none;
+            padding: 0 0 0 10px;
+        }
+
+        .dg-file-selector {
+            color: gray;
+        }
+    }
+}

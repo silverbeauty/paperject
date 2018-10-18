@@ -1,0 +1,17 @@
+<select class="range-select form-control" value= {{range}} style="width:50%;margin:0 auto">
+    <option value="1">Last 24hrs</option>
+    <option value="7">Last 7 days</option>
+    <option value="14">Last 14 days</option>
+    <option value="30">Last 30 days</option>
+</select>
+{{#if legend.length}}
+    <div class="ct-chart"></div>
+{{else}}
+    <div style="margin: 40px;text-align: center;font-size: 20px;font-weight: 200;">No data</div>
+{{/if}}
+<div style="width:50%;margin:0 auto">
+    <div><a href="#" {{action 'changeType' ''}}><i style="color:black" class="fa fa-times-circle"></i> All</a></div>
+    {{#each item in legend}}
+        <div><a href="#" {{action 'changeType' item.name}}><i style={{item.style}} class="fa fa-circle"></i> {{item.name}}</a></div>
+    {{/each}}
+</div>

@@ -1,0 +1,257 @@
+body {
+    color: @text-color;
+}
+.navbar-default {
+    background-color: transparent;
+    border-color: #67b3ef;
+}
+.navbar {
+    min-height: 110px;
+}
+.navbar-brand {
+    float: left;
+    padding: 45px 15px;
+    font-size: 18px;
+    line-height: 20px;
+    height: 110px;
+}
+.navbar-toggle {
+    position: relative;
+    float: right;
+    margin-right: 15px;
+    padding: 9px 10px;
+    margin-top: 38px;
+    margin-bottom: 38px;
+    background-color: transparent;
+    background-image: none;
+    border: 1px solid transparent;
+    border-radius: 4px;
+}
+.container-fluid {
+    padding: 0;
+    margin-left: auto;
+    margin-right: auto;
+    width: 1188px;
+}
+@media (max-width: 1218px) {
+    .container-fluid {
+        width: auto;
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+}
+@media (min-width: 768px) {
+    .navbar-nav>li>a {
+        padding-top: 45px;
+        padding-bottom: 45px;
+    }
+}
+@media (min-width: 768px) and (max-width: 860px) {
+    .top-header-panel .navbar-default .navbar-nav > li > a,
+    .top-header-panel .navbar-default.affix .navbar-nav > li > a {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+}
+.btn-brand-green {
+    color: #fff;
+    background-color: @brand-green;
+    border-color: @brand-green;
+    &:hover {
+        color: #fff;
+        background-color: @brand-green-hover;
+        border-color: @brand-green-hover;
+    }
+}
+// Styles for the general pages
+.general-page {
+    .light-bg {
+        padding: 60px 0;
+    }
+}
+.title-box {
+    max-width: 800px;
+    padding: 0 15px;
+    margin: 0 auto;
+    text-align: center;
+    h2 {
+        margin: 0 0 30px 0;
+        font-size: 30px;
+        color: #3c5072;
+        @media (min-width: @screen-xs-min) {
+            font-size: 45px;
+        }
+    }
+    p {
+        font-size: 23px;
+        line-height: 1.6;
+    }
+}
+.info-box {
+    position: relative;
+    max-width: 890px;
+    padding: 0 15px;
+    margin: 60px auto 0;
+    p {
+        font-size: 16px;
+        line-height: 1.8;
+    }
+    li {
+        font-size: 16px;
+    }
+    h3 {
+        margin-top: 60px;
+    }
+}
+#support-dialog-info-container {
+    color: green;
+}
+#support-dialog-error-container {
+    color: red;
+}
+.support-dialog-result-container {
+    font-size: 24px;
+    margin: 15px;
+    text-align: center;
+}
+.notification-message {
+    .progress {
+        margin-bottom: 0;
+    }
+}
+.general-page .light-bg-banner {
+    background: #eff6fe;
+}
+.innerpage-banner-wrap-mobile-app {
+    @media (min-width: @screen-xs-min) {
+        padding: 0 50px 50px 55px;
+    }
+}
+.innerpage-banner-wrap {
+    margin-bottom: 30px;
+    @media (min-width: @screen-xs-min) {
+        padding: 0 75px 50px 75px;
+        margin-bottom: 0;
+    }
+    .mobile-app-header {
+        background-image: url("../images/web/banner-mobile-app.png");
+        background-size: 513px 404px;
+        height: 404px;
+        width: 513px;
+    }
+    .sign-forms-header {
+        background-image: url("../images/web/banner-sign-forms.png");
+        background-size: 455px 380px;
+        height: 380px;
+        width: 455px;
+    }
+    .fill-in-forms-header {
+        background-image: url("../images/web/banner-fill-in-forms.png?ss=ss");
+        background-size: 407px 380px;
+        height: 380px;
+        width: 407px;
+    }
+    .fax-header {
+        background-image: url("../images/web/banner-fax.png");
+        background-size: 470px 263px;
+        height: 270px;
+        width: 470px;
+    }
+    .banner-header {
+        background-repeat: no-repeat;
+        background-position-x: center;
+        float: right;
+        display: none;
+        @media (min-width: 1024px) {
+            display: block;
+        }
+    }
+    .header {
+        text-align: center;
+        @media (min-width: 1024px) {
+            text-align: left;
+            padding-top: 40px;
+            width: 380px;
+            float: left;
+        }
+        h1 {
+            font-size: 40px;
+            font-weight: 300;
+            color: #1667a7;
+            @media (min-width: @screen-xs-min) {
+                font-size: 55px;
+            }
+        }
+        h2 {
+            font-weight: 300;
+            color: #2a6496;
+        }
+    }
+}
+
+.nav.collapsed-only {
+    box-shadow: #000000 0px 9px 26px -21px;
+    padding-bottom: 10px;
+}
+
+.navbar-default, .footer-testimonial {
+    // navbar responsive UI
+    .expanded-only {
+        display: none;
+    }
+    .collapsed-only {
+        display: block;
+    }
+
+    @media (min-width: @grid-float-breakpoint) {
+        .expanded-only {
+            display: block;
+        }
+        .collapsed-only {
+            display: none;
+        }
+    }
+}
+
+@-webkit-keyframes spaceboots {
+    0% { -webkit-transform: translate(2px, 1px) rotate(0deg); }
+    10% { -webkit-transform: translate(-1px, -2px) rotate(-1deg); }
+    20% { -webkit-transform: translate(-3px, 0px) rotate(1deg); }
+    30% { -webkit-transform: translate(0px, 2px) rotate(0deg); }
+    40% { -webkit-transform: translate(1px, -1px) rotate(1deg); }
+    50% { -webkit-transform: translate(-1px, 2px) rotate(-1deg); }
+    60% { -webkit-transform: translate(-3px, 1px) rotate(0deg); }
+    70% { -webkit-transform: translate(2px, 1px) rotate(-1deg); }
+    80% { -webkit-transform: translate(-1px, -1px) rotate(1deg); }
+    90% { -webkit-transform: translate(2px, 2px) rotate(0deg); }
+    100% { -webkit-transform: translate(1px, -2px) rotate(-1deg); }
+}
+
+.wiggle {
+    -webkit-animation-name: 'spaceboots';
+    -webkit-animation-duration: 0.8s;
+    -webkit-transform-origin:50% 50%;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-timing-function: linear;
+}
+
+.call-to-action-btn {
+    padding: 10px 32px;
+    background: transparent;
+    background-color: @brand-green-light;
+    border-width: 0;
+    border-bottom-width: 3px;
+    border-style: solid;
+    border-bottom-color: darken(@brand-green-light, 15%);
+    font-weight: bold;
+    text-shadow: 1px 1px 1px rgba(150, 150, 150, 0.5);
+    color: white;
+    font-size: 18px;
+    display: inline-block;
+
+    &:hover, &:focus {
+        color: white;
+        background-color: darken(@brand-green-light, 10%);
+        border-bottom-color: darken(@brand-green-light, 18%);
+    }
+}

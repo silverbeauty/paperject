@@ -1,0 +1,253 @@
+block variables
+    -title='Paperjet. Go Paperless'
+
+extends layout
+block head
+
+block content
+    section.top-header-panel.bg-cover
+        // navbar
+        .navbar.navbar-default(data-spy='affix', data-offset-top='300', role='navigation')
+            include nav
+
+        // navbar end
+        .container-fluid
+            // banner
+            .banner-wrapper
+                #banner_01.banner.banner_01
+                    .text-go-paperless
+                        h1 Fill in and Sign PDFs online
+                        h2 We turn your PDFs into fillable forms in 2 seconds
+                    .drop-browser
+                        .drag-drop
+                        .drag-file
+                    .form-page-wrap
+                        .form-page
+                        // form-page
+                    // form-page-wrap
+                    .content-fill
+                        .search-rotate
+                            img(src='images/web/anim-01-search.gif', alt='searching....')
+                        .search-text Detecting...
+                        .form-green-shape1
+                        .form-green-shape2
+                        .form-green-shape3
+                        .form-green-shape4
+                        .form-green-shape5
+                        .form-green-shape6
+                        .form-green-shape7
+                        .form-green-shape8
+                        .form-green-shape9
+                        .form-green-shape10
+                        .form-green-shape11
+                        .form-green-square.box1.bx
+                        .form-green-square.box2.bx
+                        .form-green-square.box3.bx
+                        .from-green-text1 Jane Doe
+                        .from-green-text2 15 Milkwood cresent, Edgemead, 7441
+                        .from-green-text3 27 38 555 1922
+                        .from-green-text4 27 38 555 4282
+                        .from-green-text5 27 40 493
+                        .from-green-text6 3453533223
+                        .from-green-text7 Jeremy Paulous
+                        .from-green-text8 27 38 2977737
+                        .from-green-text9 27 40 049 3982
+                        .from-green-text10 03 09 1991
+                        .from-green-text11 23
+                        .from-green-text12  
+                    // content-form
+                // banner_01
+            .text-center
+                a.btn.call-to-action-btn.btn-try-demo-form.btn-lg(href="#banner_01") try demo form
+            // banner end
+    // header panel end
+    // document uploads
+    section.uploads-panel
+        .container-fluid
+            .wrapper-uploads-box
+                .uploads-box
+                    ul.uploads-nav.clearfix
+                        li.active
+                            a(href="#upload-doc-tab", role="tab", data-toggle="tab")
+                                i.fa.fa-arrow-circle-o-up.uploads-nav-icon-1
+                                | Upload Document
+                        li
+                            a(href="#url-tab", role="tab", data-toggle="tab", class="url-tab-link")
+                                i.fa.fa-chain.uploads-nav-icon-3
+                                | Enter URL of document
+                        li
+                            a(href="#drag-tab", role="tab", data-toggle="tab")
+                                i.fa.fa-cloud-upload.uploads-nav-icon-4
+                                | Drag & Drop
+                    .tab-content
+                        .uploads-form.tab-pane.text-center.active#upload-doc-tab
+                            form(action='#', method='post', accept-charset='utf-8')
+                                .row
+                                    .col-xs-10.custom-file-input-holder.input-holder
+                                        input#doc-upload-input.form-control(placeholder="Upload PDF or Doc" readonly)
+                                        input.js-doc-upload-selector.custom-file-input(type='file', name='files')
+                                    .col-xs-2
+                                        button.btn.call-to-action-btn.custom-upload.custom-file-input-holder(type='button') browse
+                                            input.js-doc-upload-selector(type='file', name='files')
+                        .uploads-form.tab-pane#url-tab
+                            form#doc-url-upload(action='#', method='post', accept-charset='utf-8')
+                                .row
+                                    .col-xs-10.input-holder
+                                        input.form-control(type='text', id='url-input', name='url', value='', placeholder='Enter a valid url')
+                                    .col-xs-2
+                                        button.btn.call-to-action-btn.custom-upload(type='submit') upload
+                                        div.upload-btn-popup.text-center
+                                            div.text-container Click upload to continue
+                                            div.popup-caret
+                        .uploads-form.tab-pane#drag-tab
+                            form(action='#', method='post', accept-charset='utf-8')
+                                input.form-control(type='url', name='', value='', placeholder='Drag Your document here')
+                    // uploads-form
+        // container-fluid
+    // document uploads end
+    // how it works
+    section.howitworks.light-bg.js-how-it-works#how-it-works
+        .container-fluid
+            .row
+                .col-md-6
+                    .how-work-text-box
+                        h2
+                            span Upload&nbsp;
+                            | the document you want to fill in.
+                        p
+                            | Our unique software will make the blank spaces fillable so you can start typing on it straight away
+                        .infographics
+                            img(src='images/web/how-it-work-jet.png', alt='paperjet-infographics')
+                    .howitworks-show-mobile
+                        img(src='images/web/how-it-work1.png', alt='paperjet-application-image')
+        // container-fluid
+        .howitworks-image
+            img(src='images/web/how-it-work1.png', alt='paperjet-application-image')
+    section.howitworks.js-how-it-works
+        .howitworks-image.left
+            // FIX: this image won't work in production mode. Please use HTML tag for images to keep grunt happy
+            img.showImage.left(src='images/web/how-it-work2.png', alt='paperjet-application-image')
+        .container-fluid
+            .row
+                .col-md-offset-6.col-md-6
+                    .how-work-text-box.align-right
+                        h2
+                            span Add&nbsp;
+                            | your Signature or Initials
+                        p Use our Editor tools to add your signature.
+                        .infographics
+                            img(src='images/web/how-it-work-jet.png', alt='paperjet-infographics')
+                    // how-work-text-box
+                    .howitworks-show-mobile
+                        img(src='images/web/how-it-work2.png', alt='paperjet-application-image')
+            // row
+        // container-fluid
+    section.howitworks.light-bg.js-how-it-works
+        .container-fluid
+            .row
+                .col-md-6
+                    .how-work-text-box.width-auto
+                        h2
+                            span Hit Let's Go&nbsp;
+                            | and you're done!
+                        p Send via email, fax or save in your Dashboard.
+                        .infographics
+                            img(src='images/web/how-it-work-jet.png', alt='paperjet-infographics')
+                    // how-work-text-box
+                    .howitworks-show-mobile
+                        img(src='images/web/how-it-work3.png', alt='paperjet-application-image')
+            // row
+        // container-fluid
+        .howitworks-image
+            img.showImage(src='images/web/how-it-work3.png', alt='paperjet-application-image')
+    // how it works end
+
+    // why choose start
+    section.why-choose-panel.light-bg.js-features#features
+        .container-fluid
+            .why-top-title-box
+                h2
+                    span Why&nbsp;
+                    | choose paperjet?
+            .choose-features
+                ul.list-unstyled
+                    .row
+                        li.col-md-4.col-sm-6
+                            .why-choose-text
+                                .infographics-icon
+                                    img(src='images/web/icon-its-faster.png', alt='infographics-its-faster')
+                                .infographics-text
+                                    h4 Saves Time
+                                    p Up to 11 hours a week is wasted on completing forms in offices
+                            // why-choose-text
+                        // 1
+                        li.col-md-4.col-sm-6
+                            .why-choose-text
+                                .infographics-icon
+                                    img(src='images/web/icon-forget-finder.png', alt='infographics-forget about finding')
+                                .infographics-text
+                                    h4 Printer?
+                                    p Save on ink and paper costs
+                            // why-choose-text
+                        // 2
+                        li.col-md-4.col-sm-6
+                            .why-choose-text
+                                .infographics-icon
+                                    img(src='images/web/icon-fill-form.png', alt='infographics-fill-form')
+                                .infographics-text
+                                    h4 Convenience
+                                    p Fill out forms online on the run
+                            // why-choose-text
+                        // 3
+                    .row
+                        li.col-md-4.col-sm-6
+                            .why-choose-text
+                                .infographics-icon
+                                    img(src='images/web/icon-store-form.png', alt='infographics-store-form')
+                                .infographics-text
+                                    h4 Organised
+                                    p Store forms safely in your dashboard
+                            // why-choose-text
+                        // 4
+                        li.col-md-4.col-sm-6
+                            .why-choose-text
+                                .infographics-icon
+                                    img(src='images/web/icon-professional.png', alt='infographics-professional')
+                                .infographics-text
+                                    h4 Professional
+                                    p typed out forms are neater forms
+                            // why-choose-text
+                        // 5
+                        li.col-md-4.col-sm-6
+                            .why-choose-text
+                                .infographics-icon
+                                    img(src='images/web/icon-Eco.png', alt='infographics-eco')
+                                .infographics-text
+                                    h4 Close Deals
+                                    p Sign and complete contracts quicker
+                            // why-choose-text
+                        // 6
+            // choose-features
+        // container-fluid
+    // why choose end
+
+    unless userId
+        div
+            <div class="modal fade" id="producthunt-modal" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+            <div class="modal-body">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <p><img src="images/web/nav-logo-sticky.png" alt="Paperjet" class="logo-sticky"></p>
+            <p>Hello, Product Hunters! Get a free <strong>PRO</strong> account for 12 months ($#{pricing.pro.annual} value)!</p>
+            <div><i class="fa fa-check-circle" style="color:#008fff"></i> <strong>Unlimited</strong> Uploads</div>
+            <div><i class="fa fa-check-circle" style="color:#008fff"></i> Field detection</div>
+            <div><i class="fa fa-check-circle" style="color:#008fff"></i> <strong>5GB</strong> Storage</div>
+            <div><i class="fa fa-check-circle" style="color:#008fff"></i> <strong>100</strong> Fax pages</div>
+            </div>
+            <div class="modal-footer">
+            <a class="btn btn-default btn-orange" href="dashboard/register">Sign Up Free</a>
+            </div>
+            </div>
+            </div>
+            </div>

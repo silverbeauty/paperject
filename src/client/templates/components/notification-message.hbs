@@ -1,0 +1,24 @@
+{{#if message}}
+    <div class="app-notification">
+        <button type="button" class="close" aria-hidden="true" {{action "dismissErrorMessage"}} title="Dismiss Message" data-placement="bottom" data-container="body">&times;</button>
+        {{#if isErrorMessage}}
+            <i class="fa fa-exclamation-circle"></i>
+        {{/if}}
+
+        {{#if percentsCompleted}}
+            <div class="col-xs-9">
+                {{message}}
+             </div>
+            <div class="col-xs-2 nopadding">
+                <div class="progress">
+                    <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style={{progressBarStyle}}>
+                      {{percentsCompleted}}%
+                    </div>
+                </div>
+            </div>
+        {{else}}
+            {{message}}
+        {{/if}}
+        <div class="clearfix"></div>
+    </div>
+{{/if}}

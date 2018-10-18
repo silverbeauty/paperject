@@ -1,0 +1,58 @@
+<form role="form" class="form-horizontal" {{action "send" on="submit" }}>
+    <div class="form-group has-feedback">
+        <label for={{numberField.elementId}} class="col-sm-4 control-label">Number</label>
+        <div class="col-sm-7">
+            <p>{{faxLabel}}</p>
+            {{input value=number viewName="numberField" name="number" type="tel" class="form-control" disabled=faxNumberNotInitialized }}
+            <span style="top: 30px;" class="glyphicon glyphicon-remove form-control-feedback hidden" data-toggle="tooltip" data-placement="top"></span>
+        </div>
+    </div>
+
+    {{#if errorMessage}}
+    <div class="form-group">
+        <div class="col-sm-4"></div>
+        <div class="col-sm-7">
+            <div class="alert alert-danger alert-dismissable">{{errorMessage}}</div>
+        </div>
+    </div>
+    {{/if}}
+
+    <div class="form-group">
+        <div class="col-sm-4"></div>
+        <div class="col-sm-7">
+            <div class="alert {{if isInsufficientBalance 'alert-danger' 'alert-success'}}">
+                Sending {{doc.pageCount}} pages. {{user.metrics.faxPages}} fax pages available for your account.
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-sm-4 control-div"></div>
+        <div class="col-sm-7">
+            <button type="submit" class="btn btn-lg btn-primary btn-block btn-send ladda-button" data-style="zoom-in" data-spinner-size="25" disabled={{isSendDisallowed}}>
+                <span class="ladda-label"><i class="fa fa-fax"></i> Send Fax</span>
+            </button>
+        </div>
+    </div>
+</form>
+
+<div id="fax-number-notification-modal" class="modal fade"  tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-sm" >
+        <div class="modal-content">
+            <div class="modal-body">
+                <p>We didn't recognize your fax number.
+                    {{#if numberCountrySample}}
+                        Example number for {{numberCountry}}: {{numberPlaceholder}}.
+                    {{else}}
+                        Please check selected country flag and fax number.
+                    {{/if}}
+                </p>
+                <p>For your convenience valid input will be nicely formatted as you type it in. If it's not formatted, then there may be an issue with your number.</p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" {{action "sendAnyway"}} data-toggle="modal" data-target="#fax-number-notification-modal">Send Anyway</button>
+                <button class="btn btn-default" data-toggle="modal" data-target="#fax-number-notification-modal">Change</button>
+            </div>
+        </div>
+    </div>
+</div>

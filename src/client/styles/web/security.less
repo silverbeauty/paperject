@@ -1,0 +1,238 @@
+.security-panel {
+    min-height: 900px;
+    background-color: #fff;
+    .light-bg {
+        min-height: 750px;
+        padding-top: 60px;
+    }
+}
+
+.security-title-box {
+    max-width: 800px;
+    padding: 0 15px;
+    margin: 0 auto;
+    text-align: center;
+    h2 {
+        margin: 0 0 30px 0;
+        font-size: 45px;
+        color: #3c5072;
+    }
+    p {
+        font-size: 23px;
+        line-height: 1.6;
+    }
+}
+
+.security-title-box h2, .security-title-box p {
+    font-weight: 300;
+}
+
+.system-info-box {
+    position: relative;
+    .system-infographic {
+        position: absolute;
+        top: 90px;
+        left: 50%;
+        width: 464px;
+        height: 391px;
+        margin-left: -232px;
+    }
+}
+
+.system-text {
+    position: absolute;
+    h3 {
+        margin: 0 0 25px 0;
+        font-size: 23px;
+        font-weight: 400;
+        color: #3c5072;
+    }
+    p {
+        font-size: 16px;
+        font-weight: 400;
+        line-height: 1.6;
+    }
+}
+
+.system-text.text-one {
+    top: 82px;
+    left: 116px;
+    width: 294px;
+    min-height: 170px;
+}
+
+.system-text.text-one p, .system-text.text-one h3 {
+    text-align: right;
+}
+
+.system-text.text-two {
+    top: 107px;
+    right: 105px;
+    width: 315px;
+    min-height: 170px;
+}
+
+.system-text.text-two p, .system-text.text-two h3 {
+    text-align: left;
+}
+
+.system-text.text-three {
+    top: 461px;
+    left: 187px;
+    width: 270px;
+    min-height: 170px;
+}
+
+.system-text.text-three p, .system-text.text-three h3 {
+    text-align: right;
+}
+
+.system-text.text-four {
+    top: 431px;
+    right: 167px;
+    width: 304px;
+    min-height: 170px;
+}
+
+.system-text.text-four p, .system-text.text-four h3 {
+    text-align: left;
+}
+
+@media (max-width: 1024px) {
+    .system-text.text-one {
+        left: 0;
+    }
+
+    .system-text.text-two {
+        right: 0;
+    }
+
+    .system-text.text-three {
+        left: 20px;
+    }
+
+    .system-text.text-four {
+        right: 15px;
+    }
+}
+
+.security-get-button {
+    margin-top: 100px;
+    margin-bottom: 120px;
+    text-align: center;
+}
+
+@media (max-width: 980px) {
+    .system-info-box {
+        padding: 50px;
+        .system-infographic {
+            position: static;
+            top: 0;
+            left: 0;
+            padding-bottom: 40px;
+            margin-right: auto;
+            margin-left: auto;
+            img {
+                max-width: 100%;
+                height: auto;
+            }
+        }
+        .system-infographic:after {
+            clear: both;
+        }
+    }
+
+    .system-info-box .system-infographic:before, .system-info-box .system-infographic:after {
+        display: table;
+        content: " ";
+    }
+
+    .system-text {
+        position: static;
+    }
+
+    .system-text.text-one {
+        float: left;
+        width: 50%;
+    }
+
+    .system-text.text-one p, .system-text.text-one h3 {
+        text-align: left;
+    }
+
+    .system-text.text-two {
+        float: left;
+        width: 50%;
+    }
+
+    .system-text.text-two p, .system-text.text-two h3 {
+        text-align: left;
+    }
+
+    .system-text.text-three {
+        top: 0;
+        left: 0;
+        float: left;
+        width: 50%;
+        margin-top: 150px;
+    }
+
+    .system-text.text-three p, .system-text.text-three h3 {
+        text-align: left;
+    }
+
+    .system-text.text-four {
+        float: left;
+        width: 50%;
+        margin-top: 150px;
+    }
+
+    .system-text.text-four p, .system-text.text-four h3 {
+        text-align: left;
+    }
+}
+
+@media (max-width: 767px) {
+    .system-info-box {
+        .system-infographic {
+            width: auto;
+            height: auto;
+            img {
+                max-width: 100%;
+                height: auto;
+            }
+        }
+    }
+
+    .system-text {
+        position: static;
+    }
+
+    .system-text.text-one {
+        float: none;
+        width: 100%;
+        min-height: 90px;
+        margin-bottom: 40px;
+    }
+
+    .system-text.text-two {
+        float: none;
+        width: 100%;
+        min-height: 90px;
+        margin-bottom: 40px;
+    }
+
+    .system-text.text-three {
+        float: none;
+        width: 100%;
+        min-height: 90px;
+        margin-top: -10px;
+    }
+
+    .system-text.text-four {
+        float: none;
+        width: 100%;
+        min-height: 90px;
+        margin-top: 20px;
+    }
+}

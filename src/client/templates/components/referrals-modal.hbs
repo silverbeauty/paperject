@@ -1,0 +1,60 @@
+<div id="referrals-modal" class="modal fade referrals-modal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true">&times;</span>
+                    <span class="sr-only">Close</span>
+                </button>
+                <h4 class="modal-title">Referrals</h4>
+                <h5 class="text-muted">Invite a friend and get 3 uploads</h5>
+            </div>
+            <div class="modal-body">
+                <div id="invites-sent-modal" class="modal fade profile-modal" tabindex="-1" role="dialog" aria-hidden="true">
+                    <div class="modal-dialog modal-sm">
+                        <div class="modal-content">
+                            <div class="modal-body">
+                                Thanks for referring us, when your friend signs up you'll be topped up with another 3x uploads. Send to more people and help us grow!
+                            </div>
+                            <div class="modal-footer">
+                                <button class="btn btn-default" data-toggle="modal" data-target="#invites-sent-modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel">
+                    <div class="panel-body">
+                        <p>For every friend who joins, we'll give you 3 more bonus uploads </p>
+                        {{#if profile.isAnonymous}}
+                            <button type="submit" class="btn btn-primary btn-lg btn-block" data-toggle="modal" data-target="#register-modal" {{action "hideReferralsModal"}}>Register to unlock</button>
+                        {{else}}
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-10 no-right-padding">
+                                    <input type="text" id="profile-invite-emails" class="form-control input-sm" placeholder="type your friends email addresses here, you can do as many as you want" />
+                                </div>
+                                <div class="col-xs-12 col-sm-2">
+                                    <button type="submit" id="invite-by-email-btn" {{action "inviteByEmail"}} class="btn btn-primary btn-sm ladda-button {{if isInviteBtnDisabled 'disabled'}}" data-style="zoom-in" data-spinner-color="#f2f2f2" data-spinner-size="25">
+                                        <span class="ladda-label">Invite</span>
+                                        <span class="ladda-spinner" data-size="xs"></span>
+                                        <div class="ladda-progress" style="width: 0px;"></div>
+                                    </button>
+                                </div>
+                            </div>
+                            {{#if errorAlert}}
+                                <div class="alert alert-danger">
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                    {{errorAlert}}
+                                </div>
+                            {{/if}}
+                            <p>Or send them link below</p>
+                            {{input type="text" id="refferal-link" value=inviteLink class="form-control input-sm"}}
+                        {{/if}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

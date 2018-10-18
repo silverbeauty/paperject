@@ -1,0 +1,248 @@
+<nav class="navbar navbar-default navbar-fixed-top documents-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-0 col-sm-4 col-md-6"></div>
+            <div class="{{if controllers.application.model.profile.supportsUpload 'col-xs-8 col-sm-5 col-md-4' 'col-xs-12 col-sm-8 col-md-6'}}">
+                {{#if isAnonymousLogged}}
+                    <a href="#" class="btn btn-primary pull-right" data-toggle="modal" data-target="#register-modal">
+                        <i class="fa fa-user-plus"></i> Register
+                    </a>
+                {{else}}
+                    {{input value=documentNameFilterVal class="documents-filter-field form-control" placeholder="Filter by name" }}
+                {{/if}}
+            </div>
+            {{#if controllers.application.model.profile.supportsUpload}}
+                <div class="col-xs-4 col-sm-3 col-md-2">
+                    <button class="btn btn-primary documents-btn-upload btn-block" {{action "openFileSelectDialog"}}>
+                        <span class="collapsed-only">Upload</span>
+                        <span class="expanded-only"><i class="fa fa-cloud-upload"></i>&nbsp;&nbsp;Upload File</span>
+                    </button>
+                </div>
+            {{/if}}
+        </div>
+    </div>
+    {{notification-message}}
+</nav>
+
+<div class="container dashboard-documents">
+    {{upload-modal uploadedCloudFile=uploadedCloudFile store=store activeFolderId=activeFolder.id}}
+
+    <div class="row documents-container">
+        <div class="col-sm-3">
+            {{view "document-folders" sortDirection=foldersSortDirection}}
+        </div>
+        {{#if showSentDocuments}}
+            {{sent-items items=sentItems}}
+        {{else}}
+            <div class="col-sm-9 documents-list {{if isTrashActiveFolder 'documents-list-trash'}}">
+                {{#if pagedDocs.length}}
+                    <div class="row text-muted header">
+                        <div class="col-xs-2 col-sm-6 col-document">
+                            {{#if isInboxActiveFolder}}
+                                <i class="fa custom-checkbox"></i>
+                            {{else}}
+                                <i class="fa custom-checkbox {{if areAllDocsSelected 'fa-check-square-o' 'fa-square-o'}}" {{action "togglePageDocsSelection"}} title="Select All (Ctrl+A)"></i>
+                            {{/if}}
+                            <span class="hidden-xs documents-list-sort-header" {{action "changeSortDirection" "name"}}>
+                                Document
+                                {{#if sortersData.name.asc}}
+                                    <i class="fa fa-chevron-up"></i>
+                                {{/if}}
+                                {{#if sortersData.name.desc}}
+                                    <i class="fa fa-chevron-down"></i>
+                                {{/if}}
+                            </span>
+                        </div>
+                        <div class="col-xs-10 col-sm-6">
+                            <span class="hidden-xs hidden-sm documents-list-sort-header" {{action "changeSortDirection" "compositeUpdatedAt"}}>
+                                Date
+                                {{#if sortersData.compositeUpdatedAt.asc}}
+                                    <i class="fa fa-chevron-up"></i>
+                                {{/if}}
+                                {{#if sortersData.compositeUpdatedAt.desc}}
+                                    <i class="fa fa-chevron-down"></i>
+                                {{/if}}
+                            </span>
+                            <span class="pull-right action-bar">
+                                {{#unless isInboxActiveFolder}}
+                                    {{#if isRestoreBtnVisible}}
+                                        <div class="btn-wrapper" title="Restore">
+                                            <button class="btn btn-default btn-sm" {{action "restoreDocuments" bubbles=false}} title="Restore documents">
+                                                <i class="fa fa-retweet"></i>
+                                            </button>
+                                        </div>
+                                    {{/if}}
+                                    <div class="btn-wrapper" title="Remove">
+                                        <button id="tb-doc-delete-btn" class="btn btn-default btn-sm {{unless isDeleteBtnEnabled 'disabled'}}" {{action "showRemoveConfirmation" bubbles=false}} style="margin-top: -3px;">
+                                            <i class="fa fa-trash-o"></i>
+                                        </button>
+                                    </div>
+                                    {{#unless isTrashActiveFolder}}
+                                        <div class="btn-wrapper" title="Rename Document">
+                                            <button class="btn btn-default btn-sm {{unless isRenameBtnEnabled 'disabled'}}" {{action "toggleDocumentRename" bubbles=false}}>
+                                                <i class="fa fa-edit"></i>
+                                            </button>
+                                        </div>
+                                        <div class="btn-wrapper" title="Duplicate Document">
+                                            <button id="tb-doc-clone" class="btn btn-default btn-sm {{unless isCloneEnabled 'disabled'}}" {{action "cloneDocument" bubbles=false}}>
+                                                <i class="fa {{if cloning 'fa-cog' 'fa-clone'}} {{if cloning 'fa-spin'}}"></i>
+                                            </button>
+                                        </div>
+                                    {{/unless}}
+                                    <div class="btn-wrapper" title="Move to">
+                                        <button class="btn btn-default btn-sm {{unless isShowFoldersToCopyDialogBtnEnabled 'disabled'}}" {{action "showFoldersToCopyDialog" bubbles=false}}>
+                                            <i class="fa fa-share-square-o"></i>
+                                        </button>
+                                    </div>
+                                    {{#unless isTrashActiveFolder}}
+                                        <div class="btn-wrapper" title="Download">
+                                            <button id="tb-doc-download" class="btn btn-default btn-sm {{unless isDownloadBtnEnabled 'disabled'}}" {{action "downloadDocument" bubbles=false}}>
+                                                <i class="fa fa-download"></i>
+                                            </button>
+                                        </div>
+                                        <div class="btn-wrapper" title="Send via email">
+                                            <button class="btn btn-default btn-sm {{unless isEmailingBtnEnabled 'disabled'}}" {{action "showSendDialog" "email"}}>
+                                                <i class="fa {{if emailPrepared 'fa-cog' 'fa-envelope-o'}} {{if emailPrepared 'fa-spin'}} {{if emailPrepared 'disabled'}}"></i>
+                                            </button>
+                                        </div>
+                                        <div class="btn-wrapper" title="Send via fax">
+                                            <button class="btn btn-default btn-sm {{unless isEmailingBtnEnabled 'disabled'}}" {{action "showSendDialog" "fax"}}>
+                                                <i class="fa {{if faxPrepared 'fa-cog' 'fa-fax'}} {{if faxPrepared 'fa-spin'}} {{if faxPrepared 'disabled'}}"></i>
+                                            </button>
+                                        </div>
+                                        <div class="btn-wrapper" title="Print">
+                                            <button id="tb-doc-print" class="btn btn-default btn-sm {{unless isPrintingBtnEnabled 'disabled'}}" {{action "printDocument" bubbles=false}}>
+                                                <i class="fa {{if isPrintingPrepared 'fa-cog' 'fa-print'}} {{if isPrintingPrepared 'fa-spin'}} {{if isPrintingPrepared 'disabled'}}"></i>
+                                            </button>
+                                        </div>
+                                    {{/unless}}
+                                {{/unless}}
+                            </span>
+                        </div>
+                    </div>
+                    {{#each document in pagedDocs}}
+                        <div data-doc-id="{{unbound document.id}}" class="row item {{if document.isSelected 'selected'}} {{unless document.isViewed 'not-viewed'}}" {{action "selectDocument" document preventDefault=false}}>
+                            <div class="col-xs-9 col-sm-6 doc-data">
+                                {{#if isInboxActiveFolder}}
+                                    <i class="fa custom-checkbox"></i>
+                                {{else}}
+                                    <i class="fa custom-checkbox {{if document.isSelected 'fa-check-square-o' 'fa-square-o'}}"></i>
+                                {{/if}}
+                                <a class="doc-name" href="{{document.editUrl}}" {{action "openLink" document.editUrl bubbles=false }}>
+                                    {{#if document.shared}}
+                                        <i class="fa fa-share-alt"></i>
+                                    {{else}}
+                                        <i class="fa fa-file-pdf-o"></i>
+                                    {{/if}}
+                                    {{view "editable-text" text=document.name record=document isEditing=document.isEditing editedPropertyName="name"}}
+                                </a>
+                            </div>
+                            <div class="hidden-xs col-sm-4 doc-data date">{{prettifyDate document.compositeUpdatedAt true}}</div>
+                            <div class="col-xs-3 col-sm-2 actions-holder ">
+                                {{#unless isTrashActiveFolder}}
+                                    <span class="pull-right">
+                                        <a href="{{document.editUrl}}" class="btn btn-default btn-sm edit-btn">open</a>
+                                    </span>
+                                    {{#if controllers.application.model.profile.supportsForms}}
+                                        <button type="button" class="btn btn-default btn-sm edit-btn" {{action "createForm" document}}>
+                                            form
+                                        </button>
+                                    {{/if}}
+                                {{/unless}}
+                            </div>
+                        </div>
+                    {{/each}}
+                    <div class="row">
+                        <div id="documents-pagination" class="pull-right"></div>
+                    </div>
+                {{else}}
+                    <div class="empty-message">
+                        {{#if isTrashActiveFolder}}
+                            Trash is empty
+                        {{else}}
+                            {{#if isInboxActiveFolder}}
+                                Inbox is empty
+                            {{else}}
+                                <div>Drag&amp;drop PDF</div>
+                                <button id="sample-upload-btn" type="button" class="btn btn-default btn-sm ladda-button" data-spinner-color="#7d879b" data-style="zoom-in" data-spinner-size="25" {{action "uploadSampleForm"}}>
+                                    <span class="ladda-label"><i class="fa fa-file-pdf-o"></i> Try Sample Form</span>
+                                </button>
+                            {{/if}}
+                        {{/if}}
+                    </div>
+                {{/if}}
+
+                {{#if controllers.application.model.profile.supportsUpload}}
+                    {{#if isNotMobileDevice}}
+                        <div class="main-drop-area">
+                            <i class="fa fa-cloud-upload fa-4x"></i>
+
+                            <div>
+                                <span class="hidden-xs">Drag&amp;Drop your designs here or</span>
+
+                                <div class="fileinput fileinput-new" data-provides="fileinput">
+                                    <span class="btn-file link">
+                                        <span class="fileinput-new">browse</span>
+                                        <span class="fileinput-exists">browse</span>
+                                        <input type="file" name="documents-upload-file-input">
+                                    </span>
+                                </div>
+                                {{!-- Will be required in the future--}}
+                                {{!-- or <a data-toggle="modal" data-target="#upload-modal" class="link">upload from cloud</a> --}}
+                            </div>
+                        </div>
+                    {{else}}
+                        <input id="documents-upload-file-input" type="file" name="documents-upload-file-input" style="display:none">
+                        <div class="main-drop-area" {{action "openFileSelectDialog"}}>
+                            <i class="fa fa-cloud-upload fa-4x"></i>
+
+                            <div>
+                                Upload from Cloud coming soon!
+                            </div>
+                        </div>
+                    {{/if}}
+                {{/if}}
+            </div>
+        {{/if}}
+    </div>
+
+    {{doc-send user=controllers.application.model.profile doc=sendingDocument pages=sendingDocumentPages store=store sendOnly=true title="Send document" activeTab=sendDialogActiveTab}}
+
+    <div class="modal fade folder-select-dialog" id="folder-select-dialog" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span aria-hidden="true">&times;</span>
+                        <span class="sr-only">Close</span>
+                    </button>
+                    <h5 class="modal-title">Please select destination folder</h5>
+                </div>
+                <div class="modal-body list">
+                    {{#if destinationFoldersListEmpty}}
+                        <h3 class="text-center">You have no folders to move documents to. Please create some folder.</h3>
+                    {{else}}
+                        {{#each folder in folders}}
+                            {{#unless folder.isTrash}}
+                                {{#unless folder.isInbox}}
+                                    {{#unless folder.isActive}}
+                                        {{#unless folder.shared}}
+                                            <div class="row item">
+                                                <div class="col-md-12 item" {{action "selectAsDestination" folder}}>
+                                                    <i class="fa {{if folder.isSelectedAsDestination 'fa-folder-open' 'fa-folder'}}"></i> {{folder.name}}
+                                                </div>
+                                            </div>
+                                        {{/unless}}
+                                    {{/unless}}
+                                {{/unless}}
+                            {{/unless}}
+                        {{/each}}
+                    {{/if}}
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" {{action "moveDocuments"}} disabled= {{isMoveButtonDisabled}}>Move</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

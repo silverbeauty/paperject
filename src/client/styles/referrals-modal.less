@@ -1,0 +1,47 @@
+.referrals-modal {
+    .panel {
+        box-shadow: none;
+    }
+    .panel-body{
+        padding-top: 0;
+        padding-bottom: 0;
+    }
+
+    @media (min-width: @screen-sm-min) {
+        .no-right-padding {
+            padding-right: 0;
+        }
+        .alert {
+            margin-top: 0px !important;
+        }
+
+    }
+    @media (max-width: @screen-xs-max) {
+        .panel-body {
+            padding: 0 !important;
+        }
+    }
+
+    .btn-primary {
+        min-width: 0;
+        width: 100%;
+        margin-top: -4px;
+    }
+
+    .alert {
+        padding: 2px 15px 2px 15px;
+        margin-top: 10px;
+        .close {
+            padding-top: 5px;
+        }
+    }
+
+    .bootstrap-tagsinput {
+        .tag.label.label-info{
+            font-size: 95%;
+
+            line-height: 2.2em;
+            background-color: @brand-header-bg;
+        }
+    }
+}

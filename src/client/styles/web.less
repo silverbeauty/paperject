@@ -1,0 +1,53 @@
+@import "../bower_components/bootstrap/less/bootstrap.less";
+// @import "../bower_components/bootstrap/less/variables.less";
+// @import "../bower_components/bootstrap/less/mixins.less";
+
+@import "variables.less";
+
+@import "web/main.less";
+@import "web/home-global.less";
+@import "web/home-top-panel.less";
+@import "web/home-banner.less";
+@import "web/home-uploads-panel.less";
+@import "web/home-how-it-panel.less";
+@import "web/home-pricing.less";
+@import "web/home-why-choose-panel.less";
+@import "web/global-footer.less";
+@import "web/miscellaneous.less";
+@import "web/security.less";
+@import "fullscreen-dnd.less";
+@import "branding.less";
+
+.notification-message{
+    position: fixed;
+    top: 30px;
+    z-index: 100000;
+    width: 600px;
+    left: 50%;
+    margin-left: -300px;
+}
+
+.modal-content {
+    font-weight: normal;
+    color: #333;
+}
+
+#login-or-try-modal {
+    .login-form-panel{
+        display: none;
+    }
+}
+
+.btn-orange {
+    color: #ffffff;
+    background-color: #ff9c00;
+    border-color: #ff9c00;
+    text-transform: uppercase;
+    font-weight: 600;
+
+    &:hover, &:focus, &:active, &.active {
+        color: #ffffff;
+        background-color: #fbaf5d;
+        border-color: #fbaf5d;
+    }
+}

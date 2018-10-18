@@ -1,0 +1,180 @@
+<div class="modal fade" id="signature-modal" tabindex="-1" role="dialog" aria-hidden="true" aria-labelledby="signature-modal-label">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true">&times;</span>
+                    <span class="sr-only">Close</span>
+                </button>
+                {{#if isInitials}}
+                    <h4 class="modal-title" id="signature-modal-label">
+                        <span class="md-only">Create initials</span>
+                        <span class="xs-only">Initials</span>
+                    </h4>
+                {{else}}
+                    <h4 class="modal-title" id="signature-modal-label">
+                        <span class="md-only">Create a signature</span>
+                        <span class="xs-only">Signature</span>
+                    </h4>
+                {{/if}}
+
+            </div>
+            <div class="modal-body">
+                {{#if errorMessage}}
+                    <div class="alert alert-danger alert-dismissable">
+                        <button type="button" class="close" aria-hidden="true" {{action 'dismissErrorMessage'}}>&times;</button>
+                        {{errorMessage}}</div>
+                {{/if}}
+                <ul class="nav nav-tabs" role="tablist">
+                    <li role="presentation">
+                        <a href="#signature-modal-tab-draw" role="tab" data-toggle="tab" data-tab="draw">Draw</a>
+                    </li>
+                    <li role="presentation" class="active">
+                        <a href="#signature-modal-tab-type" role="tab" data-toggle="tab" data-tab="type">Type</a>
+                    </li>
+                    <li role="presentation">
+                        <a href="#signature-modal-tab-upload" role="tab" data-toggle="tab" data-tab="upload">Upload</a>
+                    </li>
+                    {{#if isNotMobileDevice}}
+                        <li role="presentation">
+                            <a href="#signature-modal-tab-dragndrop" role="tab" data-toggle="tab" data-tab="dragndrop">Drag&nbsp;&amp;&nbsp;Drop</a>
+                        </li>
+                        <li role="presentation">
+                            <a href="#signature-modal-tab-camera" role="tab" data-toggle="tab" data-tab="camera">Camera</a>
+                        </li>
+                    {{/if}}
+                </ul>
+                <div class="tab-content">
+                    <div role="tabpanel" class="tab-pane active" id="signature-modal-tab-draw">
+                        <h5 class="text-muted">Draw your {{signatureType}} below, then click <b>Save</b> button to continue</h5>
+                        <div class="sm-draw-tools">
+                            <ul class="sm-color-picker toolbar-control" title="Pen color">
+                                <li class="item color-black active" {{action 'setColor' 'black'}}></li>
+                                <li class="item color-blue" {{action 'setColor' 'blue'}}></li>
+                                <li class="item color-red" {{action 'setColor' 'red'}}></li>
+                            </ul>
+                            <div class="clearfix"></div>
+                        </div>
+
+                        <div class="canvas-container">
+                            <canvas></canvas>
+                        </div>
+                    </div>
+                    <div role="tabpanel" class="tab-pane" id="signature-modal-tab-type">
+                        <h5 class="text-muted">Type your {{signatureType}}, then click <b>Save</b> button to continue</h5>
+                        <div class="sm-draw-tools">
+                            <ul class="sm-color-picker toolbar-control" title="Pen color">
+                                <li class="item color-black active" {{action 'setColor' 'black'}}></li>
+                                <li class="item color-blue" {{action 'setColor' 'blue'}}></li>
+                                <li class="item color-red" {{action 'setColor' 'red'}}></li>
+                            </ul>
+                            <input id="signature-modal-font-selector" class="{{unless isFontSelectorInitialized 'hidden'}}">
+                            <a {{action "initializeFontSelector"}} class="toolbar-control font-selector-initializer {{if isFontSelectorInitialized 'hidden'}}">
+                                Select a font <i class="fa fa-sort-desc"></i>
+                            </a>
+
+                            {{input type="text" class="form-control sm-signature-input" value=signatureText placeholder=signatureTextPlaceholder}}
+                            <div class="clearfix"></div>
+                        </div>
+
+                        <div class="canvas-container">
+                            <canvas></canvas>
+                        </div>
+                    </div>
+                    <div role="tabpanel" class="tab-pane" id="signature-modal-tab-upload">
+                        <h5 class="text-muted">Select a file with your {{signatureType}}, it will be automatically uploaded</h5>
+                        <form action="#" method="post" accept-charset="utf-8" class="uploads-form">
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-9 custom-file-input-holder hidden-xs">
+                                    <input placeholder="Upload signature" readonly="" class="form-control">
+                                    <input type="file" name="files" class="js-sign-upload-selector custom-file-input">
+                                </div>
+
+                                <div class="col-xs-12 col-sm-3">
+                                    <button type="button" class="btn btn-lg btn-block btn-primary custom-upload-btn">
+                                        Upload
+                                        <input type="file" name="files" class="js-sign-upload-selector" />
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    {{#if isNotMobileDevice}}
+                        <div role="tabpanel" class="tab-pane" id="signature-modal-tab-dragndrop">
+                            <i class="fa fa-cloud-upload fa-4x"></i>
+                            <span>Drag&nbsp;&amp;&nbsp;Drop to upload</span>
+                        </div>
+                        <div role="tabpanel" class="tab-pane" id="signature-modal-tab-camera">
+                            {{#if cameraSupported}}
+                                <div class="camera-preview">
+                                    {{#if signaturePreview}}
+                                        <img src="{{signaturePreview.img}}" style={{signaturePreviewMargin}} />
+                                        <button type="button" class="btn btn-danger" {{action "discardCapture"}}>Try Again</button>
+                                        <button type="button" class="btn btn-primary" {{action "useCapture"}}>Use</button>
+                                    {{else}}
+                                        <div class="camera-message text-muted">
+                                            {{#if awaitingSignaturePreview}}
+                                                <i class="fa fa-spin fa-spinner"></i> Generating preview...
+                                            {{else}}
+                                                <i class="fa fa-picture-o"></i> Preview will appear here
+                                            {{/if}}
+                                        </div>
+                                    {{/if}}
+                                </div>
+                                <div class="camera-container">
+                                    <video width="640" height="480" autoplay></video>
+                                    {{#if video}}
+                                        <button type="button" id="signature-modal-capture" class="btn btn-primary ladda-button" {{action "captureFromCamera"}} disabled= {{saving}} data-style="zoom-in" data-spinner-size="25" disabled= {{signaturePreview}}>
+                                            <span class="ladda-label"><i class="fa fa-camera"></i> Capture</span>
+                                        </button>
+                                    {{else}}
+                                        <div class="camera-message text-muted"><i class="fa fa-camera"></i> Camera is not enabled</div>
+                                    {{/if}}
+                                </div>
+                                <canvas width="640" height="480"></canvas>
+                            {{else}}
+                                <div class="text-muted">Your browser does not provide access to the device's camera. Please try Chrome or Firefox to capture signature from camera.</div>
+                            {{/if}}
+                        </div>
+                    {{/if}}
+                </div>
+                {{#if saving}}
+                    <div class="loading-container">
+                        <i class="fa fa-spin fa-refresh"></i>
+                    </div>
+                {{/if}}
+            </div>
+            <div class="modal-footer {{if cameraTabActive 'hide'}}">
+                {{#if isDrawOrTypeSigTabActive}}
+                    <a id="sm-clear-btn" href="#" {{action "clearActiveTab"}} class="sm-clear" disabled= {{saving}}>Clear</a>
+                    {{#unless clientOnly}}
+                        <button type="button" id="sm-sign-save-btn" class="btn btn-lg btn-default ladda-button" {{action "saveSignature"}} data-style="zoom-in" data-spinner-size="25" disabled= {{saving}}>
+                            <span class="ladda-label">Save</span>
+                        </button>
+                    {{/unless}}
+                    <button type="button" id="sm-sign-save-and-use-btn" class="btn btn-lg btn-primary ladda-button" {{action "saveAndUseSignature"}} data-style="zoom-in" data-spinner-size="25" disabled= {{saving}}>
+                        <span class="ladda-label">
+                            {{#if clientOnly}}Save{{else}}Save&nbsp;&amp;&nbsp;Use{{/if}}
+                        </span>
+                    </button>
+                {{else}}
+                    <span class="text-muted">Selected signature will be automatically uploaded</span>
+                {{/if}}
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="signature-capture-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-body">
+                Capturing your signature. This may take a moment.
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-default" data-toggle="modal" data-target="#signature-capture-modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>

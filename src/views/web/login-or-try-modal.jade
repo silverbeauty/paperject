@@ -1,0 +1,36 @@
+#login-or-try-modal.modal.fade(tabindex="-1", role="dialog", aria-hidden="true" data-backdrop="static")
+    .modal-dialog
+        .modal-content
+            .modal-header
+                button.close(type="button", data-dismiss="modal")
+                    span(aria-hidden="true") ×
+                    span.sr-only Close
+                h4#payment-dialog-label.modal-title Please login
+                h5.text-muted You should be logged in to upload documents
+            .modal-body
+                .row
+                    .col-xs-12
+                        button.show-login-form-btn.btn.btn-lg.btn-primary.btn-block I have Paperjet account
+                .row
+                    .col-xs-12
+                        .panel.panel-default.login-form-panel(style="margin-top:20px")
+                            form.panel-body.login-form(role="form", login="login", on="submit")
+                                .form-group
+                                    label Email
+                                    input.form-control(name="email")
+                                .form-group
+                                    label Password
+                                    input.form-control(type="password" name="password")
+                                .row
+                                    .col-sm-6.col-xs-12
+                                        a.login-btn.btn.btn-lg.btn-primary.btn-block
+                                            span.ladda-label Sign in with email
+                                .row
+                                    .col-sm-6.col-xs-12
+                                        a.btn.btn-block.btn-default(style="margin-top:10px", href="/auth/google.login?redirect=landing") <i class="fa fa-google-plus"></i> Sign in with Google
+                                    .col-sm-6.col-xs-12
+                                        a.btn.btn-block.btn-default(style="margin-top:10px", href="/auth/facebook.login?redirect=landing") <i class="fa fa-facebook"></i> Sign in with Facebook
+
+                .row
+                    .col-xs-12
+                        button.try-paperjet-btn.btn.btn-lg.btn-primary.btn-block.col-xs-12 Try Paperjet

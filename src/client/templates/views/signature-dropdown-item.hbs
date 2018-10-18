@@ -1,0 +1,6 @@
+<li data-signature-id="{{signature.id}}" {{action "selectSignature" signature}}>
+    <a href="#">
+            <i class="fa fa-times-circle js-remove-item" {{action "removeItem" signature target=view bubbles=false}}></i>
+            <img class="js-sm-droppable-signature" src="{{signature.img}}"  />
+    </a>
+</li>

@@ -1,0 +1,210 @@
+/* Header Top logo, navigation,Banner
+  ================================================= */
+
+.top-header-panel{
+  background: url(../images/web/top-header-bg.jpg) repeat-x;
+  background-size: auto 100%;
+  min-height: 571px;
+  z-index: 1030;
+
+  @media (max-width: 768px) {
+    min-height: 0;
+  }
+
+  &.no-bg{
+    background: none;
+    min-height: 111px;
+  }
+}
+
+.navbar-brand{
+  padding: 33px 15px 30px 15px;
+}
+
+.navbar-default.affix{
+  background: #fff;
+  //background-color: rgba(#fff, 0.9);
+}
+.navbar-default.white .logo-normal,
+.navbar-default.affix .logo-normal,
+.navbar-default .logo-sticky{
+  display: none;
+}
+.navbar-default.white .logo-sticky,
+.navbar-default.affix .logo-sticky{
+  display: block;
+}
+
+.btn-wrap{
+    float: left;
+
+    @media (min-width: @grid-float-breakpoint) {
+        margin-top: 33px;
+    }
+
+    .btn{
+        line-height: 28px;
+        border: 2px solid white;
+        background: transparent;
+        color: #fdfeff;
+        font-weight: 600;
+        padding: 6px 24px;
+
+        &:hover{
+            color: #e3f1ff;
+        }
+
+        &.uppercase{
+            text-transform: uppercase;
+        }
+    }
+
+    .btn-profile {
+        float: left;
+        margin-right: 18px;
+        border-radius: 50%;
+        background-size: contain;
+        width: 28px;
+        height: 28px;
+        border: 0;
+        color: #ffffff;
+        background-color: #5faef3;
+        border-color: #5faef3;
+    }
+}
+.navbar-toggle .menu-text{
+  position: absolute;
+  top: 6px;
+  left: -50px;
+  text-transform: uppercase;
+}
+.navbar-default {
+  top: 0;
+  border-width: 0 0 1px;
+
+  .navbar-nav {
+    > li > a {
+      font-weight: 600;
+      color: #fdfeff;
+      text-transform: uppercase;
+
+      &:hover,
+      &:focus {
+        color: darken(#fdfeff, 5%);
+        background-color: transparent;
+      }
+    }
+    > .active > a {
+      &,
+      &:hover,
+      &:focus {
+        color: darken(#fdfeff, 5%);
+        background-color: transparent;
+      }
+    }
+  }
+
+  .navbar-toggle {
+    border-color: @brand-primary;
+
+    &:hover,
+    &:focus {
+      background-color: lighten(@brand-primary, 20%);
+    }
+    .icon-bar {
+      background-color: #fdfeff;
+    }
+
+    .menu-text{
+      color: #fdfeff;
+    }
+
+    @media (max-width: @screen-xs) {
+        .menu-text{
+            display: none;
+        }
+    }
+  }
+
+  @media (min-width: @grid-float-breakpoint) {
+    border-radius: 0;
+
+    .navbar-nav {
+      > li > a {
+        padding-left: 25px;
+        padding-right: 25px;
+      }
+    }
+  }
+}
+.navbar-default.white,
+.navbar-default.affix{
+  position: fixed;
+  right: 0;
+  left: 0;
+  z-index: @zindex-navbar-fixed;
+  border-style: solid;
+  .translate3d(0, 0, 0);
+
+  border-color: #ebeced;
+
+  .navbar-nav {
+    > li > a {
+      font-weight: 600;
+      color: #b6bfca;
+      text-transform: uppercase;
+
+      &:hover,
+      &:focus {
+        color: darken(#7d879b, 1%);
+        background-color: transparent;
+      }
+    }
+    > .active > a {
+      &,
+      &:hover,
+      &:focus {
+        color: darken(#7d879b, 1%);
+        background-color: transparent;
+      }
+    }
+  }
+
+  .btn-wrap{
+
+    .btn{
+      border: 2px solid #ff9c00;
+      background: #ff9c00;
+      color: #fdfeff;
+      font-weight: 600;
+
+      &:hover{
+        border: 2px solid #fbaf5d;
+        background: #fbaf5d;
+      }
+    }
+  }
+
+  .navbar-toggle {
+    border-color: #ff9c00;
+    &:hover,
+    &:focus {
+      background-color: lighten(#ff9c00, 20%);
+    }
+    .icon-bar {
+      background-color: #ff9c00;
+    }
+  }
+
+  // Undo the rounded corners
+  @media (min-width: @grid-float-breakpoint) {
+    border-radius: 0;
+
+    .navbar-nav {
+      > li > a {
+        padding-left: 25px;
+        padding-right: 25px;
+      }
+    }
+  }
+}

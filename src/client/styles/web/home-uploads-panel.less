@@ -1,0 +1,226 @@
+@file-hover-background-color: #85B1BD;
+
+.uploads-panel {
+    margin-bottom: (@line-height-computed * 2);
+}
+.wrapper-uploads-box {
+    margin-top: 20px;
+    @media (min-width:1080px) {
+        padding: 0 60px;
+    }
+}
+.uploads-box {
+    .clearfix();
+}
+.uploads-nav {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-size: 15px;
+    font-weight: 600;
+    .clearfix();
+    >li {
+        float: left;
+        width: 32.58%;
+        margin-right: 0.75%;
+        &:last-child {
+            float: right;
+            margin-right: 0;
+            width: 33.33%;
+        }
+    }
+    a {
+        display: block;
+        //background-color: @brand-primary;
+        padding: 14px 20px;
+        text-align: center;
+        border: 1px solid lighten(@brand-primary,30%);
+        border-bottom: 0;
+        .border-top-radius(6px);
+        .transition(all 0.20s ease-in);
+        text-decoration: none;
+        white-space: nowrap;
+        &:hover, &:focus {
+            background-color: lighten(@brand-primary,40%);
+        }
+        .fa {
+            position: relative;
+            font-size: 26px;
+            padding-right: 17px;
+        }
+        .uploads-nav-icon-1 {
+            top: 3px;
+        }
+        .uploads-nav-icon-4, .uploads-nav-icon-2 {
+            top: 4px;
+        }
+        .uploads-nav-icon-3 {
+            top: 6px;
+        }
+    }
+    >li a:active, >li.active a {
+        background-color: @brand-primary;
+        border-color: @brand-primary;
+        color: #fff;
+    }
+
+    .active.file-hover {
+        a {
+            background-color: @file-hover-background-color;
+            color: #CCC8C8;
+        }
+    }
+}
+.uploads-form {
+    background-color: @brand-primary;
+    min-height: 45px;
+    padding: 16px 30px 16px 40px;
+    //margin-right: 1px;
+    .clearfix();
+    .border-bottom-radius(6px);
+    form {
+        margin: 0;
+    }
+    .input-holder{
+        padding-right: 0;
+    }
+    .custom-file-input-holder{
+        position: relative;
+        overflow: hidden;
+        .custom-file-input{
+            position: absolute;
+            margin: 0;
+            opacity: 0;
+            transform: translate(-300px, 0px) scale(4);
+            width: 100%;
+            top: 0;
+            cursor: pointer;
+        }
+    }
+    #doc-url-upload {
+        position: relative;
+        .upload-btn-popup {
+            position: absolute;
+            left: -175px;
+            top: 6px;
+            z-index: 5000;
+            .text-container {
+                display: inline-block;
+                background-color: #ffa500;
+                color: #fff;
+                padding: 10px 5px;
+                border-radius: 3px;
+            }
+            .popup-caret {
+                display: inline-block;
+                vertical-align: middle;
+                border-top: 10px solid transparent;
+                border-bottom: 10px solid transparent;
+                border-left: 10px solid #ffa500;
+                width: 0;
+                height: 0;
+            }
+        }
+    }
+    .custom-upload {
+        width: 100%;
+        min-height: 53px;
+        border-radius: 4px;
+        input[type=file] {
+            position: absolute;
+            margin: 0;
+            opacity: 0;
+            filter: alpha(opacity=0);
+            transform: translate(-300px,0px) scale(4);
+            -webkit-transform: translate(-300px,0px) scale(4);
+            -o-transform: translate(-300px,0px) scale(4);
+            -moz-transform: translate(-300px,0px) scale(4);
+            width: auto;
+            font-size: 23px;
+            direction: ltr;
+            cursor: pointer;
+        }
+        font-weight: bold;
+    }
+    .btn-link {
+        color: #FFF;
+    }
+    .form-control, .holder {
+        padding: 10px 30px;
+        height: 53px;
+        background-color: #fff;
+        font-size: 16px;
+        font-weight: 400;
+        color: #3C3D3F;
+        .placeholder(#C4CBD3);
+    }
+    // .btn {
+        // position: relative;
+        // float: left;
+        // padding: 11px 32px;
+        // background: transparent;
+        // width: 20%;
+        // background-color: @brand-green-light;
+        // border-width: 0;
+        // border-bottom-width: 3px;
+        // border-style: solid;
+        // border-bottom-color: darken(@brand-green-light,15%);
+        // font-size: 20px;
+        // font-weight: 600;
+        // color: #fff;
+        // &:hover {
+            //background-color: darken(@brand-green-light,10%);
+            //border-bottom-color: darken(@brand-green-light,18%);
+    //     }
+    // }
+
+    &#drag-tab.file-hover {
+        background-color: @file-hover-background-color;
+    }
+}
+@media (max-width:1080px) {
+    .uploads-nav {
+        a {
+            padding: 14px 15px;
+            .fa {
+                font-size: 24px;
+                padding-right: 10px;
+            }
+        }
+    }
+    .uploads-form {
+        margin-right: 0;
+    }
+}
+@media (max-width:1022px) {
+    .uploads-nav {
+        font-size: 14px;
+        font-weight: 400;
+        a {
+            padding: 14px 10px;
+            .fa {
+                font-size: 18px;
+                padding-right: 10px;
+            }
+            .uploads-nav-icon-1, .uploads-nav-icon-2, .uploads-nav-icon-3, .uploads-nav-icon-4 {
+                top: 2px;
+            }
+        }
+    }
+}
+@media (max-width:800px) {
+    .uploads-nav {
+        a {
+            padding: 10px 6px;
+            font-size: 13px;
+            .fa {
+                display: none;
+            }
+        }
+    }
+}
+@media (max-width:768px) {
+    .uploads-panel {
+        display: none;
+    }
+}

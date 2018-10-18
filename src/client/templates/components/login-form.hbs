@@ -1,0 +1,43 @@
+<form id="login-form" role="form" {{action "login" on="submit"}}>
+    <div class="form-group">
+        <label for={{usernameField.elementId}}>Email</label>
+        {{input value=username class="form-control" viewName="usernameField"}}
+    </div>
+
+    <div class="form-group">
+        <label for={{passwordField.elementId}}>Password</label>
+        {{input value=password type="password" class="form-control" viewName="passwordField"}}
+    </div>
+
+    <div class="row">
+        <div class="col-sm-6 col-xs-12">
+            <button type="submit" class="btn btn-lg btn-block btn-primary ladda-button" disabled={{isProcessing}} id="login-form-cmp-login-btn" data-style="expand-left" data-spinner-color="#f2f2f2" data-spinner-size="25">
+                <span class="ladda-label">Sign in with email</span>
+            </button>
+        </div>
+        <div class="col-sm-6 col-xs-12">
+            <span class="pull-right-sm" style="line-height: 45px;">{{#link-to "forgot-password"}}Forgot password?{{/link-to}}</span>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-6 col-xs-12" style="margin-top:10px">
+            <a href="/auth/google.login" class="btn btn-block btn-default"><i class="fa fa-google-plus"></i> Sign in with Google</a>
+        </div>
+        <div class="col-sm-6 col-xs-12" style="margin-top:10px">
+            <a href="/auth/facebook.login" class="btn btn-block btn-default"><i class="fa fa-facebook"></i> Sign in with Facebook</a>
+        </div>
+    </div>
+
+    <div class="row" style="margin-top: 50px">
+        <div class="col-xs-12">
+            {{#if canRegister}}
+                {{#link-to "register"}}Click here to join Paperjet{{/link-to}}
+            {{/if}}
+        </div>
+    </div>
+
+    {{#if loginFailed}}
+        <div class="alert alert-danger">{{loginErrorMessage}}</div>
+    {{/if}}
+</form>

@@ -1,0 +1,182 @@
+@import "../bower_components/bootstrap/less/variables.less";
+@import "../bower_components/bootstrap/less/mixins.less";
+@import "../bower_components/bootstrap-tagsinput/src/bootstrap-tagsinput.less";
+
+@import "variables.less";
+@import "common.less";
+@import "application.less";
+@import "signature-modal.less";
+@import "font-select.less";
+@import "nouislider.less";
+@import "doc-send.less";
+@import "fullscreen-dnd.less";
+@import "print-document.less";
+@import "profile-modal.less";
+@import "referrals-modal.less";
+@import "web/home-pricing.less";
+@import "doc-editor.less";
+@import "branding.less";
+
+body {
+    background-color: #f6f8fa;
+}
+
+h4 {
+    font-size: 16px;
+}
+
+.app-header {
+    .navbar-brand {
+        padding: 9px 0 9px 15px;
+        position: relative;
+        font-size: 16px;
+        line-height: 32px;
+
+        a, .navbar-brand-logo {
+            color: white;
+            display: inline-block;
+            height: 32px;
+            float: left;
+            text-decoration: none;
+
+            &:hover {
+                color: darken(white, 10%);
+            }
+        }
+
+        .navbar-pj-link {
+            color: #e6e6e6;
+            &:hover {
+                color: white;
+            }
+        }
+
+        .navbar-doc-name {
+            line-height: 32px;
+            max-width: 510px;
+            overflow-x: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            font-size: 13px;
+
+            @media (max-width: @screen-md) {
+                max-width: 366px;
+            }
+
+            @media (max-width: @screen-xs) {
+                max-width: 165px;
+            }
+        }
+
+        .navbar-doc-status {
+            float: left;
+            font-size: 11px;
+            padding-left: 20px;
+            vertical-align: bottom;
+            color: #e0e0e0;
+            line-height: 27px;
+            margin-top: 3px;
+        }
+
+        .navbar-brand-logo {
+            .img-retina("../images/document-header.png"; "../images/document-header-2x.png"; 39px; 32px);
+            background-repeat: no-repeat;
+            width: 39px;
+            display: inline-block;
+        }
+
+        .navbar-brand-separator {
+            border-left: solid #59abee 1px;
+            width: 1px;
+            display: inline-block;
+            height: 32px;
+            margin:0 20px;
+            float: left;
+
+            @media (max-width: @screen-md) {
+                margin: 0 15px;
+            }
+        }
+
+        @media (max-width: @screen-xs) {
+            .navbar-brand-logo {
+                display: none;
+            }
+
+            .navbar-brand-separator {
+                display: none;
+            }
+        }
+    }
+
+    .navbar-toggle {
+        &:hover, &:focus {
+            background-color: darken(@brand-header-bg, 10%);
+        }
+
+        .icon-bar {
+            background-color: white;
+        }
+    }
+
+    .btn-dashboard {
+        &, &:hover, &:visited, &:active, &:focus {
+            color: white;
+        }
+    }
+
+    .navbar-right {
+        padding-right: 0;
+        padding-left: 0;
+    }
+}
+
+.route-dialog-header-title {
+    color: white;
+    line-height: 34px;
+}
+
+@media (max-width: 1024px) {
+    .btn-primary {
+        min-width: 75px;
+    }
+}
+
+.doc {
+    .brand-infobar {
+        display: none;
+        min-height: 0;
+        padding: 2px;
+        margin: 0;
+        border-color: #e7e7e7;
+        background: white;
+        box-shadow: 0 3px 12px rgba(0, 0, 0, 0.175);
+
+        a {
+            font-size: 11px;
+            font-weight: normal;
+            line-height: 20px;
+            margin-right: 0;
+
+            &.pull-right {
+                margin-left: 20px;
+            }
+        }
+
+        .brand-logo {
+            .img-retina("../images/stripe-logo.png"; "../images/stripe-logo.png"; 27px; 27px);
+            background-size: 27px 27px;
+            background-position-y: center;
+            background-repeat: no-repeat;
+            padding-left: 30px;
+        }
+    }
+
+    &.hide-site-links .site-link {
+        display: none;
+    }
+}
+
+.branded .brand-infobar {
+    display: block;
+}

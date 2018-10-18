@@ -1,0 +1,56 @@
+<nav class="navbar navbar-default navbar-fixed-top app-header doc-app-header">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse" disabled>
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <span class="navbar-brand clearfix">
+                <span class="navbar-brand-logo"></span>
+                <span class="navbar-brand-separator"></span>
+            </span>
+        </div>
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <form class="navbar-form navbar-right expanded-only" style="padding-right:0;">
+                <div class="btn-group">
+                    <button type="button" class="btn btn-primary btn-orange dropdown-toggle" disabled>&nbsp;</button>
+                </div>
+                {{#unless view.isForm}}
+                    <div class="btn-group btn-group-profile">
+                        <button type="button" class="btn btn-default dropdown-toggle btn-profile" disabled></button>
+                    </div>
+                {{/unless}}
+            </form>
+        </div>
+    </div>
+</nav>
+
+<div id="doc-route-error-modal" class="modal fade in" role="dialog">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-body">
+                {{#if model.form}}
+                    <p><strong>Sorry, the form you have requested does not exist.</strong></p>
+                    Please note that once sent, form is not available anymore.
+                {{else}}
+                    {{#if model.wrongOwner}}
+                        <p><strong>Sorry, the document you have requested belongs to another owner.</strong></p>
+                        To gain access, please consider signing in with another account.
+                    {{else}}
+                        <p><strong>Sorry, the document you have requested does not exist.</strong></p>
+                        Make sure that you have the correct URL and that the owner of the document hasn't deleted it.
+                    {{/if}}
+                {{/if}}
+            </div>
+            <div class="modal-footer text-muted">
+                {{#if view.isRegisteredUser}}
+                    <a href="/dashboard" class="btn btn-primary">OK</a>
+                {{else}}
+                    <a href="/" class="btn btn-primary">OK</a>
+                {{/if}}
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,266 @@
+<div id="profile-modal" class="modal fade profile-modal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">Account</h4>
+                <h5 class="text-muted">Please provide us with up to date details</h5>
+            </div>
+            <div class="modal-body">
+                <div id="cancel-profile-modal" class="modal fade profile-modal" tabindex="-1" role="dialog" aria-hidden="true">
+                    <div class="modal-dialog modal-sm">
+                        <div class="modal-content">
+                            <div class="modal-body">
+                                We're sorry to see you go. Please note your files will be permanently removed from the servers after 30 days. <a href="mailto:support@paperjet.com">Send us feedback</a> to improve if you have a minute!
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-danger" {{action "deactivateAccount"}}>Deactivate</button>
+                                <button class="btn btn-link" data-toggle="modal" data-target="#cancel-profile-modal">Cancel</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Account Information </h3>
+                    </div>
+                    <div class="panel-body">
+                        {{#if accCancelMessage}}
+                            <div class="alert {{if isAccCancelError 'alert-danger' 'alert-success'}}">{{accCancelMessage}}</div>
+                        {{/if}}
+                        <div class="row">
+                            <div class="col-md-4 modal-form-label">Account type:</div>
+                            <div class="col-md-8">
+                                {{#if hasSubscription}}
+                                    {{#if profile.subscription.promo}}
+                                        Free PRO until {{prettifyDate profile.paidUntil}}.
+                                    {{else}}
+                                        <div style="line-height:20px">Your Pro account is automatically renewed <a href="#" data-toggle="modal" data-target="#subscription-modal" {{action "hideProfileModal"}}>{{renewInterval}}</a>.</div>
+                                        <div style="line-height:20px">Paid until {{prettifyDate profile.paidUntil}}.</div>
+                                    {{/if}}
+                                    {{#if showCheckSubscription}}
+                                        <div>
+                                            Seems like your <a href="#" data-toggle="modal" data-target="#subscription-modal" {{action "hideProfileModal"}}>subscription</a> had expired.
+                                            <button id="profile-modal-refresh-subscription" type="submit" class="btn btn-default btn-sm ladda-button" {{action "refreshSubscription"}} data-style="zoom-in" data-spinner-color="grey" data-spinner-size="25">
+                                                <span class="ladda-label">Looks wrong? Refresh your subscription information</span>
+                                            </button>
+                                        </div>
+                                    {{/if}}
+                                {{else}}
+                                    <span>Free</span>
+                                    {{#unless profile.isAnonymous}}
+                                        <button type="submit" class="btn btn-primary btn-sm btn-account-upgrade" data-toggle="modal" data-target="#subscription-modal" {{action "hideProfileModal"}}>Upgrade</button>
+                                    {{/unless}}
+                                {{/if}}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4 modal-form-label">Document uploads:</div>
+                            <div class="col-md-8">
+                                {{profile.metrics.monthly.documentsCount}} form(s)
+                            </div>
+                        </div>
+                        {{#if profile.supportsForms}}
+                            <div class="row">
+                                <div class="col-md-4 modal-form-label">Forms sent:</div>
+                                <div class="col-md-8">
+                                    {{profile.metrics.monthly.forms}} form(s)
+                                </div>
+                            </div>
+                        {{/if}}
+                        <div class="row">
+                            <div class="col-md-4 modal-form-label">Fax pages:</div>
+                            <div class="col-md-8">
+                                {{profile.metrics.faxPages}} page(s) available
+                                {{#unless profile.isAnonymous}}
+                                    <button type="submit" class="btn btn-primary btn-sm btn-account-upgrade" data-toggle="modal" data-target="#subscription-modal" {{action "hideProfileModal"}}>Refill</button>
+                                {{/unless}}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4 modal-form-label">Storage (used/total):</div>
+                            <div class="col-md-8">
+                                {{fileSize profile.metrics.usedStorage}} of {{maxUploadGB}} GB
+                            </div>
+                        </div>
+                            {{!-- May be required in the future --}}
+                            {{!--
+                        <div class="row">
+                            <div class="col-md-4 modal-form-label">Bandwidth used:</div>
+                            <div class="col-md-8">
+                                {{fileSize profile.metrics.monthly.usedBandwidth}} of {{maxBandwidhtGB}} GB
+                            </div>
+                        </div>
+                        --}}
+                        <div class="row">
+                            <div class="col-md-4 modal-form-label">Cancellation:</div>
+                            <div class="col-md-8">
+                                {{#if showAccDeactivateConfirmation}}
+                                    <span class="text-danger" style="line-height:20px;display:inline-block;">You are about to deactivate your account. This action is permanent. Are you sure?</span>
+                                    <div>
+                                        <button class="btn btn-danger" data-toggle="modal" data-target="#cancel-profile-modal">Confirm</button>
+                                        <button class="btn btn-link" {{action "setAccDeactivationConfirm" false}}>Cancel</button>
+                                    </div>
+                                {{else}}
+                                    <a href="#" {{action "setAccDeactivationConfirm" true}}>Deactivate your account</a>
+                                {{/if}}
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                {{#if profile.isAnonymous}}
+                    <button type="submit" class="btn btn-primary btn-lg btn-block" data-toggle="modal" data-target="#register-modal" {{action "hideProfileModal"}}>Register</button>
+                {{else}}
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Name and Email Address
+                                <a class="pull-right" href="#" {{action "enableProfileEditMode"}}>Edit</a>
+                            </h3>
+                        </div>
+                        <div class="panel-body">
+                            {{#if profileErrorMessage}}
+                                <div class="alert {{if isError 'alert-danger' 'alert-success'}}">{{profileErrorMessage}}</div>
+                            {{/if}}
+                            <div class="row">
+                                <div class="col-md-4 modal-form-label">Name:</div>
+                                {{#if isProfileEditing}}
+                                    <div class="col-md-4">
+                                        {{input value=profile.firstName class="form-control input-sm" placeholder="First Name" }}
+                                    </div>
+                                    <div class="col-md-4">
+                                        {{input value=profile.lastName class="form-control input-sm" placeholder="Last Name" }}
+                                    </div>
+                                {{else}}
+                                    <div class="col-md-8">
+                                        {{#if profile.displayName}}
+                                            {{profile.displayName}}
+                                        {{else}}
+                                            <span class="text-danger">
+                                                Please <a href="#" {{action "enableProfileEditMode"}}>enter</a> you first and last names
+                                            </span>
+                                        {{/if}}
+
+                                    </div>
+                                {{/if}}
+                            </div>
+                            <div class="row" style="{{if isProfileEditing 'margin-top: 10px'}}">
+                                <div class="col-md-4 modal-form-label">Email:</div>
+                                <div class="col-md-8">
+                                    {{#if isProfileEditing}}
+                                        {{#if profile.isOAuthUser}}
+                                            {{profile.email}} (Facebook or Google user)
+                                        {{else}}
+                                            <form id="profile-email-form" role="form" onsubmit="return false;">
+                                                <div class="form-group">
+                                                    {{input value=profile.email class="form-control input-sm" placeholder="Email" name="email"}}
+                                                </div>
+                                            </form>
+                                        {{/if}}
+                                    {{else}}
+                                        {{profile.email}}
+                                    {{/if}}
+                                </div>
+                            </div>
+                            {{#unless isProfileEditing}}
+                                <div class="row">
+                                    <div class="col-md-4 modal-form-label"></div>
+                                    <div class="col-md-8">
+                                    {{#unless profile.isEmailConfirmed}}
+                                        <button type="submit" class="btn btn-primary btn-sm ladda-button js-send-confirmation-email" {{action "sendConfirmationEmail"}} data-style="expand-left" data-spinner-color="#f2f2f2" data-spinner-size="25">
+                                            <span class="ladda-label">Re-send confirmation email</span>
+                                        </button>
+                                    {{/unless}}
+                                    </div>
+                                </div>
+                            {{/unless}}
+                            <div class="row">
+                                <div class="col-md-offset-4 col-md-8">
+                                    {{#if isProfileEditing}}
+                                        <button type="submit" id="save-profile-btn" class="btn btn-primary ladda-button" {{action "saveProfile"}} disabled={{isProfileUpdatingOrEmailInvalid}} data-style="expand-left" data-spinner-color="#f2f2f2" data-spinner-size="25">
+                                            <span class="ladda-label">Save</span>
+                                        </button>
+                                        <button class="btn btn-link" {{action "disableProfileEditMode"}}>Cancel</button>
+                                    {{/if}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Change password
+                                <a class="pull-right" href="#" {{action "enablePasswordEditMode"}}>Edit</a>
+                            </h3>
+                        </div>
+                        <div class="panel-body">
+                            {{#if passChangeMessage}}
+                                <div class="alert {{if isPassError 'alert-danger' 'alert-success'}}">{{passChangeMessage}}</div>
+                            {{/if}}
+
+                            {{#if isPasswordEditing}}
+                                <form id="change-password-form" role="form" class="form-horizontal">
+                                    {{#if profile.isPassworSet}}
+                                        <div class="form-group has-feedback">
+                                            <div class="col-md-4"><label style="font-weight:normal" for={{oldPasswordField.elementId}}>Old Password:</label></div>
+                                            <div class="col-sm-8">
+                                                {{input name="oldPassword" valueBinding="oldPassword" type="password" class="form-control input-sm" viewName="oldPasswordField"}}
+                                                <span class="glyphicon glyphicon-remove form-control-feedback hidden" data-toggle="tooltip" data-placement="top"></span>
+                                            </div>
+                                        </div>
+                                    {{/if}}
+
+                                    <div class="form-group has-feedback">
+                                        <div class="col-md-4"><label style="font-weight:normal" for={{newPasswordField.elementId}}>New Password:</label></div>
+                                        <div class="col-sm-8">
+                                            {{input id="newPassword" name="newPassword" valueBinding="newPassword" type="password" class="form-control input-sm" viewName="newPasswordField"}}
+                                            <span class="glyphicon glyphicon-remove form-control-feedback hidden" data-toggle="tooltip" data-placement="top"></span>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group has-feedback">
+                                        <div class="col-md-4"><label style="font-weight:normal" for={{confirmNewPasswordField.elementId}}>Confirm new Password:</label></div>
+                                        <div class="col-sm-8">
+                                            {{input name="confirmNewPassword" valueBinding="confirmNewPassword" type="password" class="form-control input-sm" viewName="confirmNewPasswordField"}}
+                                            <span class="glyphicon glyphicon-remove form-control-feedback hidden" data-toggle="tooltip" data-placement="top"></span>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <div class="col-sm-8 col-sm-offset-4">
+                                            <button type="submit" class="btn btn-primary ladda-button" disabled={{isPasswordUpdating}} id="change-pwd-btn" data-style="expand-left" data-spinner-color="#f2f2f2" data-spinner-size="25">
+                                                <span class="ladda-label">Save</span>
+                                                <span class="ladda-spinner" data-size="xs"></span>
+                                                <div class="ladda-progress" style="width: 0px;"></div>
+                                            </button>
+                                            <button class="btn btn-link" {{action "disablePasswordEditMode"}}>Cancel</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            {{else}}
+                                <div class="row">
+                                    <div class="col-md-4 modal-form-label">Password:</div>
+                                    {{#if profile.isOAuthUser}}
+                                        {{#if profile.isPassworSet}}
+                                            <div class="col-md-8">*****</div>
+                                        {{else}}
+                                            <div class="col-md-8">
+                                                <span class="text-danger">
+                                                    If you want to login with password, you should <a href="#" {{action "enablePasswordEditMode"}}>set it. </a>
+                                                </span>
+                                            </div>
+                                        {{/if}}
+                                    {{else}}
+                                        <div class="col-md-8">*****</div>
+                                    {{/if}}
+                                </div>
+                            {{/if}}
+
+                        </div>
+                    </div>
+                {{/if}}
+            </div>
+        </div>
+    </div>
+</div>

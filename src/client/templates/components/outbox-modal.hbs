@@ -1,0 +1,25 @@
+<div id="outbox-modal" class="modal fade outbox-modal"  tabindex="-1" role="dialog"  aria-hidden="true">
+    <div class="modal-dialog" >
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">Outbox</h4>
+                <h5 class="text-muted">Emails and faxes you tried to send</h5>
+            </div>
+            <div class="modal-body">
+                <ul class="nav nav-tabs" role="tablist">
+                    <li role="presentation" {{bind-attr class="emailActive:active"}}><a id="outbox-tab-link-email" href="#outbox-tab-email" role="tab" data-toggle="tab">Emails</a></li>
+                    <li role="presentation" {{bind-attr class="faxActive:active"}}><a id="outbox-tab-link-fax" href="#outbox-tab-fax" role="tab" data-toggle="tab">Faxes</a></li>
+                </ul>
+                <div class="tab-content">
+                    <div role="tabpanel" {{bind-attr class=":tab-pane emailActive:active"}} id="outbox-tab-email">
+                        {{outbox-email user=user}}
+                    </div>
+                    <div role="tabpanel" {{bind-attr class=":tab-pane faxActive:active"}} id="outbox-tab-fax">
+                        {{outbox-fax user=user}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

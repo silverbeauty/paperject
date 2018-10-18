@@ -1,0 +1,159 @@
+<nav class="navbar navbar-default navbar-fixed-top app-header doc-app-header" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <span class="navbar-brand clearfix">
+                {{#if formId}}
+                    <a href="/" class="navbar-brand-logo" title="Powered by Paperjet" data-placement="left"></a>
+                {{else}}
+                    <a href="/dashboard/documents" class="navbar-brand-logo" title="Dashboard" data-placement="left"></a>
+                {{/if}}
+                <span class="navbar-brand-separator"></span>
+                {{#link-to "doc" class="navbar-doc-name" }}{{model.doc.name}}{{/link-to}}
+                <span class="navbar-doc-status">
+                    {{#if model.doc.readOnly}}
+                        Read-only
+                    {{else}}
+                        {{#unless formId}}
+                            {{status}}
+                        {{/unless}}
+                    {{/if}}
+                </span>
+            </span>
+        </div>
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <form class="navbar-form navbar-right expanded-only">
+                {{#if formId}}
+                    {{!-- TODO: if apiCallbackUrl is used, there is no need to show this modal --}}
+                    <button type="button" class="btn btn-primary btn-orange" data-toggle="modal" data-target="#send-signed-modal" disabled={{hasRequiredFieldsOrSendingForm}}>Submit</button>
+                {{else}}
+                    <a class="btn btn-link btn-dashboard" href="/dashboard/documents" data-placement="left">
+                        <i class="fa fa-chevron-left"></i> Dashboard
+                    </a>
+                    {{#if controllers.application.model.profile.isAnonymous}}
+                        <a class="btn btn-primary" href="#" data-toggle="modal" data-target="#register-modal">
+                            <i class="fa fa-user-plus"></i> Register
+                        </a>
+                    {{/if}}
+                    {{#if model.doc.signatureRequest}}
+                        <button type="button" class="btn btn-primary btn-orange" {{action "submitSignature"}} disabled={{hasRequiredFieldsOrSendingForm}}>Sign and send</button>
+                    {{else}}
+                        {{#if model.doc.isTemplate}}
+                            <button type="button" class="btn btn-primary btn-orange" data-toggle="modal" data-target="#send-to-sign">Send</button>
+                        {{else}}
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-primary btn-orange dropdown-toggle" data-toggle="dropdown">
+                                    Done <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li>
+                                        <a href="#" {{action "showSendDialog" "email"}}><span class="dropdown-menu-item-icon"><i class="fa fa-envelope-o"></i></span>Email</a>
+                                    </li>
+                                    <li>
+                                        <a href="#" {{action "showSendDialog" "fax"}}><span class="dropdown-menu-item-icon"><i class="fa fa-fax"></i></span>Fax</a>
+                                    </li>
+                                    <li>
+                                        <a href="#" {{action "showSendDialog" "print"}}><span class="dropdown-menu-item-icon"><i class="fa fa-print"></i></span>Print</a>
+                                    </li>
+                                    <li>
+                                        <a href="#" {{action "showSendDialog" "download"}}><span class="dropdown-menu-item-icon"><i class="fa fa-download"></i></span>Download</a>
+                                    </li>
+                                    <li class="divider"></li>
+                                    <li>
+                                        <a href="#" data-toggle="modal" data-target="#send-to-sign"><span class="dropdown-menu-item-icon"><i class="fa fa-pencil-square-o"></i></span>Send to sign</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        {{/if}}
+                    {{/if}}
+                    <div class="btn-group btn-group-profile">
+                        <button type="button" class="btn btn-default dropdown-toggle btn-profile" data-toggle="dropdown" style={{gravatarProfileBackgroundStyle}}></button>
+                        <ul class="dropdown-menu dropdown-menu-triangle" role="menu">
+                            <li>
+                                <a href="#" data-toggle="modal" data-target="#profile-modal"><span class="dropdown-menu-item-icon"><i class="fa fa-list-alt"></i></span>Account</a>
+                            </li>
+                            <li>
+                                <a href="#" data-toggle="modal" data-target="#referrals-modal"><span class="dropdown-menu-item-icon"><i class="fa fa-users"></i></span>Referrals</a>
+                            </li>
+                            <li>
+                                <a href="#" data-toggle="modal" data-target="#subscription-modal"><span class="dropdown-menu-item-icon"><i class="fa fa-credit-card"></i></span>Billing</a>
+                            </li>
+                            <li>
+                                <a href="#" {{action "logout"}}><span class="dropdown-menu-item-icon"><i class="fa fa-cog"></i></span>Logout</a>
+                            </li>
+                        </ul>
+                    </div>
+                {{/if}}
+            </form>
+
+            <ul class="nav navbar-nav navbar-right collapsed-only">
+                {{#if model.doc.signatureRequest}}
+                    <li><a href="#" {{action "submitSignature"}}>Sign and send</a></li>
+                {{else}}
+                    {{#if formId}}
+                        {{!-- TODO: if apiCallbackUrl is used, there is no need to show this modal --}}
+                        <li><a href="#" data-toggle="modal" data-target="#send-signed-modal" disabled={{hasRequiredFieldsOrSendingForm}}>Submit</a></li>
+                    {{else}}
+                        <li class="xs-only"><a href="/dashboard/documents">Dashboard</a></li>
+                        <li class="xs-only divider"></li>
+                        <li><a href="#" {{action "print"}}>Print</a></li>
+                        <li><a href="#" {{action "download"}}>Download</a></li>
+                        <li><a href="#" {{action "showSendDialog" "email"}}>Send</a></li>
+                        <li><a href="#" data-toggle="modal" data-target="#send-to-sign">Send to sign</a></li>
+                        <li class="divider"></li>
+                        <li><a href="#" data-toggle="modal" data-target="#profile-modal">Account</a></li>
+                        <li><a href="#" data-toggle="modal" data-target="#referrals-modal">Referrals</a></li>
+                        <li><a href="#" data-toggle="modal" data-target="#subscription-modal">Billing</a></li>
+                        <li class="divider"></li>
+                        <li><a href="#" {{action "logout"}}>Logout</a></li>
+                    {{/if}}
+                {{/if}}
+            </ul>
+        </div>
+    </div>
+    {{notification-message}}
+</nav>
+
+{{doc-editor store=store doc=model.doc pages=model.pages sendingForm=sendingForm form=model.form status=status hasRequiredFields=hasRequiredFields}}
+
+<canvas id="preview-gen" style="display:none"></canvas>
+
+{{view "register-modal"}}
+
+{{doc-send user=controllers.application.model.profile doc=model.doc pages=model.pages store=store activeTab=sendType downloading=downloading printing=printing download="download" print="print"}}
+
+{{send-to-sign docName=docName docId=model.doc.id pages=model.pages isTemplate=model.doc.isTemplate}}
+
+{{send-signed-modal docName=docName submit="submitForm" to=model.form.email}}
+
+{{subscription-modal email=controllers.application.model.profile.email paidUntil=controllers.application.model.profile.paidUntil subscription=controllers.application.model.profile.subscription isAnonymous=controllers.application.model.profile.isAnonymous profileUpdate="profileUpdate"}}
+
+{{referrals-modal profile=controllers.application.model.profile}}
+
+{{profile-modal profile=controllers.application.model.profile store=store}}
+
+{{#if formOrSignatureRequest}}
+    <div id="form-sent-modal" class="modal fade"  tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-sm" >
+            <div class="modal-content">
+                <div class="modal-body">
+                    <p>Thanks for completing the form, we have sent your document.</p>
+                    {{formRedirectMessage}}
+                </div>
+            </div>
+        </div>
+    </div>
+{{/if}}
+
+<nav class="navbar navbar-fixed-bottom brand-infobar app-footer">
+    <div class="container-fluid">
+        <a target="_blank" href="{{paperjetBrandHost}}" class="brand-logo">Powered by Paperjet</a>
+        <a target="_blank" href="/support" class="pull-right site-link">Support</a>
+        <a target="_blank" href="/security" class="pull-right site-link">Security</a>
+    </div>
+</nav>

@@ -1,0 +1,57 @@
+<div class="modal fade" id="send-signed-modal" tabindex="-1" role="dialog" aria-labelledby="send-signed-modal-label" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true">&times;</span>
+                    <span class="sr-only">Close</span>
+                </button>
+                <h4 class="modal-title" id="send-signed-modal-label">Send</h4>
+            </div>
+            <div class="modal-body">
+                <form role="form" class="form-horizontal">
+                    <div class="form-group has-feedback">
+                        <label for= {{toField.elementId}} class="col-sm-4 control-label">To</label>
+                        <div class="col-sm-7">
+                            {{input value=to viewName="toField" name="to" class="form-control"}}
+                            <span class="glyphicon glyphicon-remove form-control-feedback hidden" data-toggle="tooltip" data-placement="top"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group has-feedback">
+                        <label for= {{ccField.elementId}} class="col-sm-4 control-label">Cc</label>
+                        <div class="col-sm-7">
+                            {{input value=cc viewName="ccField" name="cc" class="form-control"}}
+                            <span class="glyphicon glyphicon-remove form-control-feedback hidden" data-toggle="tooltip" data-placement="top"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group has-feedback">
+                        <label for= {{subjectField.elementId}} class="col-sm-4 control-label">Subject</label>
+                        <div class="col-sm-7">
+                            {{input value=subject viewName="subjectField" name="subject" class="form-control"}}
+                            <span class="glyphicon glyphicon-remove form-control-feedback hidden" data-toggle="tooltip" data-placement="top"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group has-feedback">
+                        <label for= {{messageField.elementId}} class="col-sm-4 control-label">Message</label>
+                        <div class="col-sm-7">
+                            {{textarea value=message viewName="messageField" class="form-control js-auto-size" rows="4"}}
+                            <span class="glyphicon glyphicon-remove form-control-feedback hidden" data-toggle="tooltip" data-placement="top"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-sm-4 control-div"></div>
+                        <div class="col-sm-7">
+                            <button type="submit" class="btn btn-lg btn-primary btn-block">
+                                <i class="fa fa-paper-plane-o"></i> Send
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

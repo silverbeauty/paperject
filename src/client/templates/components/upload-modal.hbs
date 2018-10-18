@@ -1,0 +1,26 @@
+<div class="modal fade" id="upload-modal" tabindex="-1" role="dialog" aria-labelledby="upload-modal-title-label" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+                </button>
+                <h4 class="modal-title" id="upload-modal-title-label">Upload PDF from cloud</h4>
+            </div>
+            <div class="modal-body">
+                {{google-drive selectedFile=selectedGoogleDriveFile accessToken=googleAccessToken visible=visible}}
+
+                {{#if uploadErrorMessage}}
+                    <div class="alert alert-danger alert-dismissable">
+                        <button type="button" class="close" aria-hidden="true" {{action 'dismissUploadErrorMessage'}}>&times;</button>
+                        {{uploadErrorMessage}}
+                    </div>
+                {{/if}}
+            </div>
+            <div class="modal-footer">
+                <button type="submit" id="upload-modal-upload" disabled={{uploadDisabled}} {{action "upload"}} class="btn btn-lg btn-primary ladda-button" data-style="zoom-in" data-spinner-size="25">
+                    <span class="ladda-label">Upload Selected</span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,64 @@
+block variables
+    - var title='Paperjet. Go Paperless'
+    - var bodyClass='dashboard'
+
+extends layout
+
+block head
+    <link rel="stylesheet" href="/styles/dashboard.css">
+    //- <!-- build:js /scripts/modernizr.js -->
+    //- <script src="/bower_components/modernizr/modernizr.js"></script>
+    //- <!-- endbuild -->
+    <script type="text/javascript">EmberENV = {LOG_VERSION: false};</script>
+    meta(name="google-client-id", content="#{googleClientID}")
+    meta(name="stripe-public-key", content="#{stripePublicKey}")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no")
+
+block content
+    div.loading-container#app-loading
+        i.fa.fa-spin.fa-refresh
+
+block scripts
+    <!-- build:js /scripts/dashboard.components.js -->
+    <script src="/bower_components/handlebars/handlebars.runtime.js"></script>
+    <script src="/bower_components/ember/ember.js"></script>
+    <script src="/bower_components/ember-data/ember-data.js"></script>
+    <script src="/bower_components/lodash/lodash.js"></script>
+
+    <script src="/bower_components/ladda/js/spin.js"></script>
+    <script src="/bower_components/ladda/js/ladda.js"></script>
+
+    <script src="/bower_components/moment/moment.js"></script>
+
+    <script src="/bower_components/jquery-ui/ui/core.js"></script>
+    <script src="/bower_components/jquery-ui/ui/widget.js"></script>
+    <script src="/bower_components/jquery-ui/ui/mouse.js"></script>
+    <script src="/bower_components/jquery-ui/ui/draggable.js"></script>
+    <script src="/bower_components/jquery-ui/ui/droppable.js"></script>
+
+    <script src="/bower_components/jquery-bootpag/lib/jquery.bootpag.js"></script>
+    <script src="/bower_components/jasny-bootstrap/js/fileinput.js"></script>
+    <script src="/bower_components/bootstrap-tagsinput/dist/bootstrap-tagsinput.js"></script>
+
+    <script src="/bower_components/jquery-validation/dist/jquery.validate.js"></script>
+    <!-- FIX: plese include non-minimized libraries. They will be minimized on build. -->
+    <script src="/bower_components/nouislider/jquery.nouislider.full.min.js"></script>
+    <script src="/bower_components/fontselect-jquery-plugin/jquery.fontselect.js"></script>
+    <script src="/bower_components/sprintf/src/sprintf.js"></script>
+    <script src="/bower_components/jspdf/dist/jspdf.debug.js"></script>
+    <script src="/bower_components/textarea-autosize/dist/jquery.textarea_autosize.js"></script>
+    <script src="/vendor/realistic-pen.js"></script>
+    <script src="/bower_components/pdfjs-dist/web/compatibility.js"></script>
+    <script src="/bower_components/intl-tel-input/build/js/intlTelInput.js"></script>
+    <script src="/bower_components/intl-tel-input/lib/libphonenumber/build/utils.js"></script>
+    <script src="/bower_components/pdfjs-dist/web/compatibility.js"></script>
+    <!-- endbuild -->
+
+    <!-- build:js(.tmp) /scripts/dashboard.templates.js -->
+    <script src="/scripts/dashboard.templates.js"></script>
+    <!-- endbuild -->
+
+    <!-- build:js(.tmp) /scripts/dashboard.app.js -->
+    <script src="/scripts/dashboard.app.js"></script>
+    <!-- endbuild -->
+    <script src="/socket.io/socket.io.js"></script>

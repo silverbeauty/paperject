@@ -1,0 +1,17 @@
+<span class="toggle-icon" {{action "toggle"}}>
+    {{#if hasChildren}}
+        {{#if node.dataLoading}}
+            <i class="fa fa-spin fa-refresh"></i>
+        {{else}}
+            {{#if isExpanded}}
+                <i class="fa fa-minus-square-o"></i>
+            {{else}}
+                <i class="fa fa-plus-square-o"></i>
+            {{/if}}
+        {{/if}}
+    {{/if}}
+</span>
+<a class="text" {{action "didClick"}}>{{node.text}}</a>
+{{#if isExpanded}}
+    {{tree-branch node=node drive=drive}}
+{{/if}}

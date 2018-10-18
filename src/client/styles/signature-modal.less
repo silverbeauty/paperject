@@ -1,0 +1,265 @@
+@signature-manager-file-hover-state: #399ae7;
+@signature-manager-border-color: #ddd;
+#signature-modal {
+    .alert {
+        margin: -30px 20px 10px 20px;
+    }
+    // modal
+    .modal-header {
+        .modal-title {
+            text-transform: capitalize;
+        }
+    }
+    .modal-body {
+        padding: 20px 0 0;
+        min-height: 308px;
+        b {
+            color: #ade939;
+        }
+    }
+    .modal-footer {
+        .btn {
+            @media (min-width: @screen-sm-min) {
+                min-width: 140px;
+            }
+        }
+    }
+    // tabs
+    .tab-content {
+        padding: 20px;
+    }
+    .nav.nav-tabs {
+        padding: 0 20px;
+        li,
+        li:hover {
+            background-color: transparent;
+        }
+    }
+    .nav .active,
+    .nav .active:hover {
+        background-color: transparent;
+    }
+    .sm-clear {
+        float: left;
+        line-height: 45px;
+    }
+    // drag-n-drop
+    #signature-modal-tab-dragndrop {
+        width: 100%;
+        height: 225px;
+        padding: 70px 0;
+        border-radius: 16px;
+        border: 2px dashed #ccc;
+        background-color: #f1f2f6;
+        text-align: center;
+        color: #8d9099;
+        font-weight: 600;
+        white-space: nowrap;
+        &.file-hover {
+            border-color: @signature-manager-file-hover-state;
+            .fa {
+                color: @signature-manager-file-hover-state;
+            }
+        }
+        .fa {
+            display: block;
+            color: #d7dee6;
+        }
+    }
+    // file upload
+    .uploads-form {
+        margin: 15px 0 0;
+        .form-control {
+            background-color: white;
+        }
+        .custom-file-input-holder {
+            position: relative;
+            overflow: hidden;
+            .form-control {
+                margin-top: 6px;
+                // to align with btn-lg
+            }
+            .custom-file-input {
+                position: absolute;
+                margin: 0;
+                opacity: 0;
+                transform: translate(-300px, 0px) scale(4);
+                width: 100%;
+                top: 0;
+                cursor: pointer;
+            }
+        }
+        .custom-upload-btn {
+            min-width: 0;
+            input[type=file] {
+                position: absolute;
+                margin: 0;
+                opacity: 0;
+                filter: alpha(opacity=0);
+                transform: translate(-300px, 0px) scale(4);
+                width: auto;
+                font-size: 23px;
+                direction: ltr;
+                cursor: pointer;
+            }
+        }
+    }
+    // canvas
+    .canvas-container {
+        margin: 5px 0 0;
+        width: 100%;
+        height: 150px;
+        position: relative;
+        canvas {
+            border: 1px solid @signature-manager-border-color;
+            width: 560px;
+            @media (max-width: @screen-xs-max) {
+                width: 100%;
+            }
+        }
+    }
+    #signature-modal-tab-draw {
+        canvas {
+            cursor: crosshair;
+        }
+    }
+    #signature-modal-tab-type {
+        canvas {
+            background: url("../images/transparency.png") repeat;
+        }
+    }
+    #signature-modal-tab-camera {
+        .camera-preview {
+            width: 512px;
+            height: 256px;
+            background: #eee;
+            margin: 0 auto 20px auto;
+            border-radius: 5px;
+            position: relative;
+            text-align: center;
+
+            img {
+                max-width: 512px;
+                max-height: 256px;
+            }
+
+            .btn-danger {
+                bottom: 10px;
+                min-width: 0;
+                right: 110px;
+                width: 90px;
+            }
+
+            .btn-primary {
+                bottom: 10px;
+                min-width: 0;
+                right: 10px;
+                width: 90px;
+            }
+        }
+        .camera-container {
+            width: 512px;
+            height: 256px;
+            overflow: hidden;
+            background: #eee;
+            margin: 0 auto;
+            position: relative;
+            border-radius: 4px;
+        }
+        .camera-message {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            text-align: center;
+            line-height: 256px;
+        }
+        video {
+            z-index: 100;
+            width: 512px;
+            height: 384px;
+            margin-top: -64px;
+        }
+        canvas {
+            display: none;
+        }
+        button {
+            position: absolute;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+
+            &[disabled] {
+                box-shadow: none;
+            }
+        }
+        #signature-modal-capture {
+            right: 10px;
+            bottom: 10px;
+            min-width: 0;
+        }
+    }
+    .sm-signature-input {
+        width: 300px;
+        margin: 0;
+        float: right;
+        display: block;
+    }
+    .sm-draw-tools {
+        margin-top: 15px;
+        .toolbar-control {
+            float: left;
+            margin-right: 5px !important;
+            border: 1px solid @signature-manager-border-color;
+            border-radius: 5px;
+        }
+        .sm-color-picker {
+            list-style: none;
+            display: inline-block;
+            overflow: hidden;
+            padding: 6px 8px 6px 0;
+            margin: 0;
+            .item {
+                float: left;
+                padding: 8px;
+                margin-left: 13px;
+                border-radius: 11px;
+                border: 2px solid white;
+                cursor: pointer;
+            }
+            .item.color-black {
+                background-color: #606060;
+            }
+            .item.color-blue {
+                background-color: #345e8e;
+            }
+            .item.color-red {
+                background-color: #d9656e;
+            }
+            .item.active {
+                &:before {
+                    content: '';
+                    position: absolute;
+                    padding: 11px;
+                    border-radius: 11px;
+                    border: 1px solid #eee;
+                    margin-top: -12px;
+                    margin-left: -12px;
+                }
+            }
+        }
+    }
+    .loading-container {
+        background: rgba(255, 255, 255, 0.9);
+    }
+    @media (max-width: @screen-xs-max) {
+        .sm-signature-input {
+            margin-top: 10px;
+            width: 100%;
+        }
+        .font-selector-initializer,
+        .sm-type-signature-font-selector {
+            float: right;
+            margin-right: 0 !important;
+        }
+    }
+}

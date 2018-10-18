@@ -1,0 +1,79 @@
+{{!-- Registration Modal --}}
+<div class="modal fade" id="register-modal" tabindex="-1" role="dialog"  aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" >
+                    {{!-- {{#if isRegistrationTabActive}} may be required in the future --}}
+                        Registration
+                    {{!-- {{/if}} --}}
+
+                    {{#if isLoginTabActive}}
+                        Login
+                    {{/if}}
+                </h4>
+            </div>
+            <div class="modal-body">
+                <div id="reg-login-tabs" role="tabpanel">
+                    {{!-- Login functionality may be required in the future --}}
+                    {{!-- <ul class="nav nav-tabs" role="tablist">-->
+                        <li role="presentation" class="active"><a href="#registration" aria-controls="registration" role="tab" data-toggle="tab">Registration</a></li>
+                        <li role="presentation"><a href="#login" aria-controls="login" role="tab" data-toggle="tab">Login</a></li>
+                    </ul> --}}
+
+                    <div class="tab-content">
+                        <div role="tabpanel" class="tab-pane active" id="registration">
+                            {{registration-form action="registerFormAction"}}
+                        </div>
+
+                        {{!-- Login functionality may be required in the future --}}
+                        {{!--
+                        <div role="tabpanel" class="tab-pane" id="login">
+                            {{login-form authenticated="authenticated" isProcessing=isLoginProcessing }}
+                        </div>
+                        --}}
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-footer clearfix">
+               {{!-- {{#if isRegistrationTabActive}} may be required in the future --}}
+                {{!-- <button type="button" class="btn btn-default pull-left" {{action "showLoginModal" target="view"}}>Login</button> --}}
+                <a href="#" data-toggle="modal" data-target="#dismiss-anonymous-account-modal,#register-modal" style="float:left;line-height:45px">Already have an account? Login</a>
+
+                <button {{action "register"}} type="submit" class="btn btn-primary ladda-button btn-lg" disabled={{isRegProcessing}} id="register-btn" data-style="expand-left" data-spinner-color="#f2f2f2" data-spinner-size="25">
+                    <span class="ladda-label">Register</span>
+                </button>
+            {{!--  {{/if}}  --}}
+
+                {{!-- Login functionality may be required in the future --}}
+                {{!--
+                {{#if isLoginTabActive}}
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button {{action "login"}} type="submit" class="btn btn-primary ladda-button col-md-offset-6" disabled={{isLoginProcessing}} id="login-btn" data-style="expand-left" data-spinner-color="#f2f2f2" data-spinner-size="25">
+                        <span class="ladda-label">Login</span>
+                    </button>
+                {{/if}}
+                --}}
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="dismiss-anonymous-account-modal" class="modal fade"  tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-sm" >
+        <div class="modal-content">
+            <div class="modal-body">
+                We will migrate data from your Guest session into your account after login.
+                {{#if view.dismissAnonymousAccountError}}
+                    <div class="alert alert-danger" role="alert">{{view.dismissAnonymousAccountError}}</div>
+                {{/if}}
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" {{action "dismissAnonymousAccount" target="view"}}>Log into my account</button>
+                <button class="btn btn-default" data-toggle="modal" data-target="#dismiss-anonymous-account-modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,98 @@
+<div class="folders-header hidden-xs" {{action "changeSortDirection" target="view"}}>
+    <span class="sorter">
+        Folders
+        {{#if view.sortDirectionAsc}}
+            <i class="fa fa-chevron-up"></i>
+        {{/if}}
+
+        {{#if view.sortDirectionDesc}}
+            <i class="fa fa-chevron-down"></i>
+        {{/if}}
+    </span>
+</div>
+
+<div class="folders">
+    {{#unless myDocumentsFolder}}
+        <div class="folder {{if showSentDocuments 'active'}}" {{action "showSentDocuments"}}>
+            <span>Completed Docs</span>
+        </div>
+    {{/unless}}
+    {{#each folder in view.sortedFolders}}
+        {{#unless folder.isTrash}}
+        <div data-folder-id="{{folder.id}}" class="folder {{if folder.isActive 'active'}}" {{action "folderChanged" folder}} style="{{if folder.isHidden 'display:none'}}">
+            {{#if folder.isSystemFolder}}
+                {{#if folder.isInbox}}
+                    <span>Awaiting My Signature ({{folder.documentsCount}})</span>
+                {{else}}
+                    <span>{{folder.name}} {{newDocsInFolderCount folder}}</span>
+                {{/if}}
+            {{else}}
+                {{view "editable-text" text=folder.name record=folder isEditing=folder.isEditing editedPropertyName="name"}}
+                {{#unless folder.shared}}
+                    <span class="{{if folder.isEditing 'hidden'}}">{{newDocsInFolderCount folder}}</span>
+                {{/unless}}
+
+                {{#if folder.shared}}
+                    <i class="fa fa-share-alt" title="This folder is shared with you"></i>
+                {{else}}
+                    {{#if controllers.application.model.profile.supportsManageFolders}}
+                        <span class="pull-right {{if folder.isEditing 'hidden'}}">
+                            <button type="button" class="btn btn-default btn-sm btn-menu dropdown-toggle" data-toggle="dropdown">
+                                <i class="fa fa-chevron-down"></i>
+                            </button>
+                            <ul class="dropdown-menu dropdown-menu-right dropdown-menu-triangle" role="menu">
+                                <li>
+                                    <a role="menuitem" tabindex="-1" {{action "enableEditMode" folder target="view"}}>Rename</a>
+                                </li>
+                                <li>
+                                    <a role="menuitem" tabindex="-1" {{action "remove" folder target="view"}}>Remove</a>
+                                </li>
+                            </ul>
+                        </span>
+                    {{/if}}
+                {{/if}}
+            {{/if}}
+        </div>
+        {{#if folder.isMyDocuments}}
+            <div class="folder {{if showSentDocuments 'active'}}" {{action "showSentDocuments"}}>
+                <span>Completed Docs</span>
+            </div>
+        {{/if}}
+        {{/unless}}
+    {{/each}}
+    {{!-- Trash is last --}}
+    {{#each folder in view.sortedFolders}}
+        {{#if folder.isTrash}}
+        <div data-folder-id="{{folder.id}}" class="folder {{if folder.isActive 'active'}}" {{action "folderChanged" folder}} style="{{if folder.isHidden 'display:none'}}">
+                <span>{{folder.name}} {{newDocsInFolderCount folder}}</span>
+        </div>
+        {{/if}}
+    {{/each}}
+</div>
+
+{{#if controllers.application.model.profile.supportsManageFolders}}
+    <div>
+        <a href="#" {{action "toggleAddFolderForm" target="view"}}><i style="margin-right:5px" class="fa {{if view.isAddFolderVisible 'fa-minus-square-o' 'fa-plus-square-o'}}"></i>Add folder</a>
+    </div>
+
+    {{#if view.isAddFolderVisible}}
+        <div class="editable-text" style="margin-top: 10px">
+            {{input class="form-control input-sm" type="text" value=view.newFolderName viewName="newFolderNameField"}}
+            <button type="button" class="btn btn-primary btn-sm" {{action "addNewFolder" target="view"}}>Save</button>
+        </div>
+    {{/if}}
+{{/if}}
+
+{{#if promoPro}}
+    <div class="promo-panel hidden-xs">
+        <button type="button" class="close" aria-hidden="true" {{action "hidePromo" "promoPro"}}>&times;</button>
+        <a href="#" data-toggle="modal" data-target="#subscription-modal">Upgrade to PRO and get unlimited uploads</a>
+    </div>
+{{/if}}
+
+{{#if promoInvite}}
+    <div class="promo-panel hidden-xs">
+        <button type="button" class="close" aria-hidden="true" {{action "hidePromo" "promoInvite"}}>&times;</button>
+        <a href="#" data-toggle="modal" data-target="#referrals-modal">Invite a friend and get more uploads</a>
+    </div>
+{{/if}}

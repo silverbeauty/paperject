@@ -1,0 +1,39 @@
+block variables
+    - var title='Paperjet Admin'
+
+extends layout
+
+block head
+    <link rel="stylesheet" href="/styles/admin.css">
+    <script type="text/javascript">EmberENV = {LOG_VERSION: false};</script>
+
+block content    
+    div.loading-container#app-loading
+        i.fa.fa-spin.fa-refresh
+            
+block scripts
+    <!-- build:js /scripts/admin.components.js -->
+    <script src="/bower_components/handlebars/handlebars.runtime.js"></script>
+    <script src="/bower_components/ember/ember.js"></script>
+    <script src="/bower_components/ember-data/ember-data.js"></script>
+    <script src="/bower_components/lodash/lodash.js"></script>
+
+    <script src="/bower_components/ladda/js/spin.js"></script>
+    <script src="/bower_components/ladda/js/ladda.js"></script>
+    <script src="/bower_components/chartist/dist/chartist.js"></script>
+    <script src="/bower_components/moment/moment.js"></script>
+
+    <script src="/bower_components/jquery-ui/ui/core.js"></script>
+    <script src="/bower_components/jquery-ui/ui/widget.js"></script>
+    <script src="/bower_components/jquery-ui/ui/mouse.js"></script>
+
+    <script src="/bower_components/sprintf/src/sprintf.js"></script>
+    <!-- endbuild -->
+
+    <!-- build:js(.tmp) /scripts/admin.templates.js -->
+    <script src="/scripts/admin.templates.js"></script>
+    <!-- endbuild -->
+
+    <!-- build:js(.tmp) /scripts/admin.app.js -->
+    <script src="/scripts/admin.app.js"></script>
+    <!-- endbuild -->

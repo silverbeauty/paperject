@@ -1,0 +1,118 @@
+{{#if sortedItems.length}}
+    <div class="row sent-items-header">
+        <div class="col-xs-12 col-sm-5">
+            <span class="sent-items-header-sortable" {{action "changeSortDirection" "name"}}>
+                Name
+                {{#if sorters.name.asc}}
+                    <i class="fa fa-chevron-up"></i>
+                {{/if}}
+                {{#if sorters.name.desc}}
+                    <i class="fa fa-chevron-down"></i>
+                {{/if}}
+            </span>
+        </div>
+        <div class="col-xs-4 col-sm-3 hidden-xs">
+            <span class="sent-items-header-sortable" {{action "changeSortDirection" "status"}}>
+                Status
+                {{#if sorters.to.asc}}
+                    <i class="fa fa-chevron-up"></i>
+                {{/if}}
+                {{#if sorters.to.desc}}
+                    <i class="fa fa-chevron-down"></i>
+                {{/if}}
+            </span>
+        </div>
+        <div class="col-xs-4 col-sm-3 hidden-xs">
+            <span class="sent-items-header-sortable" {{action "changeSortDirection" "date"}}>
+                Date
+                {{#if sorters.date.asc}}
+                    <i class="fa fa-chevron-up"></i>
+                {{/if}}
+                {{#if sorters.date.desc}}
+                    <i class="fa fa-chevron-down"></i>
+                {{/if}}
+            </span>
+        </div>
+        <div class="col-xs-4 col-sm-1 hidden-xs">
+            <span class="pull-right">
+                <a {{action 'clearAll'}} href="#" title="Clear&nbsp;All" class="js-clear-sent"><i class="fa fa-trash-o"></i></a>
+            </span>
+        </div>
+    </div>
+    {{#each document in sortedItems}}
+        <div class="row sent-item-row">
+            <div class="col-xs-10 col-sm-5 sent-item-name">
+                <span class="hidden-xs {{if document.isFailed 'sent-item-failed'}}">
+                    {{document.name}}
+                </span>
+                <span class="visible-xs hidden-sm {{if document.isFailed 'sent-item-failed'}}">
+                    {{#if document.isFailed}}
+                        <i class="fa fa-exclamation-circle"></i>
+                    {{else}}
+                        {{#if document.isEmail}}
+                            <i class="fa fa-envelope-o"></i>
+                        {{else}}
+                            <i class="fa fa-fax"></i>
+                        {{/if}}
+                    {{/if}}
+                    <a href="/document/{{document.doc}}" target="_blank">{{document.name}}</a>
+                </span>
+            </div>
+            <div class="col-sm-3 hidden-xs sent-item-status {{if document.isFailed 'sent-item-failed'}}">
+                {{#if document.isSigned}}
+                    <i class="fa fa-check" title="Signed"></i> Signed
+                {{else}}
+                    {{#if document.isPending}}
+                        <i class="fa fa-spin fa-refresh" title="Sending"></i> Sending
+                    {{else}}
+                        {{#if document.isFailed}}
+                            <i class="fa fa-exclamation-circle"></i> Failed
+                        {{else}}
+                            {{#if document.isSignatureRequest}}
+                                <i class="fa fa-envelope-o" title="Request sent"></i> Request sent
+                            {{else}}
+                                {{#if document.isSendSignature}}
+                                    <i class="fa fa-check" title="Signature sent"></i> Signature sent
+                                {{else}}
+                                    {{#if document.isEmail}}
+                                        <i class="fa fa-envelope-o" title="Email sent"></i> Email sent
+                                    {{else}}
+                                        <i class="fa fa-fax" title="Fax delivered"></i> Fax delivered
+                                    {{/if}}
+                                {{/if}}
+                            {{/if}}
+                        {{/if}}
+                    {{/if}}
+                {{/if}}
+            </div>
+            <div class="col-sm-3 hidden-xs sent-item-date {{if document.isFailed 'sent-item-failed'}}">{{prettifyDate document.updatedAt true}}</div>
+            <div class="col-xs-2 col-sm-1">
+                {{#if document.url}}
+                    <span class="pull-right">
+                        <a href="{{document.url}}" target="_blank" title="Download&nbsp;signed&nbsp;PDF&nbsp;file" class="btn btn-default btn-sm sent-item-row-btn">PDF</a>
+                    </span>
+                {{/if}}
+            </div>
+        </div>
+        <div class="row sent-item-secondary">
+            <div class="col-sm-5 hidden-xs">
+                to {{document.to}}
+            </div>
+            <div class="col-sm-7 hidden-xs sent-item-secondary-alighed-to-icon">
+                {{document.statusDetails}}
+            </div>
+            <div class="col-xs-12 visible-xs hidden-sm sent-item-secondary-alighed-to-icon">
+                to {{document.to}} at {{prettifyDate document.updatedAt true}}
+            </div>
+            {{#if document.statusDetails}}
+                <div class="col-xs-12 visible-xs hidden-sm sent-item-secondary-alighed-to-icon">
+                    {{document.statusDetails}}
+                </div>
+            {{/if}}
+        </div>
+    {{/each}}
+{{else}}
+    <div class="empty-message">
+        There are no documents
+    </div>
+{{/if}}

@@ -1,0 +1,9 @@
+<span class="text {{if view.isEditing 'hidden'}}">
+    {{#if view.href}}
+        <a href="{{view.href}}" target="_blank">{{view.text}}</a>
+    {{else}}
+        {{view.text}}
+    {{/if}}
+</span>
+{{input type="text" value=view.inputText classBinding=":form-control :input-sm view.isEditing::hidden"}}
+<button type="button" class="btn btn-primary btn-sm {{unless view.isEditing 'hidden'}}" {{action "apply" target="view"}}>Save</button>

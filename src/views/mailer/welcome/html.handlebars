@@ -1,0 +1,84 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta name="viewport" content="width=device-width" />
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Welcome to Paperjet</title>
+<link href="styles.css" media="all" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+
+<table class="body-wrap">
+	<tr>
+		<td></td>
+		<td class="container" width="600">
+			<div class="content">
+				<table class="main" width="100%" cellpadding="0" cellspacing="0">
+					<tr>
+						<td class="content-wrap">
+							<table width="100%" cellpadding="0" cellspacing="0">
+								<tr>
+									<td class="content-block" style="font-weight:bold">
+										Welcome to Paperjet, thank you for signing up.
+									</td>
+								</tr>
+								<tr>
+									<td class="content-block">
+										Paperjet speeds up all your paperwork admin by conveniently allowing you to complete and sign forms online using our unique software and send them via email and fax.
+									</td>
+								</tr>
+								<tr>
+									<td class="content-block">
+										Our Devs are working around the clock with new Editor tools and also the Mobile app coming soon.
+									</td>
+								</tr>
+								<tr>
+									<td class="content-block">
+										Email us if you need any assistance using the web app or send feedback suggestions to help us improve to support@paperjet.com.
+									</td>
+								</tr>
+								<tr>
+									<td class="content-block">
+										<a href="{{appUrl}}/dashboard/" class="btn-primary" style="{{buttonStyle}}">Go to your dashboard</a>
+									</td>
+								</tr>
+								<tr>
+									<td class="content-block">
+										Or use this link: {{appUrl}}/dashboard/
+									</td>
+								</tr>
+								<tr>
+									<td class="content-block">
+										<a href="{{appUrl}}/dashboard/forgot-password">Click here if you forgot your password</a>
+									</td>
+								</tr>
+								<tr>
+									<td class="content-block">
+										{{footerHtml}}
+									</td>
+								</tr>
+							</table>
+						</td>
+					</tr>
+				</table>
+				<div class="footer">
+					<table width="100%">
+						<tr>
+							<td class="aligncenter content-block">
+								{{#if branding}}Powered by Paperjet{{else}}Copyright &copy; {{year}} Paperjet{{/if}} |
+								{{address}} |
+								<a href="mailto:support@paperjet.com">Support</a> |
+								<a href="{{appUrl}}/terms">Terms</a> |
+								<a href="{{appUrl}}/privacy">Privacy</a>
+							</td>
+						</tr>
+					</table>
+				</div></div>
+		</td>
+		<td></td>
+	</tr>
+</table>
+
+</body>
+</html>

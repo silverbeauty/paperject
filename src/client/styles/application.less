@@ -1,0 +1,31 @@
+@font-face {
+    font-family: HaloHandletter;
+    src: url("../fonts/HaloHandletter.otf") format("opentype");
+}
+
+body {
+    padding-top: 70px;
+    font-family: 'Open Sans', sans-serif;
+}
+
+.ember-view {
+    .nav {
+        .active, .active:hover, .active:focus {
+            color: #555;
+            background-color: #e7e7e7;
+        }
+    }
+
+    .empty-message {
+        font-family: HaloHandletter;
+        font-size: 50px;
+        color: #555555;
+        line-height: 200px;
+        text-align: center;
+        font-weight: 100;
+
+        a:hover {
+            text-decoration: none;
+        }
+    }
+}

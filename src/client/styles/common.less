@@ -1,0 +1,498 @@
+@tooltip-bg-color: #3c5072;
+@brand-grey: #b6bfca;
+@brand-grey-hover :#C8CFD7;
+@grey-border: #f6f8fa;
+
+@import "../bower_components/bootstrap/less/mixins/buttons.less";
+@import "../bower_components/bootstrap/less/mixins/vendor-prefixes.less";
+@import "../bower_components/bootstrap/less/mixins/image.less";
+
+.iti-flag {
+    background-image: url(./images/flags.png) !important;
+}
+
+.button-flat(@color; @background; @background-hover) {
+    color: @color;
+    background-color: @background;
+    border-color: @background;
+
+    &:hover,
+    &:focus,
+    &:active,
+    &.active,
+    .open > .dropdown-toggle& {
+        color: @color;
+        background-color: @background-hover;
+        border-color: @background-hover;
+    }
+    &:active,
+    &.active,
+    .open > .dropdown-toggle& {
+        background-image: none;
+    }
+    &.disabled,
+    &[disabled],
+    fieldset[disabled] & {
+        &,
+        &:hover,
+        &:focus,
+        &:active,
+        &.active {
+            background-color: #B7BFC9;
+            border-color: #B7BFC9;
+        }
+    }
+
+    .badge {
+        color: @background;
+        background-color: @color;
+    }
+}
+
+.loading-container {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    &>i {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        margin-top: -12px;
+        margin-left: -12px;
+    }
+
+    .loading-message {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 320px;
+        margin-top: 5px;
+        margin-left: -160px;
+        text-align: center;
+        color: @text-color;
+        font-family: @font-family;
+    }
+}
+
+.file-hover {
+    .file-hover-message {
+        display: block;
+    }
+}
+
+.file-hover-message {
+    display: none;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    opacity: 0.8;
+    font-size: 144px;
+    background: rgba(102, 51, 153, 0.2); // becca purple with opacity
+
+    i {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        margin-top: -72px;
+        margin-left: -72px;
+    }
+}
+
+.ladda-button[disabled] {
+    opacity: 1 !important;
+}
+
+.modal-backdrop.fade.in {
+    z-index: 3001;
+}
+
+.modal.fade.in {
+    z-index: 3002;
+}
+
+.navbar {
+    // navbar responsive UI
+    .expanded-only {
+        display: none;
+    }
+    .collapsed-only {
+        display: block;
+    }
+
+    @media (min-width: @grid-float-breakpoint) {
+        .expanded-only {
+            display: block;
+        }
+        .collapsed-only {
+            display: none;
+        }
+    }
+}
+
+// profile
+.btn-group-profile {
+    margin-left: 20px;
+}
+
+.btn-profile {
+    border-radius: 50%;
+    background-size: contain;
+    width: 34px;
+    height: 34px;
+    border: 0;
+    .button-flat(white; #5FAEF3; darken(#5FAEF3, 10%));
+}
+
+.dropdown-menu {
+    li {
+        a {
+            padding-top: 5px;
+            padding-bottom: 5px;
+        }
+    }
+
+    .dropdown-menu-item-icon {
+        width: 32px;
+        display: inline-block;
+        text-align: center;
+    }
+}
+
+.btn-group-profile .dropdown-menu li a {
+    padding-left: 4px;
+}
+
+.dropdown-menu-triangle {
+    margin-top: 5px;
+
+    &::before {
+        position: absolute;
+        top: -7px;
+        right: 9px;
+        display: inline-block;
+        border-right: 7px solid transparent;
+        border-bottom: 7px solid #CCC;
+        border-left: 7px solid transparent;
+        border-bottom-color: rgba(0, 0, 0, 0.2);
+        content: '';
+    }
+
+    &::after {
+        position: absolute;
+        top: -6px;
+        right: 10px;
+        display: inline-block;
+        border-right: 6px solid transparent;
+        border-bottom: 6px solid white;
+        border-left: 6px solid transparent;
+        content: '';
+    }
+}
+
+.app-header {
+    background: @brand-header-bg;
+    border-width: 0;
+    z-index: 1050;
+
+    .navbar-brand {
+        color: white;
+    }
+
+    .navbar-nav > li > a {
+        color: white;
+    }
+}
+
+#payment-mask {
+    opacity: 0.8;
+    background: lightgray;
+    z-index: 10000;
+}
+
+.stop-scrolling {
+    height: 100%;
+    overflow: hidden;
+}
+
+.btn {
+    font-family: @font-family;
+}
+
+.btn-gray {
+    .button-flat(white; @brand-grey; @brand-grey-hover);
+}
+
+.btn-primary {
+    .button-flat(white; #8AD573; #A8DF96);
+    min-width: 140px;
+}
+
+.btn-orange {
+    .button-flat(white; @brand-btn-orange; @brand-btn-orange-hover);
+}
+
+.btn-danger {
+    min-width: 140px;
+}
+
+.tooltip {
+    .tooltip-inner {
+        padding: 5px 15px;
+        background-color: @tooltip-bg-color;
+    }
+
+    &.top .tooltip-arrow {
+        border-top-color: @tooltip-bg-color;
+    }
+    &.top-left .tooltip-arrow {
+        border-top-color: @tooltip-bg-color;
+    }
+    &.top-right .tooltip-arrow {
+        border-top-color: @tooltip-bg-color;
+    }
+    &.right .tooltip-arrow {
+        border-right-color: @tooltip-bg-color;
+    }
+    &.left .tooltip-arrow {
+        border-left-color: @tooltip-bg-color;
+    }
+    &.bottom .tooltip-arrow {
+        border-bottom-color: @tooltip-bg-color;
+    }
+    &.bottom-left .tooltip-arrow {
+        border-bottom-color: @tooltip-bg-color;
+    }
+    &.bottom-right .tooltip-arrow {
+        border-bottom-color: @tooltip-bg-color;
+    }
+}
+
+// dialogs
+.modal {
+    font-family: @font-family;
+
+    .modal-header {
+        border-bottom: none;
+        text-align: center;
+
+        h4 {
+            font-size: 32px;
+        }
+    }
+
+    .panel-heading {
+        background: white;
+    }
+
+    .panel-title {
+        font-weight: 600;
+        font-size: 14px;
+
+        a {
+            font-family: @font-family;
+            font-weight: 400;
+            font-size: 14px;
+            color: @text-color;
+            text-decoration: none;
+            .transition(color .15s ease-in);
+            font-size: 13px;
+            line-height: 15px;
+
+        }
+        a:focus,
+        a:hover {
+            color: @brand-primary;
+        }
+    }
+    .panel-body {
+        line-height: 32px;
+        font-size: 13px;
+
+        .modal-form-label {
+            font-weight: 600;
+            color: @text-color;
+        }
+    }
+}
+.navbar-header {
+    font-family: @font-family;
+
+}
+.route-dialog-header {
+    border-bottom: 1px solid #e9edee;
+
+    .route-dialog-header-title {
+        font-size: 14px;
+        text-transform: uppercase;
+        line-height: 78px;
+    }
+}
+.route-dialog-body {
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+.app-footer {
+    margin-top: 50px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    border-top: 1px solid @grey-border;
+
+    a {
+        font-family: @font-family;
+        font-weight: 600;
+        font-size: 14px;
+        color: @text-color;
+        text-decoration: none;
+        .transition(color .15s ease-in);
+        margin-right: 20px;
+    }
+
+    a:focus, a:hover {
+        color: @brand-primary;
+    }
+}
+
+.popover-content {
+    font-family: @font-family;
+    color: #333;
+
+    .popover-title {
+        font-weight: 400;
+        color: #7d879b;
+    }
+}
+
+.app-notification {
+    @media (min-width: @grid-float-breakpoint) {
+        width: 600px;
+        margin-left: -300px;
+    }
+
+    @media (max-width: @screen-xs) {
+        width: 100%;
+        margin-left: 0;
+        left: 0;
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+    }
+
+    top: 50px;
+    position: absolute;
+    left: 50%;
+    width: 320px;
+    text-align: center;
+    margin-left: -160px;
+    padding: 10px 10px 10px 20px;
+    background: #FCAE5D;
+    color: white;
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px;
+    border: solid 1px #F9A549;
+    border-top: none;
+
+    i.fa {
+        margin-right: 5px;
+    }
+
+    .close {
+        line-height: 17px;
+        margin-left: 10px;
+    }
+
+    .nopadding {
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+
+    .progress {
+        margin-bottom: 0;
+    }
+
+    a {
+        color: white;
+        text-decoration: underline;
+    }
+}
+
+#profile-modal {
+    .btn-account-upgrade {
+        margin-left: 10px;
+        margin-top: -3px;
+        min-width: 0;
+    }
+}
+
+@media (min-width: @screen-xs) {
+    .xs-only {
+        display: none !important;
+    }
+}
+
+@media (max-width: @screen-xs-max) {
+    .md-only {
+        display: none !important;
+    }
+}
+
+input[type=text]::-ms-clear {
+    display: none;
+}
+
+@media (min-width: @screen-sm-min) {
+    .pull-right-sm {
+        float: right;
+    }
+}
+
+@media (min-width: @screen-md-min) {
+    .pull-right-md {
+        float: right;
+    }
+}
+
+@media (min-width: @screen-lg-min) {
+    .pull-right-lg {
+        float: right;
+    }
+}
+
+.account-message {
+    font-weight: 300;
+    min-width: 244px;
+    text-align: center;
+    font-size: 13px;
+    color: #333333;
+}
+
+.form-control-feedback {
+    pointer-events: auto;
+}
+
+.editable-text-inactive {
+    display: inline-block;
+}
+
+.editable-text {
+    display: inline-block;
+    padding-right: 55px;
+    position: relative;
+
+    & > input {
+        display: inline-block;
+        font-weight: 600;
+    }
+
+    & > button {
+        position: absolute;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        min-width: 0;
+    }
+}
